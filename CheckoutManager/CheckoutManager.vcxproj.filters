@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>a9eeec40-a930-4278-8c0b-89efdaf59ecf</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>992506f5-0ea6-4795-8047-8246c7ea129c</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+    <Filter Include="Calendar">
+      <UniqueIdentifier>{086e4dfb-e13a-447f-b33e-25fca4e08a43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Calendar\WeekView">
+      <UniqueIdentifier>{9b144fb9-95ea-4531-bff6-046c36afd42e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="datamanager">
+      <UniqueIdentifier>{ec6e3f14-bc13-4c9d-bca8-f706d894dba0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Calendar\MonthView">
+      <UniqueIdentifier>{f2330c9d-361b-42ed-8b71-a7c79532dfc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CommandDelegate">
+      <UniqueIdentifier>{e08be8a9-4dd1-4e98-8bea-b218814ecb13}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="App.xaml.cpp" />
+    <ClCompile Include="MainPage.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="dataManager.cpp">
+      <Filter>datamanager</Filter>
+    </ClCompile>
+    <ClCompile Include="CalInfo.cpp">
+      <Filter>Calendar</Filter>
+    </ClCompile>
+    <ClCompile Include="MonthViewControl.cpp">
+      <Filter>Calendar\MonthView</Filter>
+    </ClCompile>
+    <ClCompile Include="converters.cpp" />
+    <ClCompile Include="AddCheckout.xaml.cpp" />
+    <ClCompile Include="AuthenticationDialog.xaml.cpp" />
+    <ClCompile Include="Calpage.xaml.cpp" />
+    <ClCompile Include="DeviceViewPage.xaml.cpp" />
+    <ClCompile Include="LandingPage.xaml.cpp" />
+    <ClCompile Include="WeekEvent.xaml.cpp" />
+    <ClCompile Include="WeekViewControl.xaml.cpp" />
+    <ClCompile Include="TeamPage.xaml.cpp" />
+    <ClCompile Include="CheckoutPage.xaml.cpp" />
+    <ClCompile Include="DelegateCommand.cpp">
+      <Filter>CommandDelegate</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="App.xaml.h" />
+    <ClInclude Include="MainPage.xaml.h" />
+    <ClInclude Include="dataManager.h">
+      <Filter>datamanager</Filter>
+    </ClInclude>
+    <ClInclude Include="CalInfo.h">
+      <Filter>Calendar</Filter>
+    </ClInclude>
+    <ClInclude Include="converters.h" />
+    <ClInclude Include="MonthViewControl.h">
+      <Filter>Calendar\MonthView</Filter>
+    </ClInclude>
+    <ClInclude Include="AddCheckout.xaml.h" />
+    <ClInclude Include="AuthenticationDialog.xaml.h" />
+    <ClInclude Include="Calpage.xaml.h" />
+    <ClInclude Include="DeviceViewPage.xaml.h" />
+    <ClInclude Include="LandingPage.xaml.h" />
+    <ClInclude Include="WeekEvent.xaml.h" />
+    <ClInclude Include="WeekViewControl.xaml.h" />
+    <ClInclude Include="TeamPage.xaml.h" />
+    <ClInclude Include="CheckoutPage.xaml.h" />
+    <ClInclude Include="DelegateCommand.h">
+      <Filter>CommandDelegate</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\LockScreenLogo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square150x150Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Wide310x150Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CheckoutManager_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MainPage.xaml" />
+    <Page Include="WeekEvent.xaml">
+      <Filter>Calendar\WeekView</Filter>
+    </Page>
+    <Page Include="WeekViewControl.xaml">
+      <Filter>Calendar\WeekView</Filter>
+    </Page>
+    <Page Include="LandingPage.xaml" />
+    <Page Include="AddCheckout.xaml" />
+    <Page Include="Calpage.xaml">
+      <Filter>Calendar</Filter>
+    </Page>
+    <Page Include="AuthenticationDialog.xaml" />
+    <Page Include="DeviceViewPage.xaml" />
+    <Page Include="TeamPage.xaml" />
+    <Page Include="CheckoutPage.xaml" />
+  </ItemGroup>
+</Project>

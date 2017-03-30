@@ -1,0 +1,51 @@
+﻿<Page
+    x:Class="CheckoutManager.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CheckoutManager"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conv="using:converters"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+
+        <conv:BooleanToVisibilityConverter x:Key="boolvis"/>
+        <DataTemplate x:Key="NavMenuItemTemplate" x:DataType="local:NavItem">
+
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+
+                <SymbolIcon x:Name="Glyph" Height="24" Width="24" Symbol="{x:Bind Symbol}" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <TextBlock x:Name="Text" Grid.Column="1" Text="{x:Bind Label}" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="NoWrap" VerticalAlignment="Center"/>
+            </Grid>
+
+
+
+        </DataTemplate>
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+
+
+
+        <SplitView DisplayMode="CompactOverlay" x:Name="navMenu" IsPaneOpen="False" >
+            <SplitView.Pane>
+                <StackPanel>
+                    <Button Click="Button_Click" Content="&#xE700;" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Height="48" Width="48" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"/>
+                    <ListView SelectionMode="Single" ItemTemplate="{StaticResource NavMenuItemTemplate}" SelectionChanged="ListView_SelectionChanged" x:Name="navigator" SelectedItem="{x:Null}"/>
+                </StackPanel>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Frame x:Name="zFrame" SourcePageType="local:LandingPage"/>
+            </SplitView.Content>
+        </SplitView>
+
+    </Grid>
+</Page>

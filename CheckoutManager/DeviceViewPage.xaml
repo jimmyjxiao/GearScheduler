@@ -1,0 +1,96 @@
+﻿<Page
+    x:Class="CheckoutManager.DeviceViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CheckoutManager"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:converters"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <CollectionViewSource x:Name="devicesGrouped" IsSourceGrouped="True" ItemsPath="devices" Source="{x:Bind bindDevices}"/>
+        <converters:BooleanToVisibilityConverter x:Key="booltovis"/>
+        <converters:booltocolor x:Key="availconverter"/>
+        <local:grouptostr x:Key="groupnameconverter"/>
+        <DataTemplate x:DataType="local:device" x:Key="deviceTemplate">
+            <Grid HorizontalAlignment="Stretch" ContextRequested="Grid_ContextRequested" Background="{x:Bind Converter={StaticResource availconverter}, Path=checkedOut, Mode=OneWay}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border BorderThickness="1" BorderBrush="Gray">
+                    <TextBlock Text="{x:Bind description}"/>
+                </Border>
+                <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="1">
+                    <TextBlock  Text="{x:Bind currentRentee}"/>
+                </Border>
+                <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="2">
+                    <TextBlock Grid.Column="2" Text="{x:Bind deviceID}"/>
+                </Border>
+               
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel  Grid.Column="3">
+            <StackPanel>
+                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Add Items"/>
+                <ComboBox x:Name="DeviceSelector" Header="Item Type" DisplayMemberPath="key" ItemsSource="{x:Bind bindDevices}"/>
+                <TextBox Header="Description" x:Name="newdevdesc"/>
+                <Button Content="Add Item" Padding="5" x:Name="addDevicebutton" Click="addDevicebutton_Click"/>
+                <StackPanel Orientation="Horizontal" x:Name="addDeviceError" Visibility="Collapsed">
+                    <SymbolIcon Symbol="Important" Foreground="Red"/>
+                    <TextBlock x:Name="addDeviceWarning"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Padding="5">
+                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Add Item Type"/>
+                <TextBox Header="Type Name" x:Name="typeTextbox"/>
+                <Button Content="Add Device Category" Click="AddDeviceType_Click"/>
+                <StackPanel Orientation="Horizontal" x:Name="addDeviceTypeError" Visibility="Collapsed">
+                    <SymbolIcon Symbol="Important" Foreground="Red"/>
+                    <TextBlock x:Name="addDeviceTypeWarning"/>
+                </StackPanel>
+            </StackPanel>
+
+        </StackPanel>
+        <TextBlock Text="Item:"  Style="{StaticResource TitleTextBlockStyle}"/>
+        <TextBlock Text="Currently Checked out By" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="WrapWholeWords" Grid.Column="1"/>
+        <TextBlock Text="Item ID:" Style="{StaticResource TitleTextBlockStyle}" Grid.Column="2"/>
+        <ListView ItemsSource="{x:Bind devicesGrouped.View}" ItemTemplate="{StaticResource deviceTemplate}" HorizontalContentAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,27,0,0">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.GroupStyle>
+                <GroupStyle HidesIfEmpty="False">
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate x:DataType="local:devicesGroup">
+
+                            <TextBlock Text="{x:Bind key}" Foreground="{x:Bind color}">
+                                <TextBlock.ContextFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Text="Delete" Loaded="MenuFlyoutItem_Loaded"  Command="{x:Bind deleteGroup}"/>
+
+                                    </MenuFlyout>
+                                </TextBlock.ContextFlyout>
+                            </TextBlock>
+
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                
+                </GroupStyle>
+            </ListView.GroupStyle>
+
+        </ListView>
+    </Grid>
+</Page>

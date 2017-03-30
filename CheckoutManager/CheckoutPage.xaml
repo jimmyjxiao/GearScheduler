@@ -1,0 +1,31 @@
+﻿<Page
+    x:Class="CheckoutManager.CheckoutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CheckoutManager"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox Header="Item ID:" x:Name="IDbox"/>
+            <ComboBox Header="User:" x:Name="teamSelector" SelectionChanged="teamSelector_SelectionChanged"/>
+            <PasswordBox Header="Password:" PasswordChanged="PasswordBox_PasswordChanged" x:Name="password" IsEnabled="False"/>
+            <Button Content="Checkout" Click="Button_Click" IsEnabled="False" x:Name="checkoutbutton"/>
+            
+            <TextBlock x:Name="warning" Foreground="Red" FontWeight="Bold" />
+            <RichTextBlock TextWrapping="WrapWholeWords" Visibility="Collapsed" x:Name="statusBlock">
+                <Paragraph>
+                    <Run FontWeight="Bold" x:Name="devTypeblock" Text="zzz"/>
+                     of ID
+                    <Run FontWeight="Bold" x:Name="IDblock" Text="TestID"/>
+                     has been checked out by
+                    <Run FontWeight="Bold" x:Name="userblock" Text="team placeholder"/>
+                    return by:
+                    <Run FontWeight="Bold" x:Name="dueblock" Text="placeholder"/>
+                </Paragraph>
+            </RichTextBlock>
+        </StackPanel>
+    </Grid>
+</Page>

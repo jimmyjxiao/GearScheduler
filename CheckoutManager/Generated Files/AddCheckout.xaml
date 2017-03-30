@@ -1,0 +1,42 @@
+﻿<Page x:ConnectionId='1'
+    x:Class="CheckoutManager.AddCheckout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CheckoutManager"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <CommandBar>
+            <AppBarButton x:ConnectionId='8' Icon="Save"                           />
+            <AppBarButton Icon="Delete"/>
+            <CommandBar.Content>
+                <ComboBox x:ConnectionId='9' Header="Team:" x:Name="teamSelector"/>
+            </CommandBar.Content>
+
+        </CommandBar>
+        <TextBlock Text="Checkout details" Style="{ThemeResource HeaderTextBlockStyle}"/>
+
+
+
+
+
+        <ComboBox x:ConnectionId='2' x:Name="devicepicker"                                       Header="Device Type:"/>
+        <StackPanel Orientation="Horizontal">
+            <CalendarDatePicker x:ConnectionId='5' x:Name="startDate" Header="Checkout Date" />
+            <TimePicker x:ConnectionId='6' Header="Checkout Time" x:Name="startTime"/>
+            <ToggleSwitch x:ConnectionId='7' x:Name="sameDay" Header="Return on same day" IsOn="True" OnContent="" OffContent=""/>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <CalendarDatePicker x:ConnectionId='3' Header="Return Date" x:Name="returnDate" Visibility="Collapsed"/>
+            <TimePicker x:ConnectionId='4' Header="Return Time" x:Name="returnTime"/>
+        </StackPanel>
+
+
+
+    </StackPanel>
+</Page>
+

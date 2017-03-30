@@ -1,0 +1,34 @@
+﻿<ContentDialog
+    x:Class="CheckoutManager.AuthenticationDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CheckoutManager"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Permission Required"
+    PrimaryButtonText="Confirm"
+    SecondaryButtonText="Close"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+
+    <StackPanel>
+        <TextBlock Text=""/>
+        <ComboBox Header="Select from authorized Team/Users:" x:Name="user" SelectionChanged="user_SelectionChanged"/>
+        <PasswordBox PlaceholderText="Enter password here" BorderThickness="2,2,2,2" Margin="0,5,0,0" x:Name="passbox">
+            <PasswordBox.InputScope>
+                <InputScope>
+                    <InputScope.Names>
+                        <InputScopeName NameValue="NumericPassword"/>
+                    </InputScope.Names>
+                </InputScope>
+            </PasswordBox.InputScope>
+        </PasswordBox>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Login" Click="Button_Click"  IsEnabled="False" x:Name="loginbutton"/>
+            <ProgressRing IsActive="False" x:Name="progress"/>
+            <SymbolIcon Symbol="Contact" Foreground="Red" ToolTipService.ToolTip="Signed In status" HorizontalAlignment="Right" x:Name="logIndicator"/>
+        </StackPanel>
+        <TextBlock FontWeight="Bold" Foreground="Red" x:Name="passWarning"/>
+    </StackPanel>
+</ContentDialog>
