@@ -42,13 +42,18 @@ public:
     {
         switch(__connectionId)
         {
-            case 2:
+            case 2: // LandingPage.xaml line 14
                 this->obj2 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 break;
-            case 3:
+            case 3: // LandingPage.xaml line 16
                 this->obj3 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 break;
         }
+    }
+
+    void DisconnectUnloadedObject(int connectionId)
+    {
+        throw ref new ::Platform::InvalidArgumentException("No unloadable elements to disconnect.");
     }
 private:
     // Fields for each control that has bindings.
@@ -71,6 +76,7 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
+            // LandingPage.xaml line 14
             ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj2, obj, nullptr);
         }
     }
@@ -78,6 +84,7 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
+            // LandingPage.xaml line 16
             ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj3, obj, nullptr);
         }
     }
@@ -95,7 +102,7 @@ void ::CheckoutManager::LandingPage::Connect(int __connectionId, ::Platform::Obj
     ::XamlBindingInfo::XamlBindings^ bindings = nullptr;
     switch (__connectionId)
     {
-        case 1:
+        case 1: // LandingPage.xaml line 1
             {
                 ::Windows::UI::Xaml::Controls::Page^ element1 = safe_cast<::Windows::UI::Xaml::Controls::Page^>(__target);
                 LandingPage_obj1_Bindings* objBindings = new LandingPage_obj1_Bindings();

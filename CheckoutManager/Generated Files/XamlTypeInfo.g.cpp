@@ -278,11 +278,18 @@ struct TypeInfo
     int     baseTypeIndex;
     int     firstMemberIndex;
     int     firstEnumValueIndex;
+    int     createFromStringIndex;
     ::Windows::UI::Xaml::Interop::TypeKind kindofType;
     bool    isLocalType;
     bool    isSystemType;
     bool    isReturnTypeStub;
     bool    isBindable;
+};
+
+
+std::function<::Platform::Object^(::Platform::String^)> CreateFromStringMethods[] =
+{
+    nullptr //Last entry is for padding
 };
 
 const TypeInfo TypeInfos[] = 
@@ -291,229 +298,229 @@ const TypeInfo TypeInfos[] =
     L"Int32", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    0, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
     //   1
     L"String", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    0, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
     //   2
     L"Object", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    0, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
     //   3
     L"Boolean", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    0, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
     //   4
     L"System.Delegate", L"",
     nullptr, nullptr, nullptr, nullptr,
     2, // Object
-    0, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, false, false, false,
     //   5
     L"CheckoutManager.Team", L"",
     &ActivateType<::CheckoutManager::Team>, nullptr, nullptr, nullptr,
     2, // Object
-    0, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //   6
     L"converters.booltocolor", L"",
     &ActivateType<::converters::booltocolor>, nullptr, nullptr, nullptr,
     2, // Object
-    2, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    2, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //   7
     L"CheckoutManager.device", L"",
     &ActivateType<::CheckoutManager::device>, nullptr, nullptr, nullptr,
     2, // Object
-    2, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    2, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //   8
     L"CheckoutManager.CalInfo", L"",
     nullptr, nullptr, nullptr, nullptr,
     2, // Object
-    6, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    6, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, true,  false,
     //   9
     L"CheckoutManager.Calpage", L"",
     &ActivateType<::CheckoutManager::Calpage>, nullptr, nullptr, nullptr,
     20, // Windows.UI.Xaml.Controls.Page
-    6, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    6, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  10
     L"System.MulticastDelegate", L"",
     nullptr, nullptr, nullptr, nullptr,
     4, // System.Delegate
-    7, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    7, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, false, false, false,
     //  11
     L"CheckoutManager.MainPage", L"",
     &ActivateType<::CheckoutManager::MainPage>, nullptr, nullptr, nullptr,
     20, // Windows.UI.Xaml.Controls.Page
-    7, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    7, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  12
     L"CheckoutManager.TeamPage", L"",
     &ActivateType<::CheckoutManager::TeamPage>, nullptr, nullptr, nullptr,
     20, // Windows.UI.Xaml.Controls.Page
-    8, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    8, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  13
     L"CheckoutManager.WeekEvent", L"",
     nullptr, nullptr, nullptr, nullptr,
     26, // Windows.UI.Xaml.Controls.UserControl
-    9, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    9, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  14
     L"CheckoutManager.switchView", L"",
     nullptr, nullptr, nullptr, nullptr,
     10, // System.MulticastDelegate
-    14, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    14, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, true,  false,
     //  15
     L"CheckoutManager.grouptostr", L"",
     &ActivateType<::CheckoutManager::grouptostr>, nullptr, nullptr, nullptr,
     2, // Object
-    14, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    14, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  16
     L"CheckoutManager.AddCheckout", L"",
     &ActivateType<::CheckoutManager::AddCheckout>, nullptr, nullptr, nullptr,
     20, // Windows.UI.Xaml.Controls.Page
-    14, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    14, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  17
     L"CheckoutManager.LandingPage", L"",
     &ActivateType<::CheckoutManager::LandingPage>, nullptr, nullptr, nullptr,
     20, // Windows.UI.Xaml.Controls.Page
-    15, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    15, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  18
     L"CheckoutManager.CheckoutPage", L"",
     &ActivateType<::CheckoutManager::CheckoutPage>, nullptr, nullptr, nullptr,
     20, // Windows.UI.Xaml.Controls.Page
-    18, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    18, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  19
     L"CheckoutManager.devicesGroup", L"",
     &ActivateType<::CheckoutManager::devicesGroup>, nullptr, nullptr, nullptr,
     2, // Object
-    18, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    18, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, true, 
     //  20
     L"Windows.UI.Xaml.Controls.Page", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    22, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    22, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
     //  21
     L"CheckoutManager.DeviceViewPage", L"",
     &ActivateType<::CheckoutManager::DeviceViewPage>, nullptr, nullptr, nullptr,
     20, // Windows.UI.Xaml.Controls.Page
-    22, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    22, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  22
     L"Windows.UI.Xaml.Input.ICommand", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    23, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    23, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
     //  23
     L"Windows.UI.Xaml.Controls.Frame", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    23, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    23, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
     //  24
     L"CheckoutManager.WeekViewControl", L"",
     &ActivateType<::CheckoutManager::WeekViewControl>, nullptr, nullptr, nullptr,
     26, // Windows.UI.Xaml.Controls.UserControl
-    23, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    23, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  25
     L"CheckoutManager.MonthViewControl", L"",
     &ActivateType<::CheckoutManager::MonthViewControl>, nullptr, nullptr, nullptr,
     28, // Windows.UI.Xaml.Controls.CalendarView
-    24, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    24, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  26
     L"Windows.UI.Xaml.Controls.UserControl", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    26, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    26, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
     //  27
     L"CheckoutManager.AuthenticationDialog", L"",
     nullptr, nullptr, nullptr, nullptr,
     30, // Windows.UI.Xaml.Controls.ContentDialog
-    26, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    26, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  28
     L"Windows.UI.Xaml.Controls.CalendarView", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    26, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    26, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
     //  29
     L"Windows.UI.Xaml.Media.SolidColorBrush", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    26, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    26, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
     //  30
     L"Windows.UI.Xaml.Controls.ContentDialog", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    26, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    26, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
     //  31
     L"Windows.UI.Xaml.Controls.ContentControl", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    26, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    26, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
     //  32
     L"converters.BooleanToVisibilityConverter", L"",
     &ActivateType<::converters::BooleanToVisibilityConverter>, nullptr, nullptr, nullptr,
     2, // Object
-    26, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    26, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  33
     L"Windows.Foundation.Collections.IVector`1<String>", L"",
     nullptr, &CollectionAdd<::Windows::Foundation::Collections::IVector<::Platform::String^>, ::Platform::String^>, nullptr, nullptr,
     -1,
-    26, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    26, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, false, true,  false,
     //  34
     L"Windows.Foundation.Collections.IVector`1<CheckoutManager.Team>", L"",
     nullptr, &CollectionAdd<::Windows::Foundation::Collections::IVector<::CheckoutManager::Team^>, ::CheckoutManager::Team^>, nullptr, nullptr,
     -1,
-    26, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    26, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, false, true,  false,
     //  35
     L"Windows.Foundation.Collections.IVector`1<CheckoutManager.devicesGroup>", L"",
     nullptr, &CollectionAdd<::Windows::Foundation::Collections::IVector<::CheckoutManager::devicesGroup^>, ::CheckoutManager::devicesGroup^>, nullptr, nullptr,
     -1,
-    26, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    26, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, false, true,  false,
     //  36
     L"Windows.Foundation.Collections.IObservableVector`1<CheckoutManager.device>", L"",
     nullptr, &CollectionAdd<::Windows::Foundation::Collections::IObservableVector<::CheckoutManager::device^>, ::CheckoutManager::device^>, nullptr, nullptr,
     -1,
-    26, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    26, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, false, true,  false,
     //  Last type here is for padding
     L"", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1, 
-    26, 0,::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    26, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     false, false, false, false,
 };
 
@@ -878,6 +885,11 @@ const MemberInfo* GetMemberInfo(::Platform::String^ longMemberName)
         userType->IsLocalType = pTypeInfo->isLocalType;
         userType->IsReturnTypeStub = pTypeInfo->isReturnTypeStub;
         userType->IsBindable = pTypeInfo->isBindable;
+        userType->CreateFromStringMethod = nullptr;
+        if (pTypeInfo->createFromStringIndex != -1)
+        {
+            userType->CreateFromStringMethod = &(CreateFromStringMethods[pTypeInfo->createFromStringIndex]);
+        }
         int nextMemberIndex = pTypeInfo->firstMemberIndex;
         for (int i=pTypeInfo->firstMemberIndex; i < pNextTypeInfo->firstMemberIndex; i++)
         {

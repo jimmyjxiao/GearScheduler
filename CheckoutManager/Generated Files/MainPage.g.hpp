@@ -42,13 +42,18 @@ public:
     {
         switch(__connectionId)
         {
-            case 2:
+            case 2: // MainPage.xaml line 25
                 this->obj2 = safe_cast<::Windows::UI::Xaml::Controls::SymbolIcon^>(__target);
                 break;
-            case 3:
+            case 3: // MainPage.xaml line 26
                 this->obj3 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 break;
         }
+    }
+
+    void DisconnectUnloadedObject(int connectionId)
+    {
+        throw ref new ::Platform::InvalidArgumentException("No unloadable elements to disconnect.");
     }
 
     void ResetTemplate()
@@ -95,6 +100,7 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
+            // MainPage.xaml line 25
             ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_SymbolIcon_Symbol(this->obj2, obj);
         }
     }
@@ -102,6 +108,7 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
+            // MainPage.xaml line 26
             ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj3, obj, nullptr);
         }
     }
@@ -144,7 +151,7 @@ void ::CheckoutManager::MainPage::Connect(int __connectionId, ::Platform::Object
     ::XamlBindingInfo::XamlBindings^ bindings = nullptr;
     switch (__connectionId)
     {
-        case 1:
+        case 1: // MainPage.xaml line 17
             {
                 ::Windows::UI::Xaml::Controls::Grid^ element1 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
                 MainPage_obj1_Bindings* objBindings = new MainPage_obj1_Bindings();

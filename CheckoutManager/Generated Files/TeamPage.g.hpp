@@ -42,10 +42,15 @@ public:
     {
         switch(__connectionId)
         {
-            case 3:
+            case 3: // TeamPage.xaml line 29
                 this->obj3 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 break;
         }
+    }
+
+    void DisconnectUnloadedObject(int connectionId)
+    {
+        throw ref new ::Platform::InvalidArgumentException("No unloadable elements to disconnect.");
     }
 
     void ResetTemplate()
@@ -91,6 +96,7 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
+            // TeamPage.xaml line 29
             if (this->obj3 != nullptr)
             {
                 ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj3.Resolve<::Windows::UI::Xaml::Controls::TextBlock>(), obj, nullptr);
@@ -101,6 +107,7 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
+            // TeamPage.xaml line 29
             if (this->obj3 != nullptr)
             {
                 ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Foreground(this->obj3.Resolve<::Windows::UI::Xaml::Controls::TextBlock>(), obj, nullptr);
@@ -124,10 +131,15 @@ public:
     {
         switch(__connectionId)
         {
-            case 2:
+            case 2: // TeamPage.xaml line 26
                 this->obj2 = safe_cast<::Windows::UI::Xaml::Controls::ListView^>(__target);
                 break;
         }
+    }
+
+    void DisconnectUnloadedObject(int connectionId)
+    {
+        throw ref new ::Platform::InvalidArgumentException("No unloadable elements to disconnect.");
     }
 private:
     // Fields for each control that has bindings.
@@ -148,6 +160,7 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
+            // TeamPage.xaml line 26
             ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_ItemsControl_ItemsSource(this->obj2, obj, nullptr);
         }
     }
@@ -202,7 +215,7 @@ void ::CheckoutManager::TeamPage::Connect(int __connectionId, ::Platform::Object
     ::XamlBindingInfo::XamlBindings^ bindings = nullptr;
     switch (__connectionId)
     {
-        case 1:
+        case 1: // TeamPage.xaml line 1
             {
                 ::Windows::UI::Xaml::Controls::Page^ element1 = safe_cast<::Windows::UI::Xaml::Controls::Page^>(__target);
                 TeamPage_obj1_Bindings* objBindings = new TeamPage_obj1_Bindings();
@@ -212,7 +225,7 @@ void ::CheckoutManager::TeamPage::Connect(int __connectionId, ::Platform::Object
                 element1->Loading += ref new ::Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::FrameworkElement^, ::Platform::Object^>(bindings, &::XamlBindingInfo::XamlBindings::Loading);
             }
             break;
-        case 3:
+        case 3: // TeamPage.xaml line 29
             {
                 ::Windows::UI::Xaml::Controls::TextBlock^ element3 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 TeamPage_obj3_Bindings* objBindings = new TeamPage_obj3_Bindings();

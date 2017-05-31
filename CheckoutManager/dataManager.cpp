@@ -39,7 +39,13 @@ namespace dataspace
 		try
 		{
 			inventory = new sqlite::database((const char16_t*)path->Data());
-			*inventory << "CREATE TABLE IF NOT EXISTS 'checkouts' (`checkoutID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `teamID` tinyint, `checkedout` bit, `chktime` INTEGER NOT NULL, `typeID` tinyint, `duetime` INTEGER NOT NULL, `actchktime` INTEGER, `actreturntime` INTEGER, `returned` INTEGER); CREATE TABLE IF NOT EXISTS 'Teams' (`teamID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `TeamName` TEXT NOT NULL, `password` BLOB NOT NULL, `color` BLOB UNIQUE); CREATE TABLE IF NOT EXISTS 'deviceType' (`deviceName` text NOT NULL, `typeID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `color` INTEGER); CREATE TABLE IF NOT EXISTS 'devices' (`deviceID` INTEGER NOT NULL, `typeID` tinyint NOT NULL, `available` bit, `Currentholder` TEXT, `desc` TEXT, `PublicID` TEXT, `ForcedCheckout` INTEGER, PRIMARY KEY(`deviceID`)); ";
+			*inventory << "CREATE TABLE IF NOT EXISTS 'checkouts' (`checkoutID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `teamID` tinyint, `checkedout` bit, `chktime` INTEGER NOT NULL, `typeID` tinyint, `duetime` INTEGER NOT NULL, `actchktime` INTEGER, `actreturntime` INTEGER, `returned` INTEGER); "
+				<<
+				"CREATE TABLE IF NOT EXISTS 'Teams' (`teamID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `TeamName` TEXT NOT NULL, `password` BLOB NOT NULL, `color` BLOB UNIQUE); "
+				<<
+				"CREATE TABLE IF NOT EXISTS 'deviceType' (`deviceName` text NOT NULL, `typeID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `color` INTEGER); "
+				<<
+				"CREATE TABLE IF NOT EXISTS 'devices' (`deviceID` INTEGER NOT NULL, `typeID` tinyint NOT NULL, `available` bit, `Currentholder` TEXT, `desc` TEXT, `PublicID` TEXT, `ForcedCheckout` INTEGER, PRIMARY KEY(`deviceID`)); ";
 			getcheckoutprepnd = std::make_unique<sqlite::database_binder>(*inventory << u"SELECT Teams.TeamName, checkouts.chktime, deviceType.deviceName, checkouts.duetime, checkouts.actchktime, checkouts.actreturntime, checkouts.checkoutID, checkouts.checkedout "
 				"FROM checkouts "
 				"INNER JOIN Teams "

@@ -43,13 +43,18 @@ public:
     {
         switch(__connectionId)
         {
-            case 8:
+            case 8: // Calpage.xaml line 45
                 this->obj8 = safe_cast<::CheckoutManager::WeekViewControl^>(__target);
                 break;
-            case 9:
+            case 9: // Calpage.xaml line 42
                 this->obj9 = safe_cast<::CheckoutManager::MonthViewControl^>(__target);
                 break;
         }
+    }
+
+    void DisconnectUnloadedObject(int connectionId)
+    {
+        throw ref new ::Platform::InvalidArgumentException("No unloadable elements to disconnect.");
     }
 private:
     // Fields for each control that has bindings.
@@ -71,7 +76,9 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
+            // Calpage.xaml line 45
             ::XamlBindingInfo::XamlBindingSetters::Set_CheckoutManager_WeekViewControl_cal(this->obj8, obj, nullptr);
+            // Calpage.xaml line 42
             ::XamlBindingInfo::XamlBindingSetters::Set_CheckoutManager_MonthViewControl_cal(this->obj9, obj, nullptr);
         }
     }
@@ -142,7 +149,7 @@ void ::CheckoutManager::Calpage::Connect(int __connectionId, ::Platform::Object^
     ::XamlBindingInfo::XamlBindings^ bindings = nullptr;
     switch (__connectionId)
     {
-        case 1:
+        case 1: // Calpage.xaml line 1
             {
                 ::Windows::UI::Xaml::Controls::Page^ element1 = safe_cast<::Windows::UI::Xaml::Controls::Page^>(__target);
                 Calpage_obj1_Bindings* objBindings = new Calpage_obj1_Bindings();

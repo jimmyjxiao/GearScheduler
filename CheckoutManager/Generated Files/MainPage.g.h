@@ -33,7 +33,12 @@ namespace CheckoutManager
         virtual ::Windows::UI::Xaml::Markup::IComponentConnector^ GetBindingConnector(int connectionId, ::Platform::Object^ target);
     
     private:
+        void UnloadObject(::Windows::UI::Xaml::DependencyObject^ dependencyObject);
+        void DisconnectUnloadedObject(int connectionId);
+    
+    private:
         bool _contentLoaded;
+    
         class MainPage_obj1_Bindings;
     
         ::XamlBindingInfo::XamlBindings^ Bindings;

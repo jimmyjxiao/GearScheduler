@@ -42,19 +42,24 @@ public:
     {
         switch(__connectionId)
         {
-            case 7:
+            case 7: // WeekEvent.xaml line 30
                 this->obj7 = safe_cast<::Windows::UI::Xaml::Controls::RelativePanel^>(__target);
                 break;
-            case 8:
+            case 8: // WeekEvent.xaml line 31
                 this->obj8 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 break;
-            case 11:
+            case 11: // WeekEvent.xaml line 39
                 this->obj11 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
                 break;
-            case 12:
+            case 12: // WeekEvent.xaml line 35
                 this->obj12 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
                 break;
         }
+    }
+
+    void DisconnectUnloadedObject(int connectionId)
+    {
+        throw ref new ::Platform::InvalidArgumentException("No unloadable elements to disconnect.");
     }
 private:
     // Fields for each control that has bindings.
@@ -81,6 +86,7 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
+            // WeekEvent.xaml line 30
             ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_Panel_Background(this->obj7, obj, nullptr);
         }
     }
@@ -88,6 +94,7 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
+            // WeekEvent.xaml line 31
             ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj8, obj, nullptr);
         }
     }
@@ -95,6 +102,7 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
+            // WeekEvent.xaml line 39
             ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj11, obj, nullptr);
         }
     }
@@ -102,6 +110,7 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
+            // WeekEvent.xaml line 35
             ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj12, obj, nullptr);
         }
     }
@@ -182,7 +191,7 @@ void ::CheckoutManager::WeekEvent::Connect(int __connectionId, ::Platform::Objec
     ::XamlBindingInfo::XamlBindings^ bindings = nullptr;
     switch (__connectionId)
     {
-        case 1:
+        case 1: // WeekEvent.xaml line 1
             {
                 ::Windows::UI::Xaml::Controls::UserControl^ element1 = safe_cast<::Windows::UI::Xaml::Controls::UserControl^>(__target);
                 WeekEvent_obj1_Bindings* objBindings = new WeekEvent_obj1_Bindings();

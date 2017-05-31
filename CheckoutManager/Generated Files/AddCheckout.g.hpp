@@ -42,10 +42,15 @@ public:
     {
         switch(__connectionId)
         {
-            case 2:
+            case 2: // AddCheckout.xaml line 25
                 this->obj2 = safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(__target);
                 break;
         }
+    }
+
+    void DisconnectUnloadedObject(int connectionId)
+    {
+        throw ref new ::Platform::InvalidArgumentException("No unloadable elements to disconnect.");
     }
 private:
     // Fields for each control that has bindings.
@@ -66,6 +71,7 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
+            // AddCheckout.xaml line 25
             ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_ItemsControl_ItemsSource(this->obj2, obj, nullptr);
         }
     }
@@ -126,7 +132,7 @@ void ::CheckoutManager::AddCheckout::Connect(int __connectionId, ::Platform::Obj
     ::XamlBindingInfo::XamlBindings^ bindings = nullptr;
     switch (__connectionId)
     {
-        case 1:
+        case 1: // AddCheckout.xaml line 1
             {
                 ::Windows::UI::Xaml::Controls::Page^ element1 = safe_cast<::Windows::UI::Xaml::Controls::Page^>(__target);
                 AddCheckout_obj1_Bindings* objBindings = new AddCheckout_obj1_Bindings();

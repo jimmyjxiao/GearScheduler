@@ -56,6 +56,11 @@ void ::XamlBindingInfo::XamlBindings::SubscribeForDataContextChanged(::Windows::
     this->_pBindings->SubscribeForDataContextChanged(object, this);
 }
 
+void ::XamlBindingInfo::XamlBindings::DisconnectUnloadedObject(int connectionId)
+{
+    this->_pBindings->DisconnectUnloadedObject(connectionId);
+}
+
 void ::XamlBindingInfo::XamlBindings::Connect(int connectionId, ::Platform::Object^ target)
 {
     this->_pBindings->Connect(connectionId, target);
@@ -81,9 +86,9 @@ namespace XamlBindingInfo
     class IXamlBindingTracking
     {
     public:
-        virtual void PropertyChanged(Platform::Object^ sender, ::Windows::UI::Xaml::Data::PropertyChangedEventArgs^ e) = 0;
+        virtual void PropertyChanged(::Platform::Object^ sender, ::Windows::UI::Xaml::Data::PropertyChangedEventArgs^ e) = 0;
         virtual void CollectionChanged(::Platform::Object^ sender, ::Windows::UI::Xaml::Interop::NotifyCollectionChangedEventArgs^ e) = 0;
-        virtual void DependencyPropertyChanged(::Windows::UI::Xaml::DependencyObject^ sender, Windows::UI::Xaml::DependencyProperty^ prop) = 0;
+        virtual void DependencyPropertyChanged(::Windows::UI::Xaml::DependencyObject^ sender, ::Windows::UI::Xaml::DependencyProperty^ prop) = 0;
         virtual void VectorChanged(::Platform::Object^ sender, ::Windows::Foundation::Collections::IVectorChangedEventArgs^ e) = 0;
         virtual void MapChanged(::Platform::Object^ sender, ::Windows::Foundation::Collections::IMapChangedEventArgs<::Platform::String^>^ e) = 0;
     };
@@ -118,7 +123,7 @@ namespace XamlBindingInfo
             }
         }
 
-        void DependencyPropertyChanged(::Windows::UI::Xaml::DependencyObject^ sender, Windows::UI::Xaml::DependencyProperty^ prop)
+        void DependencyPropertyChanged(::Windows::UI::Xaml::DependencyObject^ sender, ::Windows::UI::Xaml::DependencyProperty^ prop)
         {
             if (this->_pBindingsTrackingWeakRef)
             {
@@ -178,7 +183,7 @@ namespace XamlBindingInfo
             }
         }
 
-        void UpdateDependencyPropertyChangedListener(::Windows::UI::Xaml::DependencyObject^ obj, Windows::UI::Xaml::DependencyProperty^ property, ::Windows::UI::Xaml::DependencyObject^* pCache, INT64* pToken)
+        void UpdateDependencyPropertyChangedListener(::Windows::UI::Xaml::DependencyObject^ obj, ::Windows::UI::Xaml::DependencyProperty^ property, ::Windows::UI::Xaml::DependencyObject^* pCache, INT64* pToken)
         {
             if (*pCache != nullptr && !(*pCache)->Equals(obj))
             {
@@ -194,7 +199,7 @@ namespace XamlBindingInfo
             }
         }
 
-        void UpdateDependencyPropertyChangedListener(::Windows::UI::Xaml::DependencyObject^ obj, Windows::UI::Xaml::DependencyProperty^ property, ::Platform::WeakReference& cacheRef, INT64* pToken)
+        void UpdateDependencyPropertyChangedListener(::Windows::UI::Xaml::DependencyObject^ obj, ::Windows::UI::Xaml::DependencyProperty^ property, ::Platform::WeakReference& cacheRef, INT64* pToken)
         {
             ::Windows::UI::Xaml::DependencyObject^ cache = cacheRef.Resolve<::Windows::UI::Xaml::DependencyObject>();
             if (cache != nullptr && !cache->Equals(obj))
@@ -372,7 +377,7 @@ namespace XamlBindingInfo
         void SubscribeForDataContextChanged(::Windows::UI::Xaml::FrameworkElement^ object, ::XamlBindingInfo::XamlBindings^ handler)
         {
             this->_dataContextChangedToken = object->DataContextChanged += 
-                ref new Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::FrameworkElement^, ::Windows::UI::Xaml::DataContextChangedEventArgs^>(
+                ref new ::Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::FrameworkElement^, ::Windows::UI::Xaml::DataContextChangedEventArgs^>(
                     handler, &::XamlBindingInfo::XamlBindings::DataContextChanged);
         }
 
@@ -388,6 +393,8 @@ namespace XamlBindingInfo
             // Overridden in the binding class as needed.
             return -1;
         }
+
+        virtual void DisconnectUnloadedObject(int connectionId) = 0;
     };
 
     template<class T> 
