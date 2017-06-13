@@ -65,11 +65,6 @@ void ::CheckoutManager::AuthenticationDialog::Connect(int __connectionId, ::Plat
         break;
     case 6:
         {
-            this->progress = safe_cast<::Windows::UI::Xaml::Controls::ProgressRing^>(__target);
-        }
-        break;
-    case 7:
-        {
             this->logIndicator = safe_cast<::Windows::UI::Xaml::Controls::SymbolIcon^>(__target);
         }
         break;

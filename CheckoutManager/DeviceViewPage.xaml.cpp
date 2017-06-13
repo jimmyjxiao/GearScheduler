@@ -60,9 +60,9 @@ void CheckoutManager::DeviceViewPage::AddDeviceType_Click(Platform::Object^ send
 			currentBinded->Append(newgroup);
 		}
 	}
-	catch (std::exception e)
+	catch (sqlite::exceptions::constraint e)
 	{
-		__debugbreak();
+		Windows::UI::Popups::MessageDialog("device type already exists").ShowAsync();
 	}
 }
 Windows::Foundation::Collections::IVector<devicesGroup^>^ CheckoutManager::DeviceViewPage::bindDevices::get()
@@ -85,7 +85,7 @@ Windows::Foundation::Collections::IVector<devicesGroup^>^ CheckoutManager::Devic
 				auto treetype = devtype->ToString();
 				//__debugbreak();
 				//devtype->color = ref new Windows::UI::Xaml::Media::SolidColorBrush(Windows::UI::Colors::Red);
-				devtype->devices = ref new Platform::Collections::Vector<device^>();
+				devtype->devices = ref new Platform::Collections::Vector<device, deviceEqual>();
 				auto range = v.equal_range(z.first);
 
 				if (range.first != v.end())
@@ -94,13 +94,13 @@ Windows::Foundation::Collections::IVector<devicesGroup^>^ CheckoutManager::Devic
 					std::for_each(range.first, range.second, [devtype](std::pair<std::u16string, std::tuple<bool, std::u16string, std::u16string, int>> m)
 					{
 
-						auto appending = ref new device();
-						appending->checkedOut = !std::get<0>(m.second);
-						if (appending->checkedOut)
-							appending->currentRentee = ref new Platform::String((const wchar_t*)std::get<1>(m.second).c_str());
-						else appending->currentRentee = nullptr;
-						appending->description = ref new Platform::String((const wchar_t*)(std::get<2>(m.second)).c_str());
-						appending->deviceID = std::get<3>(m.second);
+						device appending;
+						appending.checkedOut = !std::get<0>(m.second);
+						if (appending.checkedOut)
+							appending.currentRentee = ref new Platform::String((const wchar_t*)std::get<1>(m.second).c_str());
+						else appending.currentRentee = nullptr;
+						appending.description = ref new Platform::String((const wchar_t*)(std::get<2>(m.second)).c_str());
+						appending.deviceID = std::get<3>(m.second);
 						devtype->devices->Append(appending);
 					});
 				}
@@ -129,10 +129,10 @@ void CheckoutManager::DeviceViewPage::addDevicebutton_Click(Platform::Object^ se
 		try
 		{
 			data->addDevice((char16_t*)newdevdesc->Text->Data(), (char16_t*)selectedType->key->Data());
-			device^ newdevice = ref new device();
-			newdevice->checkedOut = false, newdevice->currentRentee = "", newdevice->description = newdevdesc->Text, newdevice->deviceID = 99;
+			device newdevice;
+			newdevice.checkedOut = false, newdevice.currentRentee = "", newdevice.description = newdevdesc->Text, newdevice.deviceID = 99;
 			if (selectedType->devices == nullptr)
-				selectedType->devices = ref new Platform::Collections::Vector<device^>();
+				selectedType->devices = ref new Platform::Collections::Vector<device, deviceEqual>();
 			selectedType->devices->Append(newdevice);
 		}
 		catch (std::exception e)
@@ -147,9 +147,7 @@ void CheckoutManager::DeviceViewPage::addDevicebutton_Click(Platform::Object^ se
 
 void CheckoutManager::DeviceViewPage::Grid_ContextRequested(Windows::UI::Xaml::UIElement^ sender, Windows::UI::Xaml::Input::ContextRequestedEventArgs^ args)
 {
-	auto s = sender;
-	auto a = args;
-	//__debugbreak();
+
 }
 
 
@@ -165,4 +163,27 @@ void CheckoutManager::DeviceViewPage::MenuFlyoutItem_Loaded(Platform::Object^ se
 {
 	//I like ugly code!
 	
+}
+
+
+void CheckoutManager::DeviceViewPage::MenuFlyoutItem_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	int s = (int)((Windows::UI::Xaml::Controls::MenuFlyoutItem^)sender)->Tag;
+	data->deleteDevice(s);
+	device a = (device)(((Windows::UI::Xaml::Controls::MenuFlyoutItem^)sender)->DataContext);
+	concurrency::create_task([this, a,s]() {
+
+		for (auto &z : bindDevices)
+		{
+			unsigned int index = 0;
+			if (z->devices->IndexOf(a, &index))
+			{
+				this->Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler([z, index]() {
+					z->devices->RemoveAt(index);
+				}));
+				break;
+			}
+		}
+	});
+	//__debugbreak();
 }

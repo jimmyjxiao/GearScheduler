@@ -43,7 +43,7 @@
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
-                <Frame x:ConnectionId='7' x:Name="zFrame" SourcePageType="local:LandingPage"/>
+                <Frame x:ConnectionId='7' x:Name="zFrame" SourcePageType="local:LandingPage"                                                  />
             </SplitView.Content>
         </SplitView>
 

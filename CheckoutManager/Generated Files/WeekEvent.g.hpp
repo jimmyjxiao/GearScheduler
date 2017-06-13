@@ -42,17 +42,17 @@ public:
     {
         switch(__connectionId)
         {
-            case 7: // WeekEvent.xaml line 30
-                this->obj7 = safe_cast<::Windows::UI::Xaml::Controls::RelativePanel^>(__target);
-                break;
             case 8: // WeekEvent.xaml line 31
-                this->obj8 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->obj8 = safe_cast<::Windows::UI::Xaml::Controls::RelativePanel^>(__target);
                 break;
-            case 11: // WeekEvent.xaml line 39
-                this->obj11 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
+            case 9: // WeekEvent.xaml line 32
+                this->obj9 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 break;
-            case 12: // WeekEvent.xaml line 35
+            case 12: // WeekEvent.xaml line 40
                 this->obj12 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
+                break;
+            case 13: // WeekEvent.xaml line 36
+                this->obj13 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
                 break;
         }
     }
@@ -63,10 +63,10 @@ public:
     }
 private:
     // Fields for each control that has bindings.
-    ::Windows::UI::Xaml::Controls::RelativePanel^ obj7;
-    ::Windows::UI::Xaml::Controls::TextBlock^ obj8;
-    ::Windows::UI::Xaml::Documents::Run^ obj11;
+    ::Windows::UI::Xaml::Controls::RelativePanel^ obj8;
+    ::Windows::UI::Xaml::Controls::TextBlock^ obj9;
     ::Windows::UI::Xaml::Documents::Run^ obj12;
+    ::Windows::UI::Xaml::Documents::Run^ obj13;
 
     // Update methods for each path node used in binding steps.
     void Update_(::CheckoutManager::WeekEvent^ obj, int phase)
@@ -86,32 +86,32 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            // WeekEvent.xaml line 30
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_Panel_Background(this->obj7, obj, nullptr);
+            // WeekEvent.xaml line 31
+            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_Panel_Background(this->obj8, obj, nullptr);
         }
     }
     void Update_timeStr(::Platform::String^ obj, int phase)
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            // WeekEvent.xaml line 31
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj8, obj, nullptr);
+            // WeekEvent.xaml line 32
+            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj9, obj, nullptr);
         }
     }
     void Update_teamStr(::Platform::String^ obj, int phase)
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            // WeekEvent.xaml line 39
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj11, obj, nullptr);
+            // WeekEvent.xaml line 40
+            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj12, obj, nullptr);
         }
     }
     void Update_deviceStr(::Platform::String^ obj, int phase)
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            // WeekEvent.xaml line 35
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj12, obj, nullptr);
+            // WeekEvent.xaml line 36
+            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj13, obj, nullptr);
         }
     }
 };
@@ -136,48 +136,55 @@ void ::CheckoutManager::WeekEvent::Connect(int __connectionId, ::Platform::Objec
         break;
     case 3:
         {
-            ::Windows::UI::Xaml::Controls::MenuFlyoutItem^ element3 = safe_cast<::Windows::UI::Xaml::Controls::MenuFlyoutItem^>(__target);
-            (safe_cast<::Windows::UI::Xaml::Controls::MenuFlyoutItem^>(element3))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::WeekEvent::*)
-                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WeekEvent::MenuFlyoutItem_Click_1);
+            this->edit = safe_cast<::Windows::UI::Xaml::Controls::MenuFlyoutItem^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::MenuFlyoutItem^>(this->edit))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::WeekEvent::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WeekEvent::edit_Click);
         }
         break;
     case 4:
+        {
+            ::Windows::UI::Xaml::Controls::MenuFlyoutItem^ element4 = safe_cast<::Windows::UI::Xaml::Controls::MenuFlyoutItem^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::MenuFlyoutItem^>(element4))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::WeekEvent::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WeekEvent::MenuFlyoutItem_Click_1);
+        }
+        break;
+    case 5:
         {
             this->DeviceID = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(this->DeviceID))->TextChanging += ref new ::Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::Controls::TextBox^, ::Windows::UI::Xaml::Controls::TextBoxTextChangingEventArgs^>(this, (void (::CheckoutManager::WeekEvent::*)
                 (::Windows::UI::Xaml::Controls::TextBox^, ::Windows::UI::Xaml::Controls::TextBoxTextChangingEventArgs^))&WeekEvent::DeviceID_TextChanging);
         }
         break;
-    case 5:
+    case 6:
         {
             this->Password = safe_cast<::Windows::UI::Xaml::Controls::PasswordBox^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::PasswordBox^>(this->Password))->PasswordChanged += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::WeekEvent::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WeekEvent::Password_PasswordChanged);
         }
         break;
-    case 6:
-        {
-            ::Windows::UI::Xaml::Controls::Button^ element6 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-            (safe_cast<::Windows::UI::Xaml::Controls::Button^>(element6))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::WeekEvent::*)
-                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WeekEvent::Button_Click);
-        }
-        break;
     case 7:
         {
-            this->mainGrid = safe_cast<::Windows::UI::Xaml::Controls::RelativePanel^>(__target);
+            ::Windows::UI::Xaml::Controls::Button^ element7 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::Button^>(element7))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::WeekEvent::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WeekEvent::Button_Click);
         }
         break;
     case 8:
         {
-            this->timeblock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            this->mainGrid = safe_cast<::Windows::UI::Xaml::Controls::RelativePanel^>(__target);
         }
         break;
     case 9:
         {
-            this->check = safe_cast<::Windows::UI::Xaml::Controls::SymbolIcon^>(__target);
+            this->timeblock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
         }
         break;
     case 10:
+        {
+            this->check = safe_cast<::Windows::UI::Xaml::Controls::SymbolIcon^>(__target);
+        }
+        break;
+    case 11:
         {
             this->itemblock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
         }

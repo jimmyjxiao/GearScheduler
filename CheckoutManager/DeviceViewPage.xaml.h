@@ -15,16 +15,25 @@ namespace CheckoutManager
 	/// <summary>
 	/// An empty page that can be used on its own or navigated to within a Frame.
 	/// </summary>
-	public ref struct device sealed
+
+	public value struct device sealed
 	{
+
 	public:
-		property Platform::String^ description;
-		property bool checkedOut;
-		property int deviceID;
-		property Platform::String^ currentRentee;
+		Platform::String^ description;
+		 bool checkedOut;
+		 int deviceID;
+		 Platform::String^ currentRentee;
+	};
+	struct deviceEqual : public std::binary_function<const device, const device, bool>
+	{
+		bool operator()(const device & left, const device & right) const
+		{
+			return (std::tie(left.checkedOut, left.currentRentee, left.deviceID, left.description) == std::tie(right.checkedOut, right.currentRentee, right.deviceID, right.description));
+		};
 	};
 	[Windows::UI::Xaml::Data::Bindable]
-	public ref class devicesGroup sealed
+	public ref struct devicesGroup sealed
 	{
 	public:
 		property Windows::UI::Xaml::Media::SolidColorBrush^ color;
@@ -46,7 +55,7 @@ namespace CheckoutManager
 			Windows::UI::Xaml::Input::ICommand^ get();
 		}
 		
-		property Windows::Foundation::Collections::IObservableVector<device^>^ devices;
+		property Windows::Foundation::Collections::IVector<device>^ devices;
 	private:
 		Platform::String^ typeName;
 
@@ -73,6 +82,7 @@ namespace CheckoutManager
 		void Grid_ContextRequested(Windows::UI::Xaml::UIElement^ sender, Windows::UI::Xaml::Input::ContextRequestedEventArgs^ args);
 		void MenuFlyoutItem_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void MenuFlyoutItem_Loaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void MenuFlyoutItem_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	};
 	public ref class grouptostr  sealed : Windows::UI::Xaml::Data::IValueConverter
 	{

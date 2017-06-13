@@ -2,7 +2,7 @@
 // MainPage.xaml.cpp
 // Implementation of the MainPage class.
 //
-
+// If you are reading this code right now I am so sorry. I know it's a huge steaming pile of shit.
 #include "pch.h"
 #include "MainPage.xaml.h"
 
@@ -104,5 +104,16 @@ CheckoutManager::NavItem::NavItem(Platform::Type ^ page, Platform::String ^ labe
 
 void CheckoutManager::MainPage::Page_Loaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	
+}
 
+
+void CheckoutManager::MainPage::zFrame_Navigated(Platform::Object^ sender, Windows::UI::Xaml::Navigation::NavigationEventArgs^ e)
+{
+	
+	/*auto newpage = (Platform::Type^)(dynamic_cast<Windows::UI::Xaml::Controls::Frame^>(sender)->SourcePageType);
+	auto tn = AddCheckout::typeid;
+	if (newpage == tn)
+		__debugbreak();*/
+	
 }

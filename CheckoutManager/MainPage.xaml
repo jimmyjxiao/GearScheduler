@@ -43,7 +43,7 @@
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
-                <Frame x:Name="zFrame" SourcePageType="local:LandingPage"/>
+                <Frame x:Name="zFrame" SourcePageType="local:LandingPage" Navigated="zFrame_Navigated" Loaded="Page_Loaded"/>
             </SplitView.Content>
         </SplitView>
 

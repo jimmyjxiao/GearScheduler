@@ -32,22 +32,34 @@ void ::CheckoutManager::WeekViewControl::Connect(int __connectionId, ::Platform:
     {
     case 1:
         {
-            this->Partialnotification = safe_cast<::Windows::UI::Xaml::Controls::RelativePanel^>(__target);
+            ::Windows::UI::Xaml::Controls::UserControl^ element1 = safe_cast<::Windows::UI::Xaml::Controls::UserControl^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::UserControl^>(element1))->Loaded += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::WeekViewControl::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WeekViewControl::UserControl_Loaded);
         }
         break;
     case 2:
         {
-            this->hiddenWarning = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            this->scroll = safe_cast<::Windows::UI::Xaml::Controls::ScrollViewer^>(__target);
         }
         break;
     case 3:
         {
-            ::Windows::UI::Xaml::Controls::HyperlinkButton^ element3 = safe_cast<::Windows::UI::Xaml::Controls::HyperlinkButton^>(__target);
-            (safe_cast<::Windows::UI::Xaml::Controls::HyperlinkButton^>(element3))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::WeekViewControl::*)
-                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WeekViewControl::HyperlinkButton_Click);
+            this->Partialnotification = safe_cast<::Windows::UI::Xaml::Controls::RelativePanel^>(__target);
         }
         break;
     case 4:
+        {
+            this->hiddenWarning = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+        }
+        break;
+    case 5:
+        {
+            ::Windows::UI::Xaml::Controls::HyperlinkButton^ element5 = safe_cast<::Windows::UI::Xaml::Controls::HyperlinkButton^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::HyperlinkButton^>(element5))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::WeekViewControl::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WeekViewControl::HyperlinkButton_Click);
+        }
+        break;
+    case 6:
         {
             this->mainGrid = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::Grid^>(this->mainGrid))->Loaded += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::WeekViewControl::*)

@@ -15,7 +15,6 @@ namespace Windows {
                 ref class PasswordBox;
                 ref class TextBlock;
                 ref class Button;
-                ref class ProgressRing;
                 ref class SymbolIcon;
             }
         }
@@ -46,7 +45,6 @@ namespace CheckoutManager
         private: ::Windows::UI::Xaml::Controls::PasswordBox^ passbox;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ passWarning;
         private: ::Windows::UI::Xaml::Controls::Button^ loginbutton;
-        private: ::Windows::UI::Xaml::Controls::ProgressRing^ progress;
         private: ::Windows::UI::Xaml::Controls::SymbolIcon^ logIndicator;
     };
 }

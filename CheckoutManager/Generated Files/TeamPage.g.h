@@ -12,10 +12,10 @@ namespace Windows {
     namespace UI {
         namespace Xaml {
             namespace Controls {
+                ref class StackPanel;
                 ref class TextBox;
                 ref class PasswordBox;
                 ref class Button;
-                ref class StackPanel;
                 ref class TextBlock;
             }
         }
@@ -41,10 +41,11 @@ namespace CheckoutManager
     private:
         bool _contentLoaded;
     
-        class TeamPage_obj3_Bindings;
+        class TeamPage_obj4_Bindings;
         class TeamPage_obj1_Bindings;
     
         ::XamlBindingInfo::XamlBindings^ Bindings;
+        private: ::Windows::UI::Xaml::Controls::StackPanel^ stack;
         private: ::Windows::UI::Xaml::Controls::TextBox^ newTeambox;
         private: ::Windows::UI::Xaml::Controls::PasswordBox^ Password;
         private: ::Windows::UI::Xaml::Controls::PasswordBox^ confirmpass;

@@ -5,12 +5,13 @@
     xmlns:local="using:CheckoutManager"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="UserControl_Loaded"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
     <Grid>
        
-        <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="1" IsVerticalRailEnabled="True">
+        <ScrollViewer VerticalScrollBarVisibility="Visible" IsVerticalRailEnabled="True" x:Name="scroll">
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="mainGrid" Loaded="mainGrid_Loaded" Grid.Row="1" Height="2000">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -30,8 +31,20 @@
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="Time/Day:"/>
-            <TextBlock Grid.Column="1" Text="Sunday"/>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <AppBarButton VerticalAlignment="Center" Height="16" Width="16">
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xE76B;"/>
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                    <TextBlock  Grid.Column="0" Text="Time/Day:" VerticalAlignment="Center"/>
+                    <AppBarButton VerticalAlignment="Center" Height="16" Width="16" >
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xE76C;"/>
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                </StackPanel>
+                <TextBlock Grid.Column="1" Text="Sunday"/>
             <TextBlock Grid.Column="2" Text="Monday"/>
             <TextBlock Grid.Column="3" Text="Tuesday"/>
             <TextBlock Grid.Column="4" Text="Wednesday"/>

@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <TextBox Header="Item ID:" x:Name="IDbox"/>
             <ComboBox Header="User:" x:Name="teamSelector" SelectionChanged="teamSelector_SelectionChanged"/>
             <PasswordBox Header="Password:" PasswordChanged="PasswordBox_PasswordChanged" x:Name="password" IsEnabled="False"/>

@@ -33,21 +33,34 @@ void ::CheckoutManager::Calpage::InitializeComponent()
 /// </summary>
 class CheckoutManager::Calpage::Calpage_obj1_Bindings 
     : public ::XamlBindingInfo::ReferenceTypeXamlBindings<::CheckoutManager::Calpage>
+    , public ::XamlBindingInfo::IXamlBindingTracking
 {
 public:
     Calpage_obj1_Bindings()
     {
+        InitializeTracking(this);
     }
+
+private:
+    ~Calpage_obj1_Bindings()
+    {
+        ReleaseAllListeners();
+    }
+
+public:
 
     void Connect(int __connectionId, ::Platform::Object^ __target)
     {
         switch(__connectionId)
         {
-            case 8: // Calpage.xaml line 45
-                this->obj8 = safe_cast<::CheckoutManager::WeekViewControl^>(__target);
+            case 10: // Calpage.xaml line 43
+                this->obj10 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 break;
-            case 9: // Calpage.xaml line 42
-                this->obj9 = safe_cast<::CheckoutManager::MonthViewControl^>(__target);
+            case 14: // Calpage.xaml line 60
+                this->obj14 = safe_cast<::CheckoutManager::WeekViewControl^>(__target);
+                break;
+            case 15: // Calpage.xaml line 57
+                this->obj15 = safe_cast<::CheckoutManager::MonthViewControl^>(__target);
                 break;
         }
     }
@@ -58,28 +71,103 @@ public:
     }
 private:
     // Fields for each control that has bindings.
-    ::CheckoutManager::WeekViewControl^ obj8;
-    ::CheckoutManager::MonthViewControl^ obj9;
+    ::Windows::UI::Xaml::Controls::TextBlock^ obj10;
+    ::CheckoutManager::WeekViewControl^ obj14;
+    ::CheckoutManager::MonthViewControl^ obj15;
+    
+    // Fields for binding tracking.
+    ::Windows::UI::Xaml::Data::INotifyPropertyChanged^ cachePC_weekview = nullptr;
+    ::Windows::Foundation::EventRegistrationToken tokenPC_weekview;
 
     // Update methods for each path node used in binding steps.
     void Update_(::CheckoutManager::Calpage^ obj, int phase)
     {
         if (obj != nullptr)
         {
+            if ((phase & (NOT_PHASED | DATA_CHANGED | (1 << 0))) != 0)
+            {
+                this->Update_weekview(obj->weekview, phase);
+            }
             if ((phase & (NOT_PHASED | (1 << 0))) != 0)
             {
                 this->Update_CurrentCalendar(obj->CurrentCalendar, phase);
             }
         }
     }
+    void Update_weekview(::CheckoutManager::WeekViewControl^ obj, int phase)
+    {
+        this->_bindingsTracking->UpdatePropertyChangedListener(obj, &this->cachePC_weekview, &tokenPC_weekview);
+        if (obj != nullptr)
+        {
+            if ((phase & (NOT_PHASED | DATA_CHANGED | (1 << 0))) != 0)
+            {
+                this->Update_weekview_dateRange(obj->dateRange, phase);
+            }
+        }
+    }
+    void Update_weekview_dateRange(::Platform::String^ obj, int phase)
+    {
+        if((phase & ((1 << 0) | NOT_PHASED | DATA_CHANGED)) != 0)
+        {
+            // Calpage.xaml line 43
+            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj10, obj, nullptr);
+        }
+    }
     void Update_CurrentCalendar(::CheckoutManager::CalInfo^ obj, int phase)
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            // Calpage.xaml line 45
-            ::XamlBindingInfo::XamlBindingSetters::Set_CheckoutManager_WeekViewControl_cal(this->obj8, obj, nullptr);
-            // Calpage.xaml line 42
-            ::XamlBindingInfo::XamlBindingSetters::Set_CheckoutManager_MonthViewControl_cal(this->obj9, obj, nullptr);
+            // Calpage.xaml line 60
+            ::XamlBindingInfo::XamlBindingSetters::Set_CheckoutManager_WeekViewControl_cal(this->obj14, obj, nullptr);
+            // Calpage.xaml line 57
+            ::XamlBindingInfo::XamlBindingSetters::Set_CheckoutManager_MonthViewControl_cal(this->obj15, obj, nullptr);
+        }
+    }
+
+    virtual void ReleaseAllListeners() override
+    {
+        this->_bindingsTracking->UpdatePropertyChangedListener(nullptr, &this->cachePC_weekview, &tokenPC_weekview);
+    }
+
+    virtual void PropertyChanged(Platform::Object^ sender, ::Windows::UI::Xaml::Data::PropertyChangedEventArgs^ e) override
+    {
+        if (cachePC_weekview != nullptr && cachePC_weekview->Equals(sender))
+        {
+            ::Platform::String^ propName = e->PropertyName;
+            ::CheckoutManager::WeekViewControl^ obj = safe_cast<::CheckoutManager::WeekViewControl^>(sender);
+            if (propName == nullptr || propName->IsEmpty())
+            {
+                if (obj != nullptr)
+                {
+                    this->Update_weekview_dateRange(obj->dateRange, DATA_CHANGED);
+                }
+            }
+            else if (propName == "dateRange")
+            {
+                if (obj != nullptr)
+                {
+                    this->Update_weekview_dateRange(obj->dateRange, DATA_CHANGED);
+                }
+            }
+        }
+    }
+
+    void CollectionChanged(::Platform::Object^ sender, ::Windows::UI::Xaml::Interop::NotifyCollectionChangedEventArgs^ e)
+    {
+    }
+
+    void VectorChanged(::Platform::Object^ sender, ::Windows::Foundation::Collections::IVectorChangedEventArgs^ e)
+    {
+    }
+
+    void MapChanged(::Platform::Object^ sender, ::Windows::Foundation::Collections::IMapChangedEventArgs<::Platform::String^>^ e)
+    {
+    }
+
+    void DependencyPropertyChanged(::Windows::UI::Xaml::DependencyObject^ sender, ::Windows::UI::Xaml::DependencyProperty^ prop)
+    {
+        if (sender != nullptr)
+        {
         }
     }
 };
@@ -132,10 +220,41 @@ void ::CheckoutManager::Calpage::Connect(int __connectionId, ::Platform::Object^
         break;
     case 8:
         {
-            this->weekview = safe_cast<::CheckoutManager::WeekViewControl^>(__target);
+            this->weekTools = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
         }
         break;
     case 9:
+        {
+            ::Windows::UI::Xaml::Controls::AppBarButton^ element9 = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(element9))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::Calpage::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&Calpage::AppBarButton_Click_1);
+        }
+        break;
+    case 11:
+        {
+            ::Windows::UI::Xaml::Controls::AppBarButton^ element11 = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(element11))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::Calpage::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&Calpage::AppBarButton_Click_2);
+        }
+        break;
+    case 12:
+        {
+            ::Windows::UI::Xaml::Controls::AppBarToggleButton^ element12 = safe_cast<::Windows::UI::Xaml::Controls::AppBarToggleButton^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::AppBarToggleButton^>(element12))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::Calpage::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&Calpage::AppBarToggleButton_Click);
+        }
+        break;
+    case 13:
+        {
+            this->monthitem = safe_cast<::Windows::UI::Xaml::Controls::PivotItem^>(__target);
+        }
+        break;
+    case 14:
+        {
+            this->weekview = safe_cast<::CheckoutManager::WeekViewControl^>(__target);
+        }
+        break;
+    case 15:
         {
             this->monthView = safe_cast<::CheckoutManager::MonthViewControl^>(__target);
         }

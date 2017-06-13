@@ -25,7 +25,8 @@ Calpage::Calpage()
 {
 	InitializeComponent();
 	currentcalendar = ref new CalInfo(database);
-	monthView->switchHandler = ref new CheckoutManager::switchView(this, &CheckoutManager::Calpage::onswitch);
+	currentcalendar->updateCalendar += ref new CheckoutManager::update(this, &CheckoutManager::Calpage::OnupdateCalendar);
+	currentcalendar->switchtoweek += ref new CheckoutManager::switchView(this, &CheckoutManager::Calpage::onswitch);
 	devradio->IsChecked = true;
 	refreshListbox(currentcalendar->ViewBy);
 	list->SelectAll();
@@ -52,6 +53,7 @@ void CheckoutManager::Calpage::refreshListbox(bool viewby)
 		adding->Append(text);
 	}
 	list->ItemsSource = adding;
+	list->SelectAll();
 }
 
 void CheckoutManager::Calpage::Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
@@ -87,6 +89,7 @@ void CheckoutManager::Calpage::AppBarButton_Click(Platform::Object^ sender, Wind
 void CheckoutManager::Calpage::onswitch(bool z, CalInfo ^ x)
 {
 	lengthPivot->SelectedIndex = 1;
+	
 }
 
 
@@ -104,6 +107,61 @@ void CheckoutManager::Calpage::list_SelectionChanged(Platform::Object^ sender, W
 void CheckoutManager::Calpage::lengthPivot_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e)
 {
 	if (lengthPivot->SelectedIndex == 0)
-		list->IsEnabled = false;
-	else list->IsEnabled = true;
+	{
+		list->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+		weekTools->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+		if (((MonthViewControl^)monthitem->Content)->replacewith != nullptr)
+			monthitem->Content = ((MonthViewControl^)monthitem->Content)->replacewith;
+	}
+	else 
+	{ 
+		list->Visibility = Windows::UI::Xaml::Visibility::Visible; 
+		weekTools->Visibility = Windows::UI::Xaml::Visibility::Visible;
+	}
+}
+
+
+void CheckoutManager::Calpage::calendarback_click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	if (lengthPivot->SelectedIndex == 0)
+	{
+		
+		Windows::Foundation::DateTime newdate;
+		newdate.UniversalTime= (currentcalendar->selectedDate.UniversalTime - 6.048e+12);
+		currentcalendar->selectedDate = newdate;
+	}
+}
+
+
+void CheckoutManager::Calpage::calendarforwad_click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+
+}
+
+
+void CheckoutManager::Calpage::OnupdateCalendar(CheckoutManager::CalInfo ^)
+{
+	if (lengthPivot->SelectedIndex == 0)
+	{
+		if (((MonthViewControl^)monthitem->Content)->replacewith != nullptr)
+			monthitem->Content = ((MonthViewControl^)monthitem->Content)->replacewith;
+	}
+}
+
+
+void CheckoutManager::Calpage::AppBarButton_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	weekview->incrementweek(false);
+}
+
+
+void CheckoutManager::Calpage::AppBarButton_Click_2(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	weekview->incrementweek(true);
+}
+
+
+void CheckoutManager::Calpage::AppBarToggleButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	weekview->zoomed = ((Windows::UI::Xaml::Controls::AppBarToggleButton^)sender)->IsChecked->Value;
 }

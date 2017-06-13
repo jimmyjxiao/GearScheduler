@@ -26,8 +26,7 @@
         </PasswordBox>
         <StackPanel Orientation="Horizontal">
             <Button x:ConnectionId='5' Content="Login"                       IsEnabled="False" x:Name="loginbutton"/>
-            <ProgressRing x:ConnectionId='6' IsActive="False" x:Name="progress"/>
-            <SymbolIcon x:ConnectionId='7' Symbol="Contact" Foreground="Red" ToolTipService.ToolTip="Signed In status" HorizontalAlignment="Right" x:Name="logIndicator"/>
+            <SymbolIcon x:ConnectionId='6' Symbol="Contact" Foreground="Red" ToolTipService.ToolTip="Signed In status" HorizontalAlignment="Right" x:Name="logIndicator"/>
         </StackPanel>
         <TextBlock x:ConnectionId='4' FontWeight="Bold" Foreground="Red" x:Name="passWarning"/>
     </StackPanel>

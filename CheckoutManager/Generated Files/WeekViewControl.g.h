@@ -11,6 +11,7 @@ namespace Windows {
     namespace UI {
         namespace Xaml {
             namespace Controls {
+                ref class ScrollViewer;
                 ref class RelativePanel;
                 ref class TextBlock;
                 ref class Grid;
@@ -39,6 +40,7 @@ namespace CheckoutManager
         bool _contentLoaded;
     
     
+        private: ::Windows::UI::Xaml::Controls::ScrollViewer^ scroll;
         private: ::Windows::UI::Xaml::Controls::RelativePanel^ Partialnotification;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ hiddenWarning;
         private: ::Windows::UI::Xaml::Controls::Grid^ mainGrid;

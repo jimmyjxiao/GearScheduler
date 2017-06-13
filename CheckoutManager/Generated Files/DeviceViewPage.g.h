@@ -51,7 +51,7 @@ namespace CheckoutManager
         bool _contentLoaded;
     
         class DeviceViewPage_obj3_Bindings;
-        class DeviceViewPage_obj8_Bindings;
+        class DeviceViewPage_obj9_Bindings;
         class DeviceViewPage_obj1_Bindings;
     
         ::XamlBindingInfo::XamlBindings^ Bindings;

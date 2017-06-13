@@ -6,10 +6,12 @@ namespace CheckoutManager
 {
 	ref class CalInfo;
 	public delegate void update(CalInfo^);
+	public delegate void switchView(bool month, CalInfo^ cal);
 	public ref class CalInfo sealed
 	{
 	public:
 		event update^ updateCalendar;
+		event switchView^ switchtoweek;
 		property Windows::Foundation::DateTime date;
 		property Windows::Foundation::DateTime selectedDate
 		{
@@ -20,7 +22,7 @@ namespace CheckoutManager
 			void set(Windows::Foundation::DateTime z)
 			{
 				_selectedDate = z;
-				updateCalendar(this);
+				//updateCalendar(this);
 			}
 			
 		}
@@ -36,10 +38,20 @@ namespace CheckoutManager
 				{
 					std::swap(colorMap, offColor);
 					view = a;
+					updateCalendar(this);
 				}
 			}
 		}
 	internal:
+		bool selectedDatechanged = false;
+		void updateInfo()
+		{
+			updateCalendar(this);
+		}
+		void monthtoweek()
+		{
+			switchtoweek(false, this);
+		}
 		dataManager* datcon;
 		CalInfo(dataManager* z);
 		int debugvar = 0;

@@ -224,13 +224,13 @@ namespace XamlBindingInfo
     ref class XamlBindingSetters sealed
     {
     internal:
-        static void Set_Windows_UI_Xaml_Controls_ItemsControl_ItemsSource(::Windows::UI::Xaml::Controls::ItemsControl^ obj, ::Platform::Object^ value, ::Platform::String^ targetNullValue)
+        static void Set_Windows_UI_Xaml_Controls_TextBlock_Text(::Windows::UI::Xaml::Controls::TextBlock^ obj, ::Platform::String^ value, ::Platform::String^ targetNullValue)
         {
             if (value == nullptr && targetNullValue != nullptr)
             {
-                value = (::Platform::Object^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Platform::Object::typeid, targetNullValue);
+                value = targetNullValue;
             }
-            obj->ItemsSource = value;
+            obj->Text = value;
         }
         static void Set_CheckoutManager_WeekViewControl_cal(::CheckoutManager::WeekViewControl^ obj, ::CheckoutManager::CalInfo^ value, ::Platform::String^ targetNullValue)
         {
@@ -256,6 +256,14 @@ namespace XamlBindingInfo
             }
             obj->Source = value;
         }
+        static void Set_Windows_UI_Xaml_Controls_ItemsControl_ItemsSource(::Windows::UI::Xaml::Controls::ItemsControl^ obj, ::Platform::Object^ value, ::Platform::String^ targetNullValue)
+        {
+            if (value == nullptr && targetNullValue != nullptr)
+            {
+                value = (::Platform::Object^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Platform::Object::typeid, targetNullValue);
+            }
+            obj->ItemsSource = value;
+        }
         static void Set_Windows_UI_Xaml_Controls_Panel_Background(::Windows::UI::Xaml::Controls::Panel^ obj, ::Windows::UI::Xaml::Media::Brush^ value, ::Platform::String^ targetNullValue)
         {
             if (value == nullptr && targetNullValue != nullptr)
@@ -263,14 +271,6 @@ namespace XamlBindingInfo
                 value = (::Windows::UI::Xaml::Media::Brush^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Windows::UI::Xaml::Media::Brush::typeid, targetNullValue);
             }
             obj->Background = value;
-        }
-        static void Set_Windows_UI_Xaml_Controls_TextBlock_Text(::Windows::UI::Xaml::Controls::TextBlock^ obj, ::Platform::String^ value, ::Platform::String^ targetNullValue)
-        {
-            if (value == nullptr && targetNullValue != nullptr)
-            {
-                value = targetNullValue;
-            }
-            obj->Text = value;
         }
         static void Set_Windows_UI_Xaml_Controls_TextBlock_Foreground(::Windows::UI::Xaml::Controls::TextBlock^ obj, ::Windows::UI::Xaml::Media::Brush^ value, ::Platform::String^ targetNullValue)
         {
@@ -287,6 +287,26 @@ namespace XamlBindingInfo
                 value = (::Windows::UI::Xaml::Input::ICommand^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Windows::UI::Xaml::Input::ICommand::typeid, targetNullValue);
             }
             obj->Command = value;
+        }
+        static void Set_Windows_UI_Xaml_FrameworkElement_Name(::Windows::UI::Xaml::FrameworkElement^ obj, ::Platform::String^ value, ::Platform::String^ targetNullValue)
+        {
+            if (value == nullptr && targetNullValue != nullptr)
+            {
+                value = targetNullValue;
+            }
+            obj->Name = value;
+        }
+        static void Set_Windows_UI_Xaml_FrameworkElement_Tag(::Windows::UI::Xaml::FrameworkElement^ obj, ::Platform::Object^ value, ::Platform::String^ targetNullValue)
+        {
+            if (value == nullptr && targetNullValue != nullptr)
+            {
+                value = (::Platform::Object^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Platform::Object::typeid, targetNullValue);
+            }
+            obj->Tag = value;
+        }
+        static void Set_Windows_UI_Xaml_UIElement_Visibility(::Windows::UI::Xaml::UIElement^ obj, ::Windows::UI::Xaml::Visibility value)
+        {
+            obj->Visibility = value;
         }
         static void Set_Windows_UI_Xaml_Controls_SymbolIcon_Symbol(::Windows::UI::Xaml::Controls::SymbolIcon^ obj, ::Windows::UI::Xaml::Controls::Symbol value)
         {

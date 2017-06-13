@@ -39,11 +39,14 @@ namespace CheckoutManager
 		}
 
 	private:
+		bool isloaded = false;
 		void Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		Windows::UI::Color GetNewColor();
 		void ListView_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
 		void Page_Loaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	internal:
 		static MainPage^ current;
+	private:
+		void zFrame_Navigated(Platform::Object^ sender, Windows::UI::Xaml::Navigation::NavigationEventArgs^ e);
 	};
 }

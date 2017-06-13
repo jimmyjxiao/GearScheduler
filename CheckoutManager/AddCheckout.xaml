@@ -9,28 +9,28 @@
 
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <CommandBar>
-            <AppBarButton Icon="Save" Click="AppBarButton_Click"/>
-            <AppBarButton Icon="Delete"/>
+            <AppBarButton Icon="Save" Click="AppBarButton_Click" IsEnabled="False" x:Name="savebutton" Label="Save"/>
+            <AppBarButton Icon="Delete" Label="Delete"/>
             <CommandBar.Content>
-                <ComboBox Header="Team:" x:Name="teamSelector"/>
+                <TextBlock Text="Checkout details" Style="{ThemeResource HeaderTextBlockStyle}" FontSize="40" VerticalAlignment="Center" Margin="4,0,0,0" Padding="0"/>
             </CommandBar.Content>
 
         </CommandBar>
-        <TextBlock Text="Checkout details" Style="{ThemeResource HeaderTextBlockStyle}"/>
+
+
+        <ComboBox Header="User:" x:Name="teamSelector" SelectionChanged="teamSelector_SelectionChanged" Margin="4,0,0,0" />
 
 
 
-
-
-        <ComboBox x:Name="devicepicker"   ItemsSource="{x:Bind DeviceTypes}"  Header="Device Type:"/>
-        <StackPanel Orientation="Horizontal">
+        <ComboBox x:Name="devicepicker"  Header="Device Type:" SelectionChanged="teamSelector_SelectionChanged" Margin="4,0,0,0"/>
+        <StackPanel Orientation="Horizontal" Margin="4,0,0,0">
             <CalendarDatePicker x:Name="startDate" Header="Checkout Date" />
             <TimePicker Header="Checkout Time" x:Name="startTime"/>
-            <ToggleSwitch x:Name="sameDay" Header="Return on same day" IsOn="True" OnContent="" OffContent=""/>
+            <ToggleSwitch x:Name="sameDay" Header="Return on same day" IsOn="True" Toggled="sameDay_Toggled" OnContent="" OffContent=""/>
 
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Margin="4,0,0,0">
             <CalendarDatePicker Header="Return Date" x:Name="returnDate" Visibility="Collapsed"/>
             <TimePicker Header="Return Time" x:Name="returnTime"/>
         </StackPanel>

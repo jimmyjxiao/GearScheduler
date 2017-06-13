@@ -29,6 +29,7 @@ namespace CheckoutManager
 			}
 		}
 	private:
+
 		CalInfo^ currentcalendar;
 		void refreshListbox(bool viewby);
 		void Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
@@ -37,5 +38,11 @@ namespace CheckoutManager
 		void onswitch(bool z, CalInfo^ x);
 		void list_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
 		void lengthPivot_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
+		void calendarback_click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void calendarforwad_click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void OnupdateCalendar(CheckoutManager::CalInfo ^);
+		void AppBarButton_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void AppBarButton_Click_2(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void AppBarToggleButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	};
 }

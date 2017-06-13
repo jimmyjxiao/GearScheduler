@@ -12,6 +12,7 @@ namespace Windows {
     namespace UI {
         namespace Xaml {
             namespace Controls {
+                ref class MenuFlyoutItem;
                 ref class TextBox;
                 ref class PasswordBox;
                 ref class RelativePanel;
@@ -44,6 +45,7 @@ namespace CheckoutManager
         class WeekEvent_obj1_Bindings;
     
         ::XamlBindingInfo::XamlBindings^ Bindings;
+        private: ::Windows::UI::Xaml::Controls::MenuFlyoutItem^ edit;
         private: ::Windows::UI::Xaml::Controls::TextBox^ DeviceID;
         private: ::Windows::UI::Xaml::Controls::PasswordBox^ Password;
         private: ::Windows::UI::Xaml::Controls::RelativePanel^ mainGrid;

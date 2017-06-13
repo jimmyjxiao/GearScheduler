@@ -24,7 +24,7 @@
             <TextBlock Text="View By:"/>
         </Pivot.LeftHeader>
         <Pivot.RightHeader>
-            <StackPanel  MinWidth="500" Width="336" Orientation="Horizontal">
+            <StackPanel  MinWidth="500" Orientation="Horizontal">
                 
                 
                 <AppBarButton x:ConnectionId='4' Icon="Refresh" VerticalAlignment="Center" Height="50" Width="50"                           />
@@ -33,16 +33,31 @@
                 <AppBarSeparator VerticalAlignment="Center"/>
                 <RadioButton x:ConnectionId='6' GroupName="devteamview" Content="View By Device" Tag="dev"                               VerticalAlignment="Center" x:Name="devradio"/>
                 <RadioButton x:ConnectionId='7' GroupName="devteamview" Content="View By User" Margin="3,0,0,0" Tag="team"                               VerticalAlignment="Center"/>
-    
-
-            </StackPanel>
+                 <StackPanel x:ConnectionId='8' Visibility="Collapsed" x:Name="weekTools" Orientation="Horizontal" VerticalAlignment="Center">
+                        <AppBarSeparator VerticalAlignment="Center"/>
+                        <AppBarButton x:ConnectionId='9' VerticalAlignment="Center" Height="50" Width="50"                             >
+                            <AppBarButton.Icon>
+                                <FontIcon Glyph="&#xE70E;"/>
+                            </AppBarButton.Icon>
+                        </AppBarButton >
+                        <TextBlock x:ConnectionId='10'                                                 VerticalAlignment="Center"/>
+                        <AppBarButton x:ConnectionId='11' VerticalAlignment="Center" Width="50" Height="50"                             >
+                            <AppBarButton.Icon>
+                                <FontIcon Glyph="&#xE70D;"/>
+                            </AppBarButton.Icon>
+                        </AppBarButton>
+                        <AppBarSeparator VerticalAlignment="Center"/>
+                        <AppBarToggleButton x:ConnectionId='12' VerticalAlignment="Center" Width="50" Height="50" Icon="ZoomIn"                                 />
+                    </StackPanel>
+                  
+                </StackPanel>
         </Pivot.RightHeader>
         
-        <PivotItem Header="Month">
-            <local:MonthViewControl x:ConnectionId='9'                                x:Name="monthView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DayOfWeekFormat="{}{dayofweek.solo.abbreviated(3)}"/>
+        <PivotItem x:ConnectionId='13' Header="Month" x:Name="monthitem">
+            <local:MonthViewControl x:ConnectionId='15'                                x:Name="monthView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DayOfWeekFormat="{}{dayofweek.solo.abbreviated(3)}"/>
         </PivotItem>
         <PivotItem Header="Week" Margin="0">
-            <local:WeekViewControl x:ConnectionId='8'                                x:Name="weekview"/>
+            <local:WeekViewControl x:ConnectionId='14'                                x:Name="weekview"/>
         </PivotItem>
     </Pivot>
      <ListView x:ConnectionId='3' Style="{StaticResource horizontalListbox}" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" SelectionMode="Multiple" x:Name="list"                                         />

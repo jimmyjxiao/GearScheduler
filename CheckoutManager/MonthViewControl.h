@@ -5,10 +5,20 @@
 #include "Calpage.xaml.h"
 namespace CheckoutManager
 {
-	public delegate void switchView(bool month, CalInfo^ cal);
+
 	public ref class MonthViewControl sealed :
 		public Windows::UI::Xaml::Controls::CalendarView
 	{
+	private:
+		Windows::Foundation::EventRegistrationToken cookie;
+		CalInfo^ calvar = nullptr;
+		void CalendarView_CalendarViewDayItemChanging(Windows::UI::Xaml::Controls::CalendarView^ sender, Windows::UI::Xaml::Controls::CalendarViewDayItemChangingEventArgs^ args);
+		void OnSelectedDatesChanged(Windows::UI::Xaml::Controls::CalendarView ^sender, Windows::UI::Xaml::Controls::CalendarViewSelectedDatesChangedEventArgs ^args);
+		void OnDoubleTapped(Platform::Object ^sender, Windows::UI::Xaml::Input::DoubleTappedRoutedEventArgs ^e);
+		void OnupdateCalendar(CheckoutManager::CalInfo ^);
+		bool removed = false;
+	internal:
+		MonthViewControl^ replacewith;
 	public:
 		
 		MonthViewControl();
@@ -20,24 +30,13 @@ namespace CheckoutManager
 			}
 			void set(CalInfo^ newset)
 			{
-
+				cookie = (newset->updateCalendar += ref new CheckoutManager::update(this, &CheckoutManager::MonthViewControl::OnupdateCalendar));
 				calvar = newset;
 
 			}
 		}
-		property switchView^ switchHandler
-		{
-			void set(switchView^ z)
-			{
-				switchtoweek += z;
-			}
-		}
-	private:
-		event switchView^ switchtoweek;
-		CalInfo^ calvar = nullptr;
-		void CalendarView_CalendarViewDayItemChanging(Windows::UI::Xaml::Controls::CalendarView^ sender, Windows::UI::Xaml::Controls::CalendarViewDayItemChangingEventArgs^ args);
-		void OnSelectedDatesChanged(Windows::UI::Xaml::Controls::CalendarView ^sender, Windows::UI::Xaml::Controls::CalendarViewSelectedDatesChangedEventArgs ^args);
-		void OnDoubleTapped(Platform::Object ^sender, Windows::UI::Xaml::Input::DoubleTappedRoutedEventArgs ^e);
+	
+	
 	};
 	private struct MyEqual : public std::binary_function<const Windows::UI::Color, const Windows::UI::Color, bool>
 	{

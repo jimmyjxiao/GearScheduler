@@ -39,12 +39,12 @@ namespace dataspace
 		try
 		{
 			inventory = new sqlite::database((const char16_t*)path->Data());
-			*inventory << "CREATE TABLE IF NOT EXISTS 'checkouts' (`checkoutID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `teamID` tinyint, `checkedout` bit, `chktime` INTEGER NOT NULL, `typeID` tinyint, `duetime` INTEGER NOT NULL, `actchktime` INTEGER, `actreturntime` INTEGER, `returned` INTEGER); "
-				<<
-				"CREATE TABLE IF NOT EXISTS 'Teams' (`teamID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `TeamName` TEXT NOT NULL, `password` BLOB NOT NULL, `color` BLOB UNIQUE); "
-				<<
-				"CREATE TABLE IF NOT EXISTS 'deviceType' (`deviceName` text NOT NULL, `typeID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `color` INTEGER); "
-				<<
+			*inventory << "CREATE TABLE IF NOT EXISTS 'checkouts' (`checkoutID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `teamID` tinyint, `checkedout` bit, `chktime` INTEGER NOT NULL, `typeID` tinyint, `duetime` INTEGER NOT NULL, `actchktime` INTEGER, `actreturntime` INTEGER, `returned` INTEGER); ";
+			*inventory <<
+				"CREATE TABLE IF NOT EXISTS 'Teams' (`teamID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `TeamName` TEXT NOT NULL, `password` BLOB NOT NULL, `color` BLOB UNIQUE); ";
+			*inventory <<
+				"CREATE TABLE IF NOT EXISTS 'deviceType' (`deviceName` text NOT NULL, `typeID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `color` INTEGER); ";
+				*inventory <<
 				"CREATE TABLE IF NOT EXISTS 'devices' (`deviceID` INTEGER NOT NULL, `typeID` tinyint NOT NULL, `available` bit, `Currentholder` TEXT, `desc` TEXT, `PublicID` TEXT, `ForcedCheckout` INTEGER, PRIMARY KEY(`deviceID`)); ";
 			getcheckoutprepnd = std::make_unique<sqlite::database_binder>(*inventory << u"SELECT Teams.TeamName, checkouts.chktime, deviceType.deviceName, checkouts.duetime, checkouts.actchktime, checkouts.actreturntime, checkouts.checkoutID, checkouts.checkedout "
 				"FROM checkouts "
@@ -65,6 +65,7 @@ namespace dataspace
 		}
 		catch (sqlite::sqlite_exception z)
 		{
+			
 			auto x = z.what();
 
 			__debugbreak();
@@ -107,7 +108,7 @@ namespace dataspace
 
 	}
 
-	bool dataManager::scheduleCheckout(CheckoutInfo adding)
+	bool dataManager::scheduleCheckout(CheckoutInfo & adding)
 	{
 		try
 		{
@@ -125,6 +126,27 @@ namespace dataspace
 			__debugbreak();
 		}
 		return false;
+	}
+
+	void dataManager::editCheckout(CheckoutInfo & adding)
+	{
+		try
+		{
+			*inventory <<
+				u"UPDATE checkouts "
+				"SET teamID = (SELECT teamID FROM Teams WHERE TeamName = ?), checkedout = ?, chktime = ?, typeID = (SELECT typeID from deviceType WHERE deviceName = ?), duetime = ?  "
+				"WHERE checkoutID = ?;"
+				<< adding.Team
+				<< (int)adding.fullfilled
+				<< adding.checkoutTime
+				<< adding.deviceType
+				<< adding.duedate
+				<< adding.checkoutID;
+		}
+		catch (std::exception e)
+		{
+			__debugbreak();
+		}
 	}
 
 	bool dataManager::fullfillCheckout(const CheckoutInfo & checkout, std::u16string hash, std::u16string deviceID)
@@ -168,33 +190,43 @@ namespace dataspace
 			throw 'P';
 		bool deviceFound = false;
 		CheckoutInfo returning;
-		*inventory <<
-			u"SELECT typeID FROM devices WHERE PublicID = ?"
-			<< deviceID
-			>> [&](int z)
+		try
 		{
-			deviceFound = true;
-			time_t currentTime;
-			time(&currentTime);
-			auto x = getCheckouts(currentTime, currentTime + 60, z);
-			auto it = std::find_if(x.begin(), x.end(), [team, hash, deviceID, this](CheckoutInfo v)
+			*inventory <<
+				u"SELECT typeID FROM devices WHERE PublicID = ?"
+				<< deviceID
+				>> [&](int z)
 			{
-				return (team == v.Team);
-			});
-			if (it == x.end())
+				deviceFound = true;
+				time_t currentTime;
+				time(&currentTime);
+				auto x = getCheckouts(currentTime, currentTime + 60, z);
+				if (x.size() > 0)
+				{
+					auto it = std::find_if(x.begin(), x.end(), [team, hash, deviceID, this](CheckoutInfo v)
+					{
+						return (team == v.Team);
+					});
+					if (it == x.end())
+					{
+						auto numpair = getnumofdevices(z);
+						throw (std::make_tuple(numpair.first, numpair.second, x));
+					}
+					else
+					{
+						fullfillCheckout(*it, hash, deviceID);
+						returning = *it;
+					}
+				}
+			};
+			if (!deviceFound)
 			{
-				auto numpair = getnumofdevices(z);
-				throw (std::make_tuple(numpair.first, numpair.second, x));
+				throw 'N';
 			}
-			else
-			{
-				fullfillCheckout(*it, hash, deviceID);
-				returning = *it;
-			}
-		};
-		if (!deviceFound)
+		}
+		catch (std::exception e)
 		{
-			throw 'N';
+			__debugbreak();
 		}
 		return returning;
 	}
@@ -252,7 +284,7 @@ namespace dataspace
 				"ON checkouts.teamID=Teams.teamID "
 				"INNER JOIN deviceType "
 				"ON checkouts.typeID=devicetype.typeID "
-				"WHERE (? BETWEEN checkouts.chktime AND checkouts.duetime) OR (? BETWEEN checkouts.chktime AND checkouts.duetime) OR (checkouts.chktime BETWEEN ? AND ?) AND (deviceType.typeID = ?);"
+				"WHERE ((? BETWEEN checkouts.chktime AND checkouts.duetime) OR (? BETWEEN checkouts.chktime AND checkouts.duetime) OR (checkouts.chktime BETWEEN ? AND ?)) AND (deviceType.deviceName = ?);"
 				<< startdate
 				<< enddate
 				<< startdate
@@ -418,10 +450,16 @@ namespace dataspace
 					<< newcolor;
 				return newcolor;
 			}
-			catch (sqlite::exceptions::constraint)
+			catch (sqlite::exceptions::constraint z)
 			{
-				//most likely we've generated a non-unique color. Just ignore and generate again until it works.
-				__debugbreak();
+				//most likely we've generated a non-unique color. Just ignore and generate again until it works. But maybe we have a non-unique device type name. check for that
+				int y = 0;
+				*inventory << "SELECT count(*) FROM deviceType WHERE deviceName = ?;"
+					<< name
+					>> y;
+				if (y > 0)
+					throw z;
+				//__debugbreak();
 			}
 		}
 
@@ -429,11 +467,19 @@ namespace dataspace
 
 	void dataManager::addDevice(std::u16string desc, std::u16string type)
 	{
-		*inventory <<
-			u"INSERT INTO devices (typeID, desc, PublicID, available) "
-			"VALUES ((SELECT typeID FROM deviceType WHERE deviceName = ?), ?, (SELECT abs(random()) % 999), 1)"
-			<< type
-			<< desc;
+		while (1)
+		{
+			try
+			{
+				*inventory <<
+					u"INSERT INTO devices (typeID, desc, PublicID, available) "
+					"VALUES ((SELECT typeID FROM deviceType WHERE deviceName = ?), ?, (SELECT abs(random()) % 999), 1)"
+					<< type
+					<< desc;
+				break;
+			}
+			catch (...) {};
+		}
 	}
 
 	bool dataManager::deleteTeam(std::u16string name)
@@ -451,6 +497,14 @@ namespace dataspace
 			"DELETE FROM deviceType "
 			"WHERE deviceName = ?;"
 			<< name;
+	}
+
+	void dataManager::deleteDevice(int ID)
+	{
+		*inventory <<
+			"DELETE FROM devices"
+			"WHERE PublicID = ?;"
+			<< ID;
 	}
 
 	bool dataManager::deleteTeam(int TeamID)

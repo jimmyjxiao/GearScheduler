@@ -54,7 +54,7 @@ void CheckoutManager::AuthenticationDialog::Button_Click(Platform::Object^ sende
 {
 	try
 	{
-		progress->IsActive = true;
+
 		passbox->IsEnabled = false;
 		loginbutton->IsEnabled = false;
 		IsPrimaryButtonEnabled = false;
@@ -65,7 +65,7 @@ void CheckoutManager::AuthenticationDialog::Button_Click(Platform::Object^ sende
 			{
 				passWarning->Text = L"Please enter password";
 				IsPrimaryButtonEnabled = false;
-				progress->IsActive = false;
+
 				loginbutton->IsEnabled = true;
 				logIndicator->Foreground = ref new Windows::UI::Xaml::Media::SolidColorBrush(Windows::UI::Colors::Red);
 				passbox->IsEnabled = true;
@@ -91,7 +91,6 @@ void CheckoutManager::AuthenticationDialog::Button_Click(Platform::Object^ sende
 				{
 					passWarning->Text = L"Wrong Password";
 					IsPrimaryButtonEnabled = false;
-					progress->IsActive = false;
 					loginbutton->IsEnabled = true;
 					logIndicator->Foreground = ref new Windows::UI::Xaml::Media::SolidColorBrush(Windows::UI::Colors::Red);
 					passbox->IsEnabled = true;
@@ -118,6 +117,6 @@ void CheckoutManager::AuthenticationDialog::user_SelectionChanged(Platform::Obje
 		logIndicator->Foreground = ref new Windows::UI::Xaml::Media::SolidColorBrush(Windows::UI::Colors::Red);
 		passbox->IsEnabled = true;
 		currentloggedin = nullptr;
-		progress->IsActive = false;
+
 	}
 }

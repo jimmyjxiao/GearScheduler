@@ -7,7 +7,7 @@
 CheckoutManager::CalInfo::CalInfo(dataManager * z)
 {
 	auto gcal = ref new Windows::Globalization::Calendar();
-	selectedDate = gcal->GetDateTime();
+	_selectedDate = gcal->GetDateTime();
 	date = selectedDate;
 	colorMap = z->getdeviceTypes();
 	offColor = z->getTeams();

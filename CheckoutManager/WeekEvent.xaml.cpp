@@ -7,6 +7,7 @@
 #include "WeekEvent.xaml.h"
 #include <sstream>
 #include "converters.h"
+#include "CalInfo.h"
 using namespace CheckoutManager;
 
 using namespace Platform;
@@ -37,17 +38,23 @@ void CheckoutManager::WeekEvent::hideunhide(bool hideun)
 }
 
 
-WeekEvent::WeekEvent(Windows::UI::Color color, Platform::String ^ devices, Platform::String^ teams, bool fullfilled, Platform::String^ timestr, int* maxzIndex, dataspace::dataManager::CheckoutInfo checkout)
+WeekEvent::WeekEvent(Windows::UI::Color color, Platform::String ^ devices, Platform::String^ teams, bool fullfilled, Platform::String^ timestr, int* maxzIndex, dataspace::dataManager::CheckoutInfo checkout, std::function<void()> editfunc)
 {
+	updatefunc = editfunc;
 	maxzindex = maxzIndex;
 	manuallyhidden = false;
 	groupColor = color;
 	timetext = timestr;
 	device = devices;
 	team = teams;
+
 	Checkout = checkout;
 	InitializeComponent();
-
+	if (fullfilled)
+	{
+		check->Visibility = Windows::UI::Xaml::Visibility::Visible;
+		mainGrid->BorderBrush = ref new Windows::UI::Xaml::Media::SolidColorBrush(Windows::UI::Colors::Green);
+	}
 }
 
 
@@ -68,16 +75,9 @@ void CheckoutManager::WeekEvent::Button_Click(Platform::Object^ sender, Windows:
 
 	try
 	{
-		std::wstringstream pubID;
-		pubID.str(DeviceID->Text->Data());
-		int ID;
-		if (pubID >> ID)
-		{
-			database->fullfillCheckout((const char16_t*)team->Data(), (const char16_t*)Password->Password->Data(), (const char16_t*)pubID.str().data());
+
+			database->fullfillCheckout((const char16_t*)team->Data(), (const char16_t*)Password->Password->Data(), (const char16_t*)DeviceID->Text->Data());
 			check->Visibility = Windows::UI::Xaml::Visibility::Visible;
-		}
-		else
-			throw 'D';
 	}
 	catch (char x)
 	{
@@ -96,7 +96,8 @@ void CheckoutManager::WeekEvent::UserControl_Tapped(Platform::Object^ sender, Wi
 {
 	(*maxzindex)++;
 	Windows::UI::Xaml::Controls::Canvas::SetZIndex(this, *maxzindex);
-	FlyoutBase::ShowAttachedFlyout((FrameworkElement^)sender);
+	if ((unsigned)(time(nullptr) - Checkout.checkoutTime) <= (Checkout.checkoutTime - Checkout.duedate))
+		FlyoutBase::ShowAttachedFlyout((FrameworkElement^)sender);
 }
 
 
@@ -134,4 +135,13 @@ void CheckoutManager::WeekEvent::Password_PasswordChanged(Platform::Object^ send
 void CheckoutManager::WeekEvent::MenuFlyoutItem_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	deleted(this);
+}
+
+
+void CheckoutManager::WeekEvent::edit_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	
+	auto editDialog = ref new Windows::UI::Xaml::Controls::ContentDialog();
+	editDialog->Content = ref new AddCheckout(&Checkout, updatefunc);
+	editDialog->ShowAsync();
 }

@@ -14,7 +14,12 @@
         <converters:booltocolor x:Key="availconverter"/>
         <local:grouptostr x:Key="groupnameconverter"/>
         <DataTemplate x:DataType="local:device" x:Key="deviceTemplate">
-            <Grid HorizontalAlignment="Stretch" ContextRequested="Grid_ContextRequested" Background="{x:Bind Converter={StaticResource availconverter}, Path=checkedOut, Mode=OneWay}">
+            <Grid HorizontalAlignment="Stretch" ContextRequested="Grid_ContextRequested"  Background="{x:Bind Converter={StaticResource availconverter}, Path=checkedOut, Mode=OneWay}">
+                <Grid.ContextFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Icon="Delete" Text="Delete" Click="MenuFlyoutItem_Click_1" Tag="{x:Bind deviceID}" />
+                    </MenuFlyout>
+                </Grid.ContextFlyout>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="2*"/>

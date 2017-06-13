@@ -15,6 +15,8 @@ namespace Windows {
                 ref class Pivot;
                 ref class ListView;
                 ref class RadioButton;
+                ref class StackPanel;
+                ref class PivotItem;
             }
         }
     }
@@ -49,6 +51,8 @@ namespace CheckoutManager
         private: ::Windows::UI::Xaml::Controls::Pivot^ lengthPivot;
         private: ::Windows::UI::Xaml::Controls::ListView^ list;
         private: ::Windows::UI::Xaml::Controls::RadioButton^ devradio;
+        private: ::Windows::UI::Xaml::Controls::StackPanel^ weekTools;
+        private: ::Windows::UI::Xaml::Controls::PivotItem^ monthitem;
         private: ::CheckoutManager::WeekViewControl^ weekview;
         private: ::CheckoutManager::MonthViewControl^ monthView;
     };

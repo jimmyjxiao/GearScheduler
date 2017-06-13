@@ -26,64 +26,22 @@ void ::CheckoutManager::AddCheckout::InitializeComponent()
     ::Windows::UI::Xaml::Application::LoadComponent(this, resourceLocator, ::Windows::UI::Xaml::Controls::Primitives::ComponentResourceLocation::Application);
 }
 
-
-/// <summary>
-/// Auto generated class for compiled bindings.
-/// </summary>
-class CheckoutManager::AddCheckout::AddCheckout_obj1_Bindings 
-    : public ::XamlBindingInfo::ReferenceTypeXamlBindings<::CheckoutManager::AddCheckout>
-{
-public:
-    AddCheckout_obj1_Bindings()
-    {
-    }
-
-    void Connect(int __connectionId, ::Platform::Object^ __target)
-    {
-        switch(__connectionId)
-        {
-            case 2: // AddCheckout.xaml line 25
-                this->obj2 = safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(__target);
-                break;
-        }
-    }
-
-    void DisconnectUnloadedObject(int connectionId)
-    {
-        throw ref new ::Platform::InvalidArgumentException("No unloadable elements to disconnect.");
-    }
-private:
-    // Fields for each control that has bindings.
-    ::Windows::UI::Xaml::Controls::ComboBox^ obj2;
-
-    // Update methods for each path node used in binding steps.
-    void Update_(::CheckoutManager::AddCheckout^ obj, int phase)
-    {
-        if (obj != nullptr)
-        {
-            if ((phase & (NOT_PHASED | (1 << 0))) != 0)
-            {
-                this->Update_DeviceTypes(obj->DeviceTypes, phase);
-            }
-        }
-    }
-    void Update_DeviceTypes(::Windows::Foundation::Collections::IVector<::Platform::String^>^ obj, int phase)
-    {
-        if((phase & ((1 << 0) | NOT_PHASED )) != 0)
-        {
-            // AddCheckout.xaml line 25
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_ItemsControl_ItemsSource(this->obj2, obj, nullptr);
-        }
-    }
-};
-
 void ::CheckoutManager::AddCheckout::Connect(int __connectionId, ::Platform::Object^ __target)
 {
     switch (__connectionId)
     {
+    case 1:
+        {
+            this->teamSelector = safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(this->teamSelector))->SelectionChanged += ref new ::Windows::UI::Xaml::Controls::SelectionChangedEventHandler(this, (void (::CheckoutManager::AddCheckout::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::Controls::SelectionChangedEventArgs^))&AddCheckout::teamSelector_SelectionChanged);
+        }
+        break;
     case 2:
         {
             this->devicepicker = safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(this->devicepicker))->SelectionChanged += ref new ::Windows::UI::Xaml::Controls::SelectionChangedEventHandler(this, (void (::CheckoutManager::AddCheckout::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::Controls::SelectionChangedEventArgs^))&AddCheckout::teamSelector_SelectionChanged);
         }
         break;
     case 3:
@@ -109,18 +67,15 @@ void ::CheckoutManager::AddCheckout::Connect(int __connectionId, ::Platform::Obj
     case 7:
         {
             this->sameDay = safe_cast<::Windows::UI::Xaml::Controls::ToggleSwitch^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::ToggleSwitch^>(this->sameDay))->Toggled += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::AddCheckout::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&AddCheckout::sameDay_Toggled);
         }
         break;
     case 8:
         {
-            ::Windows::UI::Xaml::Controls::AppBarButton^ element8 = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(__target);
-            (safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(element8))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::AddCheckout::*)
+            this->savebutton = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(this->savebutton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::AddCheckout::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&AddCheckout::AppBarButton_Click);
-        }
-        break;
-    case 9:
-        {
-            this->teamSelector = safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(__target);
         }
         break;
     }
@@ -129,21 +84,9 @@ void ::CheckoutManager::AddCheckout::Connect(int __connectionId, ::Platform::Obj
 
 ::Windows::UI::Xaml::Markup::IComponentConnector^ ::CheckoutManager::AddCheckout::GetBindingConnector(int __connectionId, ::Platform::Object^ __target)
 {
-    ::XamlBindingInfo::XamlBindings^ bindings = nullptr;
-    switch (__connectionId)
-    {
-        case 1: // AddCheckout.xaml line 1
-            {
-                ::Windows::UI::Xaml::Controls::Page^ element1 = safe_cast<::Windows::UI::Xaml::Controls::Page^>(__target);
-                AddCheckout_obj1_Bindings* objBindings = new AddCheckout_obj1_Bindings();
-                objBindings->SetDataRoot(this);
-                bindings = ref new ::XamlBindingInfo::XamlBindings(objBindings);
-                this->Bindings = bindings;
-                element1->Loading += ref new ::Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::FrameworkElement^, ::Platform::Object^>(bindings, &::XamlBindingInfo::XamlBindings::Loading);
-            }
-            break;
-    }
-    return bindings;
+    __connectionId;         // unreferenced
+    __target;               // unreferenced
+    return nullptr;
 }
 
 #pragma warning(pop)

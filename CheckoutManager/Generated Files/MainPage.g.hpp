@@ -140,6 +140,10 @@ void ::CheckoutManager::MainPage::Connect(int __connectionId, ::Platform::Object
     case 7:
         {
             this->zFrame = safe_cast<::Windows::UI::Xaml::Controls::Frame^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::Frame^>(this->zFrame))->Navigated += ref new ::Windows::UI::Xaml::Navigation::NavigatedEventHandler(this, (void (::CheckoutManager::MainPage::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::Navigation::NavigationEventArgs^))&MainPage::zFrame_Navigated);
+            (safe_cast<::Windows::UI::Xaml::Controls::Frame^>(this->zFrame))->Loaded += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::MainPage::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::Page_Loaded);
         }
         break;
     }

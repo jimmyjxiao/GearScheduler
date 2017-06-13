@@ -7,23 +7,20 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <StackPanel Padding="5">
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch">
+        <StackPanel Padding="5" Name="stack" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
             <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Add New Person/Team:"/>
             <TextBox Header="Name" x:Name="newTeambox"/>
-            <PasswordBox x:Name="Password" PasswordChanged="Password_PasswordChanged"/>
-            <PasswordBox x:Name="confirmpass" PasswordChanged="confirmpass_PasswordChanged" IsEnabled="False"/>
+            <PasswordBox x:Name="Password" PasswordChanged="Password_PasswordChanged" Header="Password:" />
+            <PasswordBox x:Name="confirmpass" PasswordChanged="confirmpass_PasswordChanged" IsEnabled="False" Header="Confirm Password:"/>
             <Button Content="Add Person/Team" Click="Button_Click" x:Name="addbutton" IsEnabled="False"/>
             <StackPanel Orientation="Horizontal" x:Name="addError" Visibility="Collapsed">
                 <SymbolIcon Symbol="Important" Foreground="Red"/>
                 <TextBlock x:Name="addTypeWarning"/>
             </StackPanel>
         </StackPanel>
-        <ListView ItemsSource="{x:Bind bindTeams}" Grid.Row="1">
+        <ListView ItemsSource="{x:Bind bindTeams}" RelativePanel.Below="stack">
+
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Team">
                     <TextBlock Text="{x:Bind teamName}" Foreground="{x:Bind color}"/>
@@ -31,5 +28,5 @@
             </ListView.ItemTemplate>
         </ListView>
 
-    </Grid>
+    </RelativePanel>
 </Page>

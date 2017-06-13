@@ -6,7 +6,6 @@
 //     the code is regenerated.
 //------------------------------------------------------------------------------
 
-#include "XamlBindingInfo.g.h"
 
 namespace Windows {
     namespace UI {
@@ -16,6 +15,7 @@ namespace Windows {
                 ref class CalendarDatePicker;
                 ref class TimePicker;
                 ref class ToggleSwitch;
+                ref class AppBarButton;
             }
         }
     }
@@ -40,16 +40,15 @@ namespace CheckoutManager
     private:
         bool _contentLoaded;
     
-        class AddCheckout_obj1_Bindings;
     
-        ::XamlBindingInfo::XamlBindings^ Bindings;
+        private: ::Windows::UI::Xaml::Controls::ComboBox^ teamSelector;
         private: ::Windows::UI::Xaml::Controls::ComboBox^ devicepicker;
         private: ::Windows::UI::Xaml::Controls::CalendarDatePicker^ returnDate;
         private: ::Windows::UI::Xaml::Controls::TimePicker^ returnTime;
         private: ::Windows::UI::Xaml::Controls::CalendarDatePicker^ startDate;
         private: ::Windows::UI::Xaml::Controls::TimePicker^ startTime;
         private: ::Windows::UI::Xaml::Controls::ToggleSwitch^ sameDay;
-        private: ::Windows::UI::Xaml::Controls::ComboBox^ teamSelector;
+        private: ::Windows::UI::Xaml::Controls::AppBarButton^ savebutton;
     };
 }
 

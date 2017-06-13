@@ -24,7 +24,7 @@
             <TextBlock Text="View By:"/>
         </Pivot.LeftHeader>
         <Pivot.RightHeader>
-            <StackPanel  MinWidth="500" Width="336" Orientation="Horizontal">
+            <StackPanel  MinWidth="500" Orientation="Horizontal">
                 
                 
                 <AppBarButton Icon="Refresh" VerticalAlignment="Center" Height="50" Width="50" Click="AppBarButton_Click"/>
@@ -33,12 +33,27 @@
                 <AppBarSeparator VerticalAlignment="Center"/>
                 <RadioButton GroupName="devteamview" Content="View By Device" Tag="dev" Checked="RadioButton_Checked" VerticalAlignment="Center" x:Name="devradio"/>
                 <RadioButton GroupName="devteamview" Content="View By User" Margin="3,0,0,0" Tag="team" Checked="RadioButton_Checked" VerticalAlignment="Center"/>
-    
-
-            </StackPanel>
+                 <StackPanel Visibility="Collapsed" x:Name="weekTools" Orientation="Horizontal" VerticalAlignment="Center">
+                        <AppBarSeparator VerticalAlignment="Center"/>
+                        <AppBarButton VerticalAlignment="Center" Height="50" Width="50" Click="AppBarButton_Click_1">
+                            <AppBarButton.Icon>
+                                <FontIcon Glyph="&#xE70E;"/>
+                            </AppBarButton.Icon>
+                        </AppBarButton >
+                        <TextBlock Text="{x:Bind weekview.dateRange, Mode=OneWay}" VerticalAlignment="Center"/>
+                        <AppBarButton VerticalAlignment="Center" Width="50" Height="50" Click="AppBarButton_Click_2">
+                            <AppBarButton.Icon>
+                                <FontIcon Glyph="&#xE70D;"/>
+                            </AppBarButton.Icon>
+                        </AppBarButton>
+                        <AppBarSeparator VerticalAlignment="Center"/>
+                        <AppBarToggleButton VerticalAlignment="Center" Width="50" Height="50" Icon="ZoomIn" Click="AppBarToggleButton_Click"/>
+                    </StackPanel>
+                  
+                </StackPanel>
         </Pivot.RightHeader>
         
-        <PivotItem Header="Month">
+        <PivotItem Header="Month" x:Name="monthitem">
             <local:MonthViewControl cal="{x:Bind CurrentCalendar}" x:Name="monthView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DayOfWeekFormat="{}{dayofweek.solo.abbreviated(3)}"/>
         </PivotItem>
         <PivotItem Header="Week" Margin="0">

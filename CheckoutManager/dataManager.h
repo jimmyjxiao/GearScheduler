@@ -25,18 +25,23 @@ namespace dataspace
 		dataManager(std::function<Windows::UI::Color(bool)> colorFunc);
 		struct CheckoutInfo
 		{
+			static bool isSameNotfulfilled(const CheckoutInfo& left, const CheckoutInfo& right)
+			{
+				return ((left.checkoutTime == right.checkoutTime) && (left.duedate == right.duedate) && (left.checkoutID == right.checkoutID) && (left.Team == right.Team) && (left.deviceType == right.deviceType));
+			}
 			std::u16string Team;
 			std::u16string deviceType;
 			time_t checkoutTime;
 			time_t duedate;
 			time_t actualchktime;
 			time_t actualreturntime;
-			int checkoutID;
-			bool fullfilled;
+			int checkoutID = NULL;
+			bool fullfilled = false;
 
 		};
 
-		bool scheduleCheckout(CheckoutInfo adding);
+		bool scheduleCheckout(CheckoutInfo& adding);
+		void editCheckout(CheckoutInfo& adding);
 		bool fullfillCheckout(const CheckoutInfo & checkout, std::u16string hash, std::u16string deviceID);
 		void forceCheckout(std::u16string deviceID, std::u16string team);
 		CheckoutInfo fullfillCheckout(std::u16string team, std::u16string hash, std::u16string deviceID);
@@ -51,6 +56,7 @@ namespace dataspace
 		void addDevice(std::u16string desc, std::u16string type);
 		bool deleteTeam(std::u16string name);
 		void deleteDeviceType(std::u16string name);
+		void deleteDevice(int ID);
 		bool deleteTeam(int TeamID);
 		char getnumofdevices(std::u16string type);
 		std::pair<char, std::u16string> getnumofdevices(int type);

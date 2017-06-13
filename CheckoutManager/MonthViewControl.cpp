@@ -7,7 +7,6 @@ CheckoutManager::MonthViewControl::MonthViewControl()
 	CalendarViewDayItemChanging += ref new Windows::Foundation::TypedEventHandler<Windows::UI::Xaml::Controls::CalendarView ^, Windows::UI::Xaml::Controls::CalendarViewDayItemChangingEventArgs ^>(this, &CheckoutManager::MonthViewControl::CalendarView_CalendarViewDayItemChanging);
 	SelectionMode = Windows::UI::Xaml::Controls::CalendarViewSelectionMode::Single;
 	SelectedDatesChanged += ref new Windows::Foundation::TypedEventHandler<Windows::UI::Xaml::Controls::CalendarView ^, Windows::UI::Xaml::Controls::CalendarViewSelectedDatesChangedEventArgs ^>(this, &CheckoutManager::MonthViewControl::OnSelectedDatesChanged);
-	
 }
 
 void CheckoutManager::MonthViewControl::CalendarView_CalendarViewDayItemChanging(Windows::UI::Xaml::Controls::CalendarView ^ sender, Windows::UI::Xaml::Controls::CalendarViewDayItemChangingEventArgs ^ args)
@@ -93,11 +92,31 @@ void CheckoutManager::MonthViewControl::OnSelectedDatesChanged(Windows::UI::Xaml
 	if (args->AddedDates->Size != 0)
 	{
 		cal->selectedDate = args->AddedDates->GetAt(0);
+		cal->selectedDatechanged = true;
 	}
 }
 
 
 void CheckoutManager::MonthViewControl::OnDoubleTapped(Platform::Object ^sender, Windows::UI::Xaml::Input::DoubleTappedRoutedEventArgs ^e)
 {
-	switchtoweek(false, calvar);
+	cal->monthtoweek();
+}
+
+
+void CheckoutManager::MonthViewControl::OnupdateCalendar(CheckoutManager::CalInfo ^)
+{
+	if (!removed)
+	{
+		auto newcontrol = ref new MonthViewControl();
+		newcontrol->cal = calvar;
+		newcontrol->HorizontalAlignment = Windows::UI::Xaml::HorizontalAlignment::Stretch;
+		newcontrol->VerticalAlignment = Windows::UI::Xaml::VerticalAlignment::Stretch;
+		calvar->updateCalendar -= cookie;
+		auto x = ((Windows::UI::Xaml::Controls::PivotItem^)Parent);
+		if (x != nullptr)
+			x->Content = newcontrol;
+		else
+			replacewith = newcontrol;
+		removed = true; 
+	}
 }

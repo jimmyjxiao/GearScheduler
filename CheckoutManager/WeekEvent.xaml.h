@@ -58,10 +58,11 @@ namespace CheckoutManager
 
 
 	internal:
-		WeekEvent(Windows::UI::Color color, Platform::String ^ devices, Platform::String^ teams, bool fullfilled, Platform::String^ timestr, int* maxzIndex, dataspace::dataManager::CheckoutInfo checkout);
+		WeekEvent(Windows::UI::Color color, Platform::String ^ devices, Platform::String^ teams, bool fullfilled, Platform::String^ timestr, int* maxzIndex, dataspace::dataManager::CheckoutInfo checkout, std::function<void()> editfunc);
 		dataspace::dataManager::CheckoutInfo Checkout;
+		std::shared_ptr<std::vector<WeekEvent^>> intersectswith;
 	private:
-
+		std::function<void()> updatefunc;
 		Platform::String^ team;
 		Platform::String^ device;
 		int* maxzindex;
@@ -73,5 +74,6 @@ namespace CheckoutManager
 		void DeviceID_TextChanging(Windows::UI::Xaml::Controls::TextBox^ sender, Windows::UI::Xaml::Controls::TextBoxTextChangingEventArgs^ args);
 		void Password_PasswordChanged(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void MenuFlyoutItem_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void edit_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	};
 }

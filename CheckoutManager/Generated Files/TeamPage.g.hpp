@@ -30,11 +30,11 @@ void ::CheckoutManager::TeamPage::InitializeComponent()
 /// <summary>
 /// Auto generated class for compiled bindings.
 /// </summary>
-class CheckoutManager::TeamPage::TeamPage_obj3_Bindings 
+class CheckoutManager::TeamPage::TeamPage_obj4_Bindings 
     : public ::XamlBindingInfo::ReferenceTypeXamlBindings<::CheckoutManager::Team>
 {
 public:
-    TeamPage_obj3_Bindings()
+    TeamPage_obj4_Bindings()
     {
     }
 
@@ -42,8 +42,8 @@ public:
     {
         switch(__connectionId)
         {
-            case 3: // TeamPage.xaml line 29
-                this->obj3 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            case 4: // TeamPage.xaml line 25
+                this->obj4 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 break;
         }
     }
@@ -78,7 +78,7 @@ public:
     }
 private:
     // Fields for each control that has bindings.
-    ::Platform::WeakReference obj3;
+    ::Platform::WeakReference obj4;
 
     // Update methods for each path node used in binding steps.
     void Update_(::CheckoutManager::Team^ obj, int phase)
@@ -96,10 +96,10 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            // TeamPage.xaml line 29
-            if (this->obj3 != nullptr)
+            // TeamPage.xaml line 25
+            if (this->obj4 != nullptr)
             {
-                ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj3.Resolve<::Windows::UI::Xaml::Controls::TextBlock>(), obj, nullptr);
+                ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj4.Resolve<::Windows::UI::Xaml::Controls::TextBlock>(), obj, nullptr);
             }
         }
     }
@@ -107,10 +107,10 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            // TeamPage.xaml line 29
-            if (this->obj3 != nullptr)
+            // TeamPage.xaml line 25
+            if (this->obj4 != nullptr)
             {
-                ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Foreground(this->obj3.Resolve<::Windows::UI::Xaml::Controls::TextBlock>(), obj, nullptr);
+                ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Foreground(this->obj4.Resolve<::Windows::UI::Xaml::Controls::TextBlock>(), obj, nullptr);
             }
         }
     }
@@ -131,8 +131,8 @@ public:
     {
         switch(__connectionId)
         {
-            case 2: // TeamPage.xaml line 26
-                this->obj2 = safe_cast<::Windows::UI::Xaml::Controls::ListView^>(__target);
+            case 3: // TeamPage.xaml line 22
+                this->obj3 = safe_cast<::Windows::UI::Xaml::Controls::ListView^>(__target);
                 break;
         }
     }
@@ -143,7 +143,7 @@ public:
     }
 private:
     // Fields for each control that has bindings.
-    ::Windows::UI::Xaml::Controls::ListView^ obj2;
+    ::Windows::UI::Xaml::Controls::ListView^ obj3;
 
     // Update methods for each path node used in binding steps.
     void Update_(::CheckoutManager::TeamPage^ obj, int phase)
@@ -160,8 +160,8 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            // TeamPage.xaml line 26
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_ItemsControl_ItemsSource(this->obj2, obj, nullptr);
+            // TeamPage.xaml line 22
+            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_ItemsControl_ItemsSource(this->obj3, obj, nullptr);
         }
     }
 };
@@ -170,38 +170,43 @@ void ::CheckoutManager::TeamPage::Connect(int __connectionId, ::Platform::Object
 {
     switch (__connectionId)
     {
-    case 4:
+    case 2:
+        {
+            this->stack = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
+        }
+        break;
+    case 5:
         {
             this->newTeambox = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
         }
         break;
-    case 5:
+    case 6:
         {
             this->Password = safe_cast<::Windows::UI::Xaml::Controls::PasswordBox^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::PasswordBox^>(this->Password))->PasswordChanged += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::TeamPage::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&TeamPage::Password_PasswordChanged);
         }
         break;
-    case 6:
+    case 7:
         {
             this->confirmpass = safe_cast<::Windows::UI::Xaml::Controls::PasswordBox^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::PasswordBox^>(this->confirmpass))->PasswordChanged += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::TeamPage::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&TeamPage::confirmpass_PasswordChanged);
         }
         break;
-    case 7:
+    case 8:
         {
             this->addbutton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->addbutton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::TeamPage::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&TeamPage::Button_Click);
         }
         break;
-    case 8:
+    case 9:
         {
             this->addError = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
         }
         break;
-    case 9:
+    case 10:
         {
             this->addTypeWarning = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
         }
@@ -225,14 +230,14 @@ void ::CheckoutManager::TeamPage::Connect(int __connectionId, ::Platform::Object
                 element1->Loading += ref new ::Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::FrameworkElement^, ::Platform::Object^>(bindings, &::XamlBindingInfo::XamlBindings::Loading);
             }
             break;
-        case 3: // TeamPage.xaml line 29
+        case 4: // TeamPage.xaml line 25
             {
-                ::Windows::UI::Xaml::Controls::TextBlock^ element3 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
-                TeamPage_obj3_Bindings* objBindings = new TeamPage_obj3_Bindings();
-                objBindings->SetDataRoot(element3->DataContext);
+                ::Windows::UI::Xaml::Controls::TextBlock^ element4 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                TeamPage_obj4_Bindings* objBindings = new TeamPage_obj4_Bindings();
+                objBindings->SetDataRoot(element4->DataContext);
                 bindings = ref new ::XamlBindingInfo::XamlBindings(objBindings);
-                bindings->SubscribeForDataContextChanged(element3);
-                ::Windows::UI::Xaml::DataTemplate::SetExtensionInstance(element3, bindings);
+                bindings->SubscribeForDataContextChanged(element4);
+                ::Windows::UI::Xaml::DataTemplate::SetExtensionInstance(element4, bindings);
             }
             break;
     }
