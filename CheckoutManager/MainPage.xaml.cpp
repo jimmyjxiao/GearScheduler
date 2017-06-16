@@ -36,9 +36,10 @@ MainPage::MainPage()
 		TeamPage::typeid, L"People/Teams", Symbol::People
 	));
 	navlist->Append(ref new NavItem(
-		CheckoutPage::typeid, L"Checkout/Return", Symbol::Bullets
+		CheckoutPage::typeid, L"Checkout/Return/Status", Symbol::Bullets
 	));
 	navigator->ItemsSource = navlist;
+	navigator->SelectedIndex = 0;
 	//navigator->SelectedIndex = 0;
 	//auto container = (Windows::UI::Xaml::Controls::ListViewItem^)navigator->ContainerFromIndex(0);
 	//container->IsSelected = false;

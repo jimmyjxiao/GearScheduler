@@ -17,7 +17,7 @@ namespace Windows {
                 ref class PasswordBox;
                 ref class RelativePanel;
                 ref class TextBlock;
-                ref class SymbolIcon;
+                ref class Border;
             }
         }
     }
@@ -50,8 +50,9 @@ namespace CheckoutManager
         private: ::Windows::UI::Xaml::Controls::PasswordBox^ Password;
         private: ::Windows::UI::Xaml::Controls::RelativePanel^ mainGrid;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ timeblock;
-        private: ::Windows::UI::Xaml::Controls::SymbolIcon^ check;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ itemblock;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ Userblock;
+        private: ::Windows::UI::Xaml::Controls::Border^ fulfilledblock;
     };
 }
 

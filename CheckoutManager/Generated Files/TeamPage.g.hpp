@@ -42,7 +42,7 @@ public:
     {
         switch(__connectionId)
         {
-            case 4: // TeamPage.xaml line 25
+            case 4: // TeamPage.xaml line 27
                 this->obj4 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 break;
         }
@@ -96,7 +96,7 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            // TeamPage.xaml line 25
+            // TeamPage.xaml line 27
             if (this->obj4 != nullptr)
             {
                 ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj4.Resolve<::Windows::UI::Xaml::Controls::TextBlock>(), obj, nullptr);
@@ -107,7 +107,7 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            // TeamPage.xaml line 25
+            // TeamPage.xaml line 27
             if (this->obj4 != nullptr)
             {
                 ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Foreground(this->obj4.Resolve<::Windows::UI::Xaml::Controls::TextBlock>(), obj, nullptr);
@@ -175,6 +175,13 @@ void ::CheckoutManager::TeamPage::Connect(int __connectionId, ::Platform::Object
             this->stack = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
         }
         break;
+    case 3:
+        {
+            this->teamslist = safe_cast<::Windows::UI::Xaml::Controls::ListView^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::ListView^>(this->teamslist))->ContextRequested += ref new ::Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::UIElement^, ::Windows::UI::Xaml::Input::ContextRequestedEventArgs^>(this, (void (::CheckoutManager::TeamPage::*)
+                (::Windows::UI::Xaml::UIElement^, ::Windows::UI::Xaml::Input::ContextRequestedEventArgs^))&TeamPage::ListView_ContextRequested);
+        }
+        break;
     case 5:
         {
             this->newTeambox = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
@@ -230,7 +237,7 @@ void ::CheckoutManager::TeamPage::Connect(int __connectionId, ::Platform::Object
                 element1->Loading += ref new ::Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::FrameworkElement^, ::Platform::Object^>(bindings, &::XamlBindingInfo::XamlBindings::Loading);
             }
             break;
-        case 4: // TeamPage.xaml line 25
+        case 4: // TeamPage.xaml line 27
             {
                 ::Windows::UI::Xaml::Controls::TextBlock^ element4 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 TeamPage_obj4_Bindings* objBindings = new TeamPage_obj4_Bindings();

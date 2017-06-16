@@ -69,3 +69,12 @@ void CheckoutManager::TeamPage::confirmpass_PasswordChanged(Platform::Object^ se
 	else
 		addbutton->IsEnabled = false;
 }
+
+
+void CheckoutManager::TeamPage::ListView_ContextRequested(Windows::UI::Xaml::UIElement^ sender, Windows::UI::Xaml::Input::ContextRequestedEventArgs^ args)
+{
+
+	//Platform::String^ dighe = teamslist->Items->GetAt(1)->GetType()->FullName;
+	//__debugbreak();
+
+}

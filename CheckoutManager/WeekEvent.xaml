@@ -30,15 +30,26 @@
     
     <RelativePanel Background="{x:Bind background}" x:Name="mainGrid"  BorderBrush="Black" BorderThickness="4">
         <TextBlock Name="timeblock" Text="{x:Bind timeStr}" FontWeight="Bold" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
-        <SymbolIcon Symbol="Accept" RelativePanel.AlignRightWithPanel="True" Margin="4"  x:Name="check" Foreground="Green" Visibility="Collapsed" RelativePanel.AlignTopWithPanel="True" Height="25" Width="25" />
         <TextBlock Name="itemblock" RelativePanel.Below="timeblock">
             <Run Text="Item: "/>
             <Run Text="{x:Bind deviceStr}"/>
         </TextBlock>
-        <TextBlock RelativePanel.Below="itemblock">
+        <TextBlock RelativePanel.Below="itemblock" Name="Userblock">
             <Run Text="User: "/>
             <Run Text="{x:Bind teamStr}"/>
         </TextBlock>
+        <Border RelativePanel.Below="Userblock" x:Load="{x:Bind chk}" x:Name="fulfilledblock" BorderBrush="Black" BorderThickness="0,2,0,0" RelativePanel.AlignLeftWithPanel="True"  RelativePanel.AlignRightWithPanel="True">
+            <StackPanel>
+                <TextBlock>
+                    <Run Text="Checked Out:"/>
+                    <Run Text="{x:Bind actChecktime}"/>
+                </TextBlock>
+                <TextBlock>
+                    <Run Text="Returned:"/>
+                    <Run Text="{x:Bind actReturntime}"/>
+                </TextBlock>
+            </StackPanel>
+        </Border>
     </RelativePanel>
  
 </UserControl>

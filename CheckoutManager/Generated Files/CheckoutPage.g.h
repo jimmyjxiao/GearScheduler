@@ -6,16 +6,19 @@
 //     the code is regenerated.
 //------------------------------------------------------------------------------
 
+#include "XamlBindingInfo.g.h"
 
 namespace Windows {
     namespace UI {
         namespace Xaml {
             namespace Controls {
+                ref class Grid;
+                ref class ListView;
                 ref class TextBox;
-                ref class ComboBox;
-                ref class PasswordBox;
                 ref class Button;
                 ref class TextBlock;
+                ref class ComboBox;
+                ref class PasswordBox;
                 ref class RichTextBlock;
             }
         }
@@ -50,7 +53,16 @@ namespace CheckoutManager
     private:
         bool _contentLoaded;
     
+        class CheckoutPage_obj4_Bindings;
+        class CheckoutPage_obj11_Bindings;
     
+        ::XamlBindingInfo::XamlBindings^ Bindings;
+        private: ::Windows::UI::Xaml::Controls::Grid^ CheckoutPanel;
+        private: ::Windows::UI::Xaml::Controls::ListView^ overdueview;
+        private: ::Windows::UI::Xaml::Controls::ListView^ currentListview;
+        private: ::Windows::UI::Xaml::Controls::TextBox^ returnBox;
+        private: ::Windows::UI::Xaml::Controls::Button^ Returnbutton;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ returnBlock;
         private: ::Windows::UI::Xaml::Controls::TextBox^ IDbox;
         private: ::Windows::UI::Xaml::Controls::ComboBox^ teamSelector;
         private: ::Windows::UI::Xaml::Controls::PasswordBox^ password;

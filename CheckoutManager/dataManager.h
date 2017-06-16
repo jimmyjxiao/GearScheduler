@@ -39,14 +39,15 @@ namespace dataspace
 			bool fullfilled = false;
 
 		};
-
+		void returndevice(int ID);
 		bool scheduleCheckout(CheckoutInfo& adding);
-		void editCheckout(CheckoutInfo& adding);
+		void editCheckout(const CheckoutInfo& adding);
 		bool fullfillCheckout(const CheckoutInfo & checkout, std::u16string hash, std::u16string deviceID);
 		void forceCheckout(std::u16string deviceID, std::u16string team);
 		CheckoutInfo fullfillCheckout(std::u16string team, std::u16string hash, std::u16string deviceID);
 		std::vector<CheckoutInfo> getCheckouts(time_t startdate, time_t enddate);
 		std::vector<CheckoutInfo> getCheckouts(time_t startdate, time_t enddate, std::u16string deviceType);
+		std::vector<std::pair<CheckoutInfo, int>> getOverdueCheckouts();
 		std::vector<dataManager::CheckoutInfo> getCheckouts(time_t startdate, time_t enddate, int deviceType);
 		bool passwordCheck(std::u16string team, std::u16string hash);
 		bool addTeam(std::u16string name, std::u16string hash, Windows::UI::Color z);

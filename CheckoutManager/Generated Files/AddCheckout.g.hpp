@@ -78,6 +78,20 @@ void ::CheckoutManager::AddCheckout::Connect(int __connectionId, ::Platform::Obj
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&AddCheckout::AppBarButton_Click);
         }
         break;
+    case 9:
+        {
+            this->deleteButton = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(this->deleteButton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::AddCheckout::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&AddCheckout::deleteButton_Click);
+        }
+        break;
+    case 10:
+        {
+            this->CloseButton = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(this->CloseButton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::AddCheckout::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&AddCheckout::CloseButton_Click);
+        }
+        break;
     }
     _contentLoaded = true;
 }

@@ -1,0 +1,35 @@
+﻿<Page x:ConnectionId='1'
+    x:Class="CheckoutManager.TeamPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CheckoutManager"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch">
+        <StackPanel x:ConnectionId='2' Padding="5" Name="stack" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
+            <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Add New Person/Team:"/>
+            <TextBox x:ConnectionId='5' Header="Name" x:Name="newTeambox"/>
+            <PasswordBox x:ConnectionId='6' x:Name="Password"                                            Header="Password:" />
+            <PasswordBox x:ConnectionId='7' x:Name="confirmpass"                                               IsEnabled="False" Header="Confirm Password:"/>
+            <Button x:ConnectionId='8' Content="Add Person/Team"                      x:Name="addbutton" IsEnabled="False"/>
+            <StackPanel x:ConnectionId='9' Orientation="Horizontal" x:Name="addError" Visibility="Collapsed">
+                <SymbolIcon Symbol="Important" Foreground="Red"/>
+                <TextBlock x:ConnectionId='10' x:Name="addTypeWarning"/>
+            </StackPanel>
+        </StackPanel>
+        <ListView x:ConnectionId='3'                                  RelativePanel.Below="stack"                                              RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True" x:Name="teamslist">
+
+            <ListView.ItemTemplate>
+                <DataTemplate                        >
+                    
+                     <TextBlock x:ConnectionId='4'                                                     />
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </RelativePanel>
+</Page>
+

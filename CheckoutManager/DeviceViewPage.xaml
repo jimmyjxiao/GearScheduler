@@ -10,11 +10,12 @@
 
     <Page.Resources>
         <CollectionViewSource x:Name="devicesGrouped" IsSourceGrouped="True" ItemsPath="devices" Source="{x:Bind bindDevices}"/>
+        <x:String x:Key="convParam">True</x:String>
         <converters:BooleanToVisibilityConverter x:Key="booltovis"/>
         <converters:booltocolor x:Key="availconverter"/>
         <local:grouptostr x:Key="groupnameconverter"/>
         <DataTemplate x:DataType="local:device" x:Key="deviceTemplate">
-            <Grid HorizontalAlignment="Stretch" ContextRequested="Grid_ContextRequested"  Background="{x:Bind Converter={StaticResource availconverter}, Path=checkedOut, Mode=OneWay}">
+            <Grid HorizontalAlignment="Stretch" ContextRequested="Grid_ContextRequested"  Background="{x:Bind Converter={StaticResource availconverter}, Path=checkedOut, ConverterParameter=str}">
                 <Grid.ContextFlyout>
                     <MenuFlyout>
                         <MenuFlyoutItem Icon="Delete" Text="Delete" Click="MenuFlyoutItem_Click_1" Tag="{x:Bind deviceID}" />

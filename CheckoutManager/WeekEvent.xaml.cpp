@@ -38,7 +38,7 @@ void CheckoutManager::WeekEvent::hideunhide(bool hideun)
 }
 
 
-WeekEvent::WeekEvent(Windows::UI::Color color, Platform::String ^ devices, Platform::String^ teams, bool fullfilled, Platform::String^ timestr, int* maxzIndex, dataspace::dataManager::CheckoutInfo checkout, std::function<void()> editfunc)
+WeekEvent::WeekEvent(Windows::UI::Color color, Platform::String ^ devices, Platform::String^ teams, bool fullfilled, Platform::String^ timestr, int* maxzIndex, dataspace::dataManager::CheckoutInfo checkout, std::function<void()> editfunc, time_t actChk, time_t actRet, bool ful)
 {
 	updatefunc = editfunc;
 	maxzindex = maxzIndex;
@@ -47,13 +47,17 @@ WeekEvent::WeekEvent(Windows::UI::Color color, Platform::String ^ devices, Platf
 	timetext = timestr;
 	device = devices;
 	team = teams;
-
+	chkact = actChk;
+	retact = actRet;
+	chk = ful;
 	Checkout = checkout;
 	InitializeComponent();
 	if (fullfilled)
 	{
-		check->Visibility = Windows::UI::Xaml::Visibility::Visible;
-		mainGrid->BorderBrush = ref new Windows::UI::Xaml::Media::SolidColorBrush(Windows::UI::Colors::Green);
+		if (retact != NULL)
+			mainGrid->BorderBrush = ref new Windows::UI::Xaml::Media::SolidColorBrush(Windows::UI::Colors::Green);
+		else
+			mainGrid->BorderBrush = ref new Windows::UI::Xaml::Media::SolidColorBrush(Windows::UI::Colors::Yellow);
 	}
 }
 
@@ -77,7 +81,7 @@ void CheckoutManager::WeekEvent::Button_Click(Platform::Object^ sender, Windows:
 	{
 
 			database->fullfillCheckout((const char16_t*)team->Data(), (const char16_t*)Password->Password->Data(), (const char16_t*)DeviceID->Text->Data());
-			check->Visibility = Windows::UI::Xaml::Visibility::Visible;
+			mainGrid->BorderBrush = ref new Windows::UI::Xaml::Media::SolidColorBrush(Windows::UI::Colors::Green);
 	}
 	catch (char x)
 	{
@@ -96,7 +100,7 @@ void CheckoutManager::WeekEvent::UserControl_Tapped(Platform::Object^ sender, Wi
 {
 	(*maxzindex)++;
 	Windows::UI::Xaml::Controls::Canvas::SetZIndex(this, *maxzindex);
-	if ((unsigned)(time(nullptr) - Checkout.checkoutTime) <= (Checkout.checkoutTime - Checkout.duedate))
+	if ((unsigned)(time(nullptr) - Checkout.checkoutTime) <= (Checkout.duedate - Checkout.checkoutTime))
 		FlyoutBase::ShowAttachedFlyout((FrameworkElement^)sender);
 }
 

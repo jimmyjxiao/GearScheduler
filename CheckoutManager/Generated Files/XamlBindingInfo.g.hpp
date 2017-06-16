@@ -248,6 +248,18 @@ namespace XamlBindingInfo
             }
             obj->cal = value;
         }
+        static void Set_Windows_UI_Xaml_Controls_SymbolIcon_Symbol(::Windows::UI::Xaml::Controls::SymbolIcon^ obj, ::Windows::UI::Xaml::Controls::Symbol value)
+        {
+            obj->Symbol = value;
+        }
+        static void Set_Windows_UI_Xaml_Controls_IconElement_Foreground(::Windows::UI::Xaml::Controls::IconElement^ obj, ::Windows::UI::Xaml::Media::Brush^ value, ::Platform::String^ targetNullValue)
+        {
+            if (value == nullptr && targetNullValue != nullptr)
+            {
+                value = (::Windows::UI::Xaml::Media::Brush^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Windows::UI::Xaml::Media::Brush::typeid, targetNullValue);
+            }
+            obj->Foreground = value;
+        }
         static void Set_Windows_UI_Xaml_Data_CollectionViewSource_Source(::Windows::UI::Xaml::Data::CollectionViewSource^ obj, ::Platform::Object^ value, ::Platform::String^ targetNullValue)
         {
             if (value == nullptr && targetNullValue != nullptr)
@@ -272,6 +284,14 @@ namespace XamlBindingInfo
             }
             obj->Background = value;
         }
+        static void Set_Windows_UI_Xaml_FrameworkElement_Tag(::Windows::UI::Xaml::FrameworkElement^ obj, ::Platform::Object^ value, ::Platform::String^ targetNullValue)
+        {
+            if (value == nullptr && targetNullValue != nullptr)
+            {
+                value = (::Platform::Object^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Platform::Object::typeid, targetNullValue);
+            }
+            obj->Tag = value;
+        }
         static void Set_Windows_UI_Xaml_Controls_TextBlock_Foreground(::Windows::UI::Xaml::Controls::TextBlock^ obj, ::Windows::UI::Xaml::Media::Brush^ value, ::Platform::String^ targetNullValue)
         {
             if (value == nullptr && targetNullValue != nullptr)
@@ -287,30 +307,6 @@ namespace XamlBindingInfo
                 value = (::Windows::UI::Xaml::Input::ICommand^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Windows::UI::Xaml::Input::ICommand::typeid, targetNullValue);
             }
             obj->Command = value;
-        }
-        static void Set_Windows_UI_Xaml_FrameworkElement_Name(::Windows::UI::Xaml::FrameworkElement^ obj, ::Platform::String^ value, ::Platform::String^ targetNullValue)
-        {
-            if (value == nullptr && targetNullValue != nullptr)
-            {
-                value = targetNullValue;
-            }
-            obj->Name = value;
-        }
-        static void Set_Windows_UI_Xaml_FrameworkElement_Tag(::Windows::UI::Xaml::FrameworkElement^ obj, ::Platform::Object^ value, ::Platform::String^ targetNullValue)
-        {
-            if (value == nullptr && targetNullValue != nullptr)
-            {
-                value = (::Platform::Object^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Platform::Object::typeid, targetNullValue);
-            }
-            obj->Tag = value;
-        }
-        static void Set_Windows_UI_Xaml_UIElement_Visibility(::Windows::UI::Xaml::UIElement^ obj, ::Windows::UI::Xaml::Visibility value)
-        {
-            obj->Visibility = value;
-        }
-        static void Set_Windows_UI_Xaml_Controls_SymbolIcon_Symbol(::Windows::UI::Xaml::Controls::SymbolIcon^ obj, ::Windows::UI::Xaml::Controls::Symbol value)
-        {
-            obj->Symbol = value;
         }
         static void Set_Windows_UI_Xaml_Documents_Run_Text(::Windows::UI::Xaml::Documents::Run^ obj, ::Platform::String^ value, ::Platform::String^ targetNullValue)
         {

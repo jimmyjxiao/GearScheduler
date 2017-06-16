@@ -48,25 +48,118 @@ public:
             case 9: // WeekEvent.xaml line 32
                 this->obj9 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 break;
-            case 12: // WeekEvent.xaml line 40
-                this->obj12 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
+            case 12: // WeekEvent.xaml line 41
+                this->obj12 = safe_cast<::Windows::UI::Xaml::Controls::Border^>(__target);
                 break;
-            case 13: // WeekEvent.xaml line 36
+            case 13: // WeekEvent.xaml line 49
                 this->obj13 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
+                // WeekEvent.xaml line 49
+                if (this->obj13 != nullptr)
+                {
+                    ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj13, this->obj13TextDeferredValue, nullptr);
+                }
+                break;
+            case 14: // WeekEvent.xaml line 45
+                this->obj14 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
+                // WeekEvent.xaml line 45
+                if (this->obj14 != nullptr)
+                {
+                    ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj14, this->obj14TextDeferredValue, nullptr);
+                }
+                break;
+            case 15: // WeekEvent.xaml line 39
+                this->obj15 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
+                break;
+            case 16: // WeekEvent.xaml line 35
+                this->obj16 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
                 break;
         }
     }
 
     void DisconnectUnloadedObject(int connectionId)
     {
-        throw ref new ::Platform::InvalidArgumentException("No unloadable elements to disconnect.");
+        switch (connectionId)
+        {
+            case 12: // WeekEvent.xaml line 41
+            {
+                if (this->obj12 != nullptr)
+                {
+                    this->obj12 = nullptr;
+                }
+                this->DisconnectUnloadedObject(13);
+                this->DisconnectUnloadedObject(14);
+                break;
+            }
+            case 13: // WeekEvent.xaml line 49
+            {
+                if (this->obj13 != nullptr)
+                {
+                    this->obj13TextDeferredValue = this->obj13->Text;
+                    this->obj13 = nullptr;
+                }
+                break;
+            }
+            case 14: // WeekEvent.xaml line 45
+            {
+                if (this->obj14 != nullptr)
+                {
+                    this->obj14TextDeferredValue = this->obj14->Text;
+                    this->obj14 = nullptr;
+                }
+                break;
+            }
+            default:
+            {
+                throw ref new ::Platform::InvalidArgumentException("Invalid connectionId.");
+            }
+        }
+    }
+
+    void UpdateUnloadedElement(int connectionId)
+    {
+        switch (connectionId)
+        {
+            case 12: // WeekEvent.xaml line 41
+            {
+                // WeekEvent.xaml line 41
+                if (this->obj12LoadDeferredValue)
+                {
+                    this->GetDataRoot()->FindName("fulfilledblock");
+                }
+                else
+                {
+                    this->GetDataRoot()->UnloadObject(this->obj12);
+                }
+                break;
+            }
+            default:
+            {
+                throw ref new ::Platform::InvalidArgumentException("Invalid connectionId.");
+            }
+        }
     }
 private:
     // Fields for each control that has bindings.
     ::Windows::UI::Xaml::Controls::RelativePanel^ obj8;
     ::Windows::UI::Xaml::Controls::TextBlock^ obj9;
-    ::Windows::UI::Xaml::Documents::Run^ obj12;
+    ::Windows::UI::Xaml::Controls::Border^ obj12;
+    ::Platform::Boolean obj12LoadDeferredValue;
     ::Windows::UI::Xaml::Documents::Run^ obj13;
+    ::Platform::String^ obj13TextDeferredValue;
+    ::Windows::UI::Xaml::Documents::Run^ obj14;
+    ::Platform::String^ obj14TextDeferredValue;
+    ::Windows::UI::Xaml::Documents::Run^ obj15;
+    ::Windows::UI::Xaml::Documents::Run^ obj16;
+    std::list<int> UnloadedElementsToUpdate;
+
+    void CompleteUpdate(int phase)
+    {
+        while (!this->UnloadedElementsToUpdate.empty())
+        {
+            this->UpdateUnloadedElement(this->UnloadedElementsToUpdate.front());
+            this->UnloadedElementsToUpdate.pop_front();
+        }
+    }
 
     // Update methods for each path node used in binding steps.
     void Update_(::CheckoutManager::WeekEvent^ obj, int phase)
@@ -77,10 +170,14 @@ private:
             {
                 this->Update_background(obj->background, phase);
                 this->Update_timeStr(obj->timeStr, phase);
+                this->Update_chk(obj->chk, phase);
+                this->Update_actReturntime(obj->actReturntime, phase);
+                this->Update_actChecktime(obj->actChecktime, phase);
                 this->Update_teamStr(obj->teamStr, phase);
                 this->Update_deviceStr(obj->deviceStr, phase);
             }
         }
+        this->CompleteUpdate(phase);
     }
     void Update_background(::Windows::UI::Xaml::Media::SolidColorBrush^ obj, int phase)
     {
@@ -98,20 +195,67 @@ private:
             ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj9, obj, nullptr);
         }
     }
+    void Update_chk(::Platform::Boolean obj, int phase)
+    {
+        if((phase & ((1 << 0) | NOT_PHASED )) != 0)
+        {
+            // WeekEvent.xaml line 41
+            this->obj12LoadDeferredValue = obj;
+    
+            if (obj)
+            {
+                this->GetDataRoot()->FindName("fulfilledblock");
+            }
+            else
+            {
+                this->GetDataRoot()->UnloadObject(this->obj12);
+            }
+        }
+    }
+    void Update_actReturntime(::Platform::String^ obj, int phase)
+    {
+        if((phase & ((1 << 0) | NOT_PHASED )) != 0)
+        {
+            // WeekEvent.xaml line 49
+            if (this->obj13 != nullptr)
+            {
+                ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj13, obj, nullptr);
+            }
+            else
+            {
+                this->obj13TextDeferredValue = obj;
+            }
+        }
+    }
+    void Update_actChecktime(::Platform::String^ obj, int phase)
+    {
+        if((phase & ((1 << 0) | NOT_PHASED )) != 0)
+        {
+            // WeekEvent.xaml line 45
+            if (this->obj14 != nullptr)
+            {
+                ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj14, obj, nullptr);
+            }
+            else
+            {
+                this->obj14TextDeferredValue = obj;
+            }
+        }
+    }
     void Update_teamStr(::Platform::String^ obj, int phase)
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            // WeekEvent.xaml line 40
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj12, obj, nullptr);
+            // WeekEvent.xaml line 39
+            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj15, obj, nullptr);
         }
     }
     void Update_deviceStr(::Platform::String^ obj, int phase)
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            // WeekEvent.xaml line 36
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj13, obj, nullptr);
+            // WeekEvent.xaml line 35
+            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj16, obj, nullptr);
         }
     }
 };
@@ -181,16 +325,53 @@ void ::CheckoutManager::WeekEvent::Connect(int __connectionId, ::Platform::Objec
         break;
     case 10:
         {
-            this->check = safe_cast<::Windows::UI::Xaml::Controls::SymbolIcon^>(__target);
+            this->itemblock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
         }
         break;
     case 11:
         {
-            this->itemblock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            this->Userblock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+        }
+        break;
+    case 12:
+        {
+            this->fulfilledblock = safe_cast<::Windows::UI::Xaml::Controls::Border^>(__target);
         }
         break;
     }
     _contentLoaded = true;
+}
+
+void ::CheckoutManager::WeekEvent::UnloadObject(::Windows::UI::Xaml::DependencyObject^ unloadableObject)
+{
+    if (unloadableObject != nullptr)
+    {
+        // WeekEvent.xaml line 41
+        if (unloadableObject == this->fulfilledblock)
+        {
+            this->DisconnectUnloadedObject(12);
+        }
+        ::Windows::UI::Xaml::Markup::XamlMarkupHelper::UnloadObject(unloadableObject);        
+    }
+}
+
+void ::CheckoutManager::WeekEvent::DisconnectUnloadedObject(int connectionId)
+{
+    switch(connectionId)
+    {
+        case 12: // WeekEvent.xaml line 41
+        {
+            this->Bindings->DisconnectUnloadedObject(13);
+            this->Bindings->DisconnectUnloadedObject(14);
+            this->Bindings->DisconnectUnloadedObject(12);
+            this->fulfilledblock = nullptr;
+            break;
+        }
+        default:
+        {
+            throw ref new ::Platform::InvalidArgumentException("Invalid connectionId.");
+        }
+    }
 }
 
 ::Windows::UI::Xaml::Markup::IComponentConnector^ ::CheckoutManager::WeekEvent::GetBindingConnector(int __connectionId, ::Platform::Object^ __target)

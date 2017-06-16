@@ -64,6 +64,12 @@ template<typename TDeclaringType, typename TValue>
 }
 
 template<typename TDeclaringType, typename TValue>
+::Platform::Object^ GetValueTypeMember_chk(::Platform::Object^ instance)
+{
+    return ref new ::Platform::Box<TValue>(safe_cast<TDeclaringType^>(instance)->chk);
+}
+
+template<typename TDeclaringType, typename TValue>
 ::Platform::Object^ GetValueTypeMember_manuallyhidden(::Platform::Object^ instance)
 {
     return ref new ::Platform::Box<TValue>(safe_cast<TDeclaringType^>(instance)->manuallyhidden);
@@ -160,6 +166,18 @@ template<typename TDeclaringType>
 }
 
 template<typename TDeclaringType>
+::Platform::Object^ GetReferenceTypeMember_actReturntime(::Platform::Object^ instance)
+{
+    return safe_cast<TDeclaringType^>(instance)->actReturntime;
+}
+
+template<typename TDeclaringType>
+::Platform::Object^ GetReferenceTypeMember_actChecktime(::Platform::Object^ instance)
+{
+    return safe_cast<TDeclaringType^>(instance)->actChecktime;
+}
+
+template<typename TDeclaringType>
 ::Platform::Object^ GetReferenceTypeMember_timeStr(::Platform::Object^ instance)
 {
     return safe_cast<TDeclaringType^>(instance)->timeStr;
@@ -181,6 +199,12 @@ template<typename TDeclaringType, typename TValue>
 void SetValueTypeMember_zoomed(::Platform::Object^ instance, ::Platform::Object^ value)
 {
     safe_cast<TDeclaringType^>(instance)->zoomed = safe_cast<::Platform::IBox<TValue>^>(value)->Value;
+}
+
+template<typename TDeclaringType, typename TValue>
+void SetValueTypeMember_chk(::Platform::Object^ instance, ::Platform::Object^ value)
+{
+    safe_cast<TDeclaringType^>(instance)->chk = safe_cast<::Platform::IBox<TValue>^>(value)->Value;
 }
 
 template<typename TDeclaringType, typename TValue>
@@ -285,7 +309,7 @@ const TypeInfo TypeInfos[] =
     //   5
     L"converters.booltocolor", L"",
     &ActivateType<::converters::booltocolor>, nullptr, nullptr, nullptr,
-    0, // Object
+    24, // Windows.UI.Xaml.DependencyObject
     2, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //   6
@@ -303,158 +327,170 @@ const TypeInfo TypeInfos[] =
     //   8
     L"CheckoutManager.Calpage", L"",
     &ActivateType<::CheckoutManager::Calpage>, nullptr, nullptr, nullptr,
-    17, // Windows.UI.Xaml.Controls.Page
+    18, // Windows.UI.Xaml.Controls.Page
     2, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //   9
-    L"CheckoutManager.MainPage", L"",
-    &ActivateType<::CheckoutManager::MainPage>, nullptr, nullptr, nullptr,
-    17, // Windows.UI.Xaml.Controls.Page
+    L"converters.booltosymbol", L"",
+    &ActivateType<::converters::booltosymbol>, nullptr, nullptr, nullptr,
+    0, // Object
     3, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  10
-    L"CheckoutManager.TeamPage", L"",
-    &ActivateType<::CheckoutManager::TeamPage>, nullptr, nullptr, nullptr,
-    17, // Windows.UI.Xaml.Controls.Page
-    4, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    L"CheckoutManager.MainPage", L"",
+    &ActivateType<::CheckoutManager::MainPage>, nullptr, nullptr, nullptr,
+    18, // Windows.UI.Xaml.Controls.Page
+    3, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  11
-    L"CheckoutManager.WeekEvent", L"",
-    nullptr, nullptr, nullptr, nullptr,
-    23, // Windows.UI.Xaml.Controls.UserControl
-    5, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    L"CheckoutManager.TeamPage", L"",
+    &ActivateType<::CheckoutManager::TeamPage>, nullptr, nullptr, nullptr,
+    18, // Windows.UI.Xaml.Controls.Page
+    4, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  12
+    L"CheckoutManager.WeekEvent", L"",
+    nullptr, nullptr, nullptr, nullptr,
+    25, // Windows.UI.Xaml.Controls.UserControl
+    5, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    true,  false, false, false,
+    //  13
     L"CheckoutManager.grouptostr", L"",
     &ActivateType<::CheckoutManager::grouptostr>, nullptr, nullptr, nullptr,
     0, // Object
-    10, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
-    //  13
-    L"CheckoutManager.AddCheckout", L"",
-    &ActivateType<::CheckoutManager::AddCheckout>, nullptr, nullptr, nullptr,
-    17, // Windows.UI.Xaml.Controls.Page
-    10, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    13, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  14
-    L"CheckoutManager.LandingPage", L"",
-    &ActivateType<::CheckoutManager::LandingPage>, nullptr, nullptr, nullptr,
-    17, // Windows.UI.Xaml.Controls.Page
-    10, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    L"CheckoutManager.AddCheckout", L"",
+    &ActivateType<::CheckoutManager::AddCheckout>, nullptr, nullptr, nullptr,
+    18, // Windows.UI.Xaml.Controls.Page
+    13, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  15
-    L"CheckoutManager.CheckoutPage", L"",
-    &ActivateType<::CheckoutManager::CheckoutPage>, nullptr, nullptr, nullptr,
-    17, // Windows.UI.Xaml.Controls.Page
+    L"CheckoutManager.LandingPage", L"",
+    &ActivateType<::CheckoutManager::LandingPage>, nullptr, nullptr, nullptr,
+    18, // Windows.UI.Xaml.Controls.Page
     13, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  16
+    L"CheckoutManager.CheckoutPage", L"",
+    &ActivateType<::CheckoutManager::CheckoutPage>, nullptr, nullptr, nullptr,
+    18, // Windows.UI.Xaml.Controls.Page
+    16, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    true,  false, false, false,
+    //  17
     L"CheckoutManager.devicesGroup", L"",
     &ActivateType<::CheckoutManager::devicesGroup>, nullptr, nullptr, nullptr,
     0, // Object
-    13, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    16, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, true, 
-    //  17
+    //  18
     L"Windows.UI.Xaml.Controls.Page", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    17, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    20, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
-    //  18
+    //  19
     L"CheckoutManager.DeviceViewPage", L"",
     &ActivateType<::CheckoutManager::DeviceViewPage>, nullptr, nullptr, nullptr,
-    17, // Windows.UI.Xaml.Controls.Page
-    17, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    18, // Windows.UI.Xaml.Controls.Page
+    20, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
-    //  19
+    //  20
     L"Windows.UI.Xaml.Input.ICommand", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    18, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    21, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
-    //  20
+    //  21
     L"Windows.UI.Xaml.Controls.Frame", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    18, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    21, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
-    //  21
+    //  22
     L"CheckoutManager.WeekViewControl", L"",
     &ActivateType<::CheckoutManager::WeekViewControl>, nullptr, nullptr, nullptr,
-    23, // Windows.UI.Xaml.Controls.UserControl
-    18, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
-    //  22
-    L"CheckoutManager.MonthViewControl", L"",
-    &ActivateType<::CheckoutManager::MonthViewControl>, nullptr, nullptr, nullptr,
-    25, // Windows.UI.Xaml.Controls.CalendarView
+    25, // Windows.UI.Xaml.Controls.UserControl
     21, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //  23
+    L"CheckoutManager.MonthViewControl", L"",
+    &ActivateType<::CheckoutManager::MonthViewControl>, nullptr, nullptr, nullptr,
+    27, // Windows.UI.Xaml.Controls.CalendarView
+    24, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    true,  false, false, false,
+    //  24
+    L"Windows.UI.Xaml.DependencyObject", L"",
+    nullptr, nullptr, nullptr, nullptr,
+    -1,
+    25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    false, true,  false, false,
+    //  25
     L"Windows.UI.Xaml.Controls.UserControl", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    22, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
-    //  24
+    //  26
     L"CheckoutManager.AuthenticationDialog", L"",
     nullptr, nullptr, nullptr, nullptr,
-    27, // Windows.UI.Xaml.Controls.ContentDialog
-    22, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    29, // Windows.UI.Xaml.Controls.ContentDialog
+    25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
-    //  25
+    //  27
     L"Windows.UI.Xaml.Controls.CalendarView", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    22, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
-    //  26
+    //  28
     L"Windows.UI.Xaml.Media.SolidColorBrush", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    22, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
-    //  27
+    //  29
     L"Windows.UI.Xaml.Controls.ContentDialog", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    22, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
-    //  28
+    //  30
     L"Windows.UI.Xaml.Controls.ContentControl", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    22, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
-    //  29
+    //  31
     L"converters.BooleanToVisibilityConverter", L"",
     &ActivateType<::converters::BooleanToVisibilityConverter>, nullptr, nullptr, nullptr,
     0, // Object
-    22, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
-    //  30
+    //  32
     L"Windows.Foundation.Collections.IVector`1<CheckoutManager.Team>", L"",
     nullptr, &CollectionAdd<::Windows::Foundation::Collections::IVector<::CheckoutManager::Team^>, ::CheckoutManager::Team^>, nullptr, nullptr,
     -1,
-    22, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, false, true,  false,
-    //  31
+    //  33
     L"Windows.Foundation.Collections.IVector`1<CheckoutManager.device>", L"",
     nullptr, &CollectionAdd<::Windows::Foundation::Collections::IVector<::CheckoutManager::device>, ::CheckoutManager::device>, nullptr, nullptr,
     -1,
-    22, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, false, true,  false,
-    //  32
+    //  34
     L"Windows.Foundation.Collections.IVector`1<CheckoutManager.devicesGroup>", L"",
     nullptr, &CollectionAdd<::Windows::Foundation::Collections::IVector<::CheckoutManager::devicesGroup^>, ::CheckoutManager::devicesGroup^>, nullptr, nullptr,
     -1,
-    22, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, false, true,  false,
     //  Last type here is for padding
     L"", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1, 
-    22, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     false, false, false, false,
 };
 
@@ -483,54 +519,54 @@ const UINT TypeInfoLookup[] = {
       5,   //  21
       5,   //  22
       7,   //  23
-      9,   //  24
-     11,   //  25
-     12,   //  26
-     13,   //  27
-     15,   //  28
-     17,   //  29
-     18,   //  30
-     21,   //  31
-     22,   //  32
-     23,   //  33
-     23,   //  34
-     23,   //  35
-     23,   //  36
-     25,   //  37
-     27,   //  38
-     28,   //  39
-     30,   //  40
-     30,   //  41
-     30,   //  42
-     30,   //  43
-     30,   //  44
-     30,   //  45
-     30,   //  46
-     30,   //  47
-     30,   //  48
-     30,   //  49
-     30,   //  50
-     30,   //  51
-     30,   //  52
-     30,   //  53
-     30,   //  54
-     30,   //  55
-     30,   //  56
-     30,   //  57
-     30,   //  58
-     30,   //  59
-     30,   //  60
-     30,   //  61
-     30,   //  62
-     31,   //  63
-     31,   //  64
-     32,   //  65
-     32,   //  66
-     32,   //  67
-     32,   //  68
-     32,   //  69
-     32,   //  70
-     33,   //  71
+     10,   //  24
+     12,   //  25
+     13,   //  26
+     14,   //  27
+     16,   //  28
+     18,   //  29
+     19,   //  30
+     22,   //  31
+     23,   //  32
+     25,   //  33
+     25,   //  34
+     25,   //  35
+     25,   //  36
+     27,   //  37
+     29,   //  38
+     30,   //  39
+     32,   //  40
+     32,   //  41
+     32,   //  42
+     32,   //  43
+     32,   //  44
+     32,   //  45
+     32,   //  46
+     32,   //  47
+     32,   //  48
+     32,   //  49
+     32,   //  50
+     32,   //  51
+     32,   //  52
+     32,   //  53
+     32,   //  54
+     32,   //  55
+     32,   //  56
+     32,   //  57
+     32,   //  58
+     32,   //  59
+     32,   //  60
+     32,   //  61
+     32,   //  62
+     33,   //  63
+     33,   //  64
+     34,   //  65
+     34,   //  66
+     34,   //  67
+     34,   //  68
+     34,   //  69
+     34,   //  70
+     35,   //  71
 };
 
 struct MemberInfo 
@@ -551,7 +587,7 @@ const MemberInfo MemberInfos[] =
     L"color",
     &GetReferenceTypeMember_color<::CheckoutManager::Team>,
     &SetReferenceTypeMember_color<::CheckoutManager::Team, ::Windows::UI::Xaml::Media::SolidColorBrush>,
-    26, // Windows.UI.Xaml.Media.SolidColorBrush
+    28, // Windows.UI.Xaml.Media.SolidColorBrush
     -1,
     false, false, false,
     //   1 - CheckoutManager.Team.teamName
@@ -572,129 +608,150 @@ const MemberInfo MemberInfos[] =
     L"AppFrame",
     &GetReferenceTypeMember_AppFrame<::CheckoutManager::MainPage>,
     nullptr,
-    20, // Windows.UI.Xaml.Controls.Frame
+    21, // Windows.UI.Xaml.Controls.Frame
     -1,
     true,  false, false,
     //   4 - CheckoutManager.TeamPage.bindTeams
     L"bindTeams",
     &GetReferenceTypeMember_bindTeams<::CheckoutManager::TeamPage>,
     nullptr,
-    30, // Windows.Foundation.Collections.IVector`1<CheckoutManager.Team>
+    32, // Windows.Foundation.Collections.IVector`1<CheckoutManager.Team>
     -1,
     true,  false, false,
     //   5 - CheckoutManager.WeekEvent.background
     L"background",
     &GetReferenceTypeMember_background<::CheckoutManager::WeekEvent>,
     nullptr,
-    26, // Windows.UI.Xaml.Media.SolidColorBrush
+    28, // Windows.UI.Xaml.Media.SolidColorBrush
     -1,
     true,  false, false,
-    //   6 - CheckoutManager.WeekEvent.timeStr
+    //   6 - CheckoutManager.WeekEvent.chk
+    L"chk",
+    &GetValueTypeMember_chk<::CheckoutManager::WeekEvent, ::Platform::Boolean>,
+    &SetValueTypeMember_chk<::CheckoutManager::WeekEvent, ::Platform::Boolean>,
+    2, // Boolean
+    -1,
+    false, false, false,
+    //   7 - CheckoutManager.WeekEvent.actReturntime
+    L"actReturntime",
+    &GetReferenceTypeMember_actReturntime<::CheckoutManager::WeekEvent>,
+    nullptr,
+    1, // String
+    -1,
+    true,  false, false,
+    //   8 - CheckoutManager.WeekEvent.actChecktime
+    L"actChecktime",
+    &GetReferenceTypeMember_actChecktime<::CheckoutManager::WeekEvent>,
+    nullptr,
+    1, // String
+    -1,
+    true,  false, false,
+    //   9 - CheckoutManager.WeekEvent.timeStr
     L"timeStr",
     &GetReferenceTypeMember_timeStr<::CheckoutManager::WeekEvent>,
     nullptr,
     1, // String
     -1,
     true,  false, false,
-    //   7 - CheckoutManager.WeekEvent.deviceStr
+    //  10 - CheckoutManager.WeekEvent.deviceStr
     L"deviceStr",
     &GetReferenceTypeMember_deviceStr<::CheckoutManager::WeekEvent>,
     nullptr,
     1, // String
     -1,
     true,  false, false,
-    //   8 - CheckoutManager.WeekEvent.manuallyhidden
+    //  11 - CheckoutManager.WeekEvent.manuallyhidden
     L"manuallyhidden",
     &GetValueTypeMember_manuallyhidden<::CheckoutManager::WeekEvent, ::Platform::Boolean>,
     &SetValueTypeMember_manuallyhidden<::CheckoutManager::WeekEvent, ::Platform::Boolean>,
     2, // Boolean
     -1,
     false, false, false,
-    //   9 - CheckoutManager.WeekEvent.teamStr
+    //  12 - CheckoutManager.WeekEvent.teamStr
     L"teamStr",
     &GetReferenceTypeMember_teamStr<::CheckoutManager::WeekEvent>,
     nullptr,
     1, // String
     -1,
     true,  false, false,
-    //  10 - CheckoutManager.LandingPage.numdevices
+    //  13 - CheckoutManager.LandingPage.numdevices
     L"numdevices",
     &GetReferenceTypeMember_numdevices<::CheckoutManager::LandingPage>,
     &SetReferenceTypeMember_numdevices<::CheckoutManager::LandingPage, ::Platform::String>,
     1, // String
     -1,
     false, false, false,
-    //  11 - CheckoutManager.LandingPage.dtf
+    //  14 - CheckoutManager.LandingPage.dtf
     L"dtf",
     &GetReferenceTypeMember_dtf<::CheckoutManager::LandingPage>,
     nullptr,
     1, // String
     -1,
     true,  false, false,
-    //  12 - CheckoutManager.LandingPage.datestr
+    //  15 - CheckoutManager.LandingPage.datestr
     L"datestr",
     &GetReferenceTypeMember_datestr<::CheckoutManager::LandingPage>,
     nullptr,
     1, // String
     -1,
     true,  false, false,
-    //  13 - CheckoutManager.devicesGroup.devices
+    //  16 - CheckoutManager.devicesGroup.devices
     L"devices",
     &GetReferenceTypeMember_devices<::CheckoutManager::devicesGroup>,
     &SetReferenceTypeMember_devices<::CheckoutManager::devicesGroup, ::Windows::Foundation::Collections::IVector<::CheckoutManager::device>>,
-    31, // Windows.Foundation.Collections.IVector`1<CheckoutManager.device>
+    33, // Windows.Foundation.Collections.IVector`1<CheckoutManager.device>
     -1,
     false, false, false,
-    //  14 - CheckoutManager.devicesGroup.deleteGroup
+    //  17 - CheckoutManager.devicesGroup.deleteGroup
     L"deleteGroup",
     &GetReferenceTypeMember_deleteGroup<::CheckoutManager::devicesGroup>,
     nullptr,
-    19, // Windows.UI.Xaml.Input.ICommand
+    20, // Windows.UI.Xaml.Input.ICommand
     -1,
     true,  false, false,
-    //  15 - CheckoutManager.devicesGroup.key
+    //  18 - CheckoutManager.devicesGroup.key
     L"key",
     &GetReferenceTypeMember_key<::CheckoutManager::devicesGroup>,
     &SetReferenceTypeMember_key<::CheckoutManager::devicesGroup, ::Platform::String>,
     1, // String
     -1,
     false, false, false,
-    //  16 - CheckoutManager.devicesGroup.color
+    //  19 - CheckoutManager.devicesGroup.color
     L"color",
     &GetReferenceTypeMember_color<::CheckoutManager::devicesGroup>,
     &SetReferenceTypeMember_color<::CheckoutManager::devicesGroup, ::Windows::UI::Xaml::Media::SolidColorBrush>,
-    26, // Windows.UI.Xaml.Media.SolidColorBrush
+    28, // Windows.UI.Xaml.Media.SolidColorBrush
     -1,
     false, false, false,
-    //  17 - CheckoutManager.DeviceViewPage.bindDevices
+    //  20 - CheckoutManager.DeviceViewPage.bindDevices
     L"bindDevices",
     &GetReferenceTypeMember_bindDevices<::CheckoutManager::DeviceViewPage>,
     nullptr,
-    32, // Windows.Foundation.Collections.IVector`1<CheckoutManager.devicesGroup>
+    34, // Windows.Foundation.Collections.IVector`1<CheckoutManager.devicesGroup>
     -1,
     true,  false, false,
-    //  18 - CheckoutManager.WeekViewControl.cal
+    //  21 - CheckoutManager.WeekViewControl.cal
     L"cal",
     &GetReferenceTypeMember_cal<::CheckoutManager::WeekViewControl>,
     &SetReferenceTypeMember_cal<::CheckoutManager::WeekViewControl, ::CheckoutManager::CalInfo>,
     7, // CheckoutManager.CalInfo
     -1,
     false, false, false,
-    //  19 - CheckoutManager.WeekViewControl.dateRange
+    //  22 - CheckoutManager.WeekViewControl.dateRange
     L"dateRange",
     &GetReferenceTypeMember_dateRange<::CheckoutManager::WeekViewControl>,
     nullptr,
     1, // String
     -1,
     true,  false, false,
-    //  20 - CheckoutManager.WeekViewControl.zoomed
+    //  23 - CheckoutManager.WeekViewControl.zoomed
     L"zoomed",
     &GetValueTypeMember_zoomed<::CheckoutManager::WeekViewControl, ::Platform::Boolean>,
     &SetValueTypeMember_zoomed<::CheckoutManager::WeekViewControl, ::Platform::Boolean>,
     2, // Boolean
     -1,
     false, false, false,
-    //  21 - CheckoutManager.MonthViewControl.cal
+    //  24 - CheckoutManager.MonthViewControl.cal
     L"cal",
     &GetReferenceTypeMember_cal<::CheckoutManager::MonthViewControl>,
     &SetReferenceTypeMember_cal<::CheckoutManager::MonthViewControl, ::CheckoutManager::CalInfo>,

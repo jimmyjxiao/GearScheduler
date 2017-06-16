@@ -39,11 +39,11 @@
             <SplitView.Pane>
                 <StackPanel>
                     <Button Click="Button_Click" Content="&#xE700;" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Height="48" Width="48" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"/>
-                    <ListView SelectionMode="Single" ItemTemplate="{StaticResource NavMenuItemTemplate}" SelectionChanged="ListView_SelectionChanged" x:Name="navigator" SelectedItem="{x:Null}"/>
+                    <ListView SelectionMode="Single" ItemTemplate="{StaticResource NavMenuItemTemplate}" SelectionChanged="ListView_SelectionChanged" x:Name="navigator" />
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
-                <Frame x:Name="zFrame" SourcePageType="local:LandingPage" Navigated="zFrame_Navigated" Loaded="Page_Loaded"/>
+                <Frame x:Name="zFrame" Navigated="zFrame_Navigated" Loaded="Page_Loaded"/>
             </SplitView.Content>
         </SplitView>
 

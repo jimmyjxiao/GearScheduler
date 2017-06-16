@@ -32,6 +32,7 @@ namespace CheckoutManager
 		Platform::Collections::Vector<Team^>^ teamvec = nullptr;
 		void Password_PasswordChanged(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void confirmpass_PasswordChanged(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void ListView_ContextRequested(Windows::UI::Xaml::UIElement^ sender, Windows::UI::Xaml::Input::ContextRequestedEventArgs^ args);
 	};
 	
 }

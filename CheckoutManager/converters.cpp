@@ -45,3 +45,10 @@ void converters::textchangedNumberfilter(Windows::UI::Xaml::Controls::TextBox ^ 
 	sender->Text = ref new Platform::String(text.data());
 
 }
+
+std::wstring converters::shortDatetime(time_t time)
+{
+	wchar_t buf[80]; //inefficient, but who cares;
+	wcsftime(buf, 80, L"%D %I:%M%p", localtime(&time));
+	return buf;
+}

@@ -5,7 +5,7 @@
 
 #include "pch.h"
 #include "CheckoutPage.xaml.h"
-
+#include "converters.h"
 using namespace CheckoutManager;
 
 using namespace Platform;
@@ -31,9 +31,47 @@ CheckoutPage::CheckoutPage()
 	{
 		x->Append(ref new Platform::String((const wchar_t*)z.first.c_str()));
 	}
+	currentListview->ItemsSource = getCurrentcheckouts();
+	overdueview->ItemsSource = getOverdue();
 	teamSelector->ItemsSource = x;
 }
 
+
+Platform::Collections::Vector<overDueinfo, overDueequal>^ CheckoutManager::CheckoutPage::getOverdue()
+{
+	Platform::Collections::Vector<overDueinfo, overDueequal>^ returning = ref new Platform::Collections::Vector<overDueinfo, overDueequal>();
+	const auto overdue = database->getOverdueCheckouts();
+	for (auto &aeig : overdue)
+	{
+		overDueinfo e;
+		e.itemType = Platform::StringReference((const wchar_t*)aeig.first.deviceType.data());
+		e.user = Platform::StringReference((const wchar_t*)aeig.first.Team.data());
+		e.itemID = aeig.second;
+		e.checkedOutTime = Platform::StringReference(converters::shortDatetime(aeig.first.actualchktime).data());
+		e.dueTime = Platform::StringReference(converters::shortDatetime(aeig.first.duedate).data());
+		returning->Append(e);
+	}
+	return returning;
+}
+
+Platform::Collections::Vector<refCheckout, checkoutEqual>^ CheckoutManager::CheckoutPage::getCurrentcheckouts()
+{
+	Platform::Collections::Vector<refCheckout, checkoutEqual>^ returning = ref new Platform::Collections::Vector<refCheckout, checkoutEqual>();
+	const auto currentcheckouts = database->getCheckouts(time(nullptr), time(nullptr) + 60);
+	for (auto &aeg : currentcheckouts)
+	{
+		refCheckout z;
+		z.checkedout = aeg.fullfilled; //xaml converters go the other way and I'm too lazy to do it any other way
+		z.returned = ((aeg.fullfilled) && (aeg.actualreturntime != NULL));
+		z.checkoutID = aeg.checkoutID;
+		z.deviceType = Platform::StringReference((const wchar_t*)aeg.deviceType.data());
+		z.team = Platform::StringReference((const wchar_t*)aeg.Team.data());
+		z.CheckoutTime = Platform::StringReference(converters::shortDatetime(aeg.checkoutTime).data());
+		z.returnTime = Platform::StringReference(converters::shortDatetime(aeg.duedate).data());
+		returning->Append(z);
+	}
+	return returning;
+}
 
 void CheckoutManager::CheckoutPage::Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
@@ -69,6 +107,10 @@ void CheckoutManager::CheckoutPage::Button_Click(Platform::Object^ sender, Windo
 		else if (z == 'N')
 		{
 			warning->Text = "Invalid Item ID";
+		}
+		else if (z == 'U')
+		{
+			warning->Text = "Does not match any scheduled checkout";
 		}
 		warning->Visibility = Windows::UI::Xaml::Visibility::Visible;
 	}
@@ -144,4 +186,25 @@ void CheckoutManager::CheckoutPage::teamSelector_SelectionChanged(Platform::Obje
 {
 	password->IsEnabled = true;
 	warning->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+}
+
+
+
+
+void CheckoutManager::CheckoutPage::Returnbutton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	int id = std::stoi(returnBox->Text->Data());
+	database->returndevice(id);
+	Platform::String^ refz = Platform::StringReference((const wchar_t*)database->getdevicetypefromPubID(id).data());
+	refz += L" (ID:"; 
+	refz += id;
+	refz += L") returned sucessfully and is now available";
+	returnBlock->Text = refz;
+	returnBox->Text = "";
+}
+
+
+void CheckoutManager::CheckoutPage::returnBox_TextChanging(Windows::UI::Xaml::Controls::TextBox^ sender, Windows::UI::Xaml::Controls::TextBoxTextChangingEventArgs^ args)
+{
+	converters::textchangedNumberfilter(sender, args);
 }

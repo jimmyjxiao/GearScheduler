@@ -5,12 +5,22 @@
     xmlns:local="using:CheckoutManager"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:converters"
     mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
-            <TextBox Header="Item ID:" x:Name="IDbox"/>
-            <ComboBox Header="User:" x:Name="teamSelector" SelectionChanged="teamSelector_SelectionChanged"/>
+    <Page.Resources>
+        <converters:booltosymbol x:Key="boolconv"/>
+        <converters:booltocolor x:Key="boolcool"/>
+        <x:Boolean x:Key="false">False</x:Boolean>
+    </Page.Resources>
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid HorizontalAlignment="Stretch" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Name="CheckoutPanel">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top"  Grid.Column="0">
+            <TextBox Header="Item ID:" x:Name="IDbox" TextChanging="returnBox_TextChanging"/>
+            <ComboBox Header="User:" x:Name="teamSelector" SelectionChanged="teamSelector_SelectionChanged" />
             <PasswordBox Header="Password:" PasswordChanged="PasswordBox_PasswordChanged" x:Name="password" IsEnabled="False"/>
             <Button Content="Checkout" Click="Button_Click" IsEnabled="False" x:Name="checkoutbutton"/>
             
@@ -27,5 +37,179 @@
                 </Paragraph>
             </RichTextBlock>
         </StackPanel>
-    </Grid>
+            <StackPanel HorizontalAlignment="Stretch" Grid.Column="1">
+                <TextBox TextChanging="returnBox_TextChanging" x:Name="returnBox" Header="ItemID"/>
+                <Button Name="Returnbutton" Click="Returnbutton_Click" Content="Return Item"/>
+                <TextBlock x:Name="returnBlock"/>
+            </StackPanel>
+        </Grid>
+
+        <ListView x:Name="overdueview" RelativePanel.Below="CheckoutPanel" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True" SelectionMode="None">
+            <ListView.HeaderTemplate>
+                <DataTemplate>
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}" Text="Overdue Unreturned Checkouts:"/>
+                        <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1"  Background="LightGray">
+                            <TextBlock Text="Item Type"/>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="1" Grid.Row="1"  Background="LightGray">
+                            <TextBlock Text="Item ID:" />
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="2" Grid.Row="1"  Background="LightGray">
+                            <TextBlock Grid.Column="2" Text="Time Checked Out"/>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="3" Grid.Row="1"  Background="LightGray">
+                            <TextBlock Grid.Column="2" Text="Time Due"/>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="4" Grid.Row="1"  Background="LightGray">
+                            <TextBlock Text="User:" />
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ListView.HeaderTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <ListViewItemPresenter ContentMargin="0" Padding="0" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:overDueinfo">
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border BorderThickness="1" BorderBrush="Gray">
+                            <TextBlock Text="{x:Bind itemType}"/>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="1">
+                            <TextBlock Text="{x:Bind itemID}" />
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="2">
+                            <TextBlock Grid.Column="2" Text="{x:Bind checkedOutTime}"/>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="3">
+                            <TextBlock Grid.Column="2" Text="{x:Bind dueTime}"/>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="4">
+                            <TextBlock Text="{x:Bind user}"/>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+            <ListView  x:Name="currentListview" SelectionMode="None" RelativePanel.Below="overdueview" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True">
+                
+            <ListView.HeaderTemplate>
+                <DataTemplate>
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="75"/>
+                            <ColumnDefinition Width="75"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}" Text="Current Checkouts:"/>
+                        <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1"  Background="LightGray">
+                         <TextBlock Text="Item Type"/>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="1" Grid.Row="1"  Background="LightGray">
+                            <TextBlock Text="User" />
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="2" Grid.Row="1"  Background="LightGray">
+                            <TextBlock Grid.Column="2" Text="Checkout Time"/>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="3" Grid.Row="1"  Background="LightGray">
+                            <TextBlock Grid.Column="2" Text="Time Due"/>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="4" Grid.Row="1"  Background="LightGray">
+                            <TextBlock Text="Checked Out" TextWrapping="WrapWholeWords"/>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="5" Grid.Row="1" Background="LightGray">
+                            <TextBlock Text="Returned" TextWrapping="WrapWholeWords"/>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ListView.HeaderTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <ListViewItemPresenter ContentMargin="0" Padding="0" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+                </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:refCheckout">
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="75"/>
+                                <ColumnDefinition Width="75"/>
+                            </Grid.ColumnDefinitions>
+                        <Border BorderThickness="1" BorderBrush="Gray">
+                            <TextBlock Text="{x:Bind deviceType}"/>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="1">
+                            <TextBlock Text="{x:Bind team}" />
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="2">
+                            <TextBlock Grid.Column="2" Text="{x:Bind CheckoutTime}"/>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="3">
+                            <TextBlock Grid.Column="2" Text="{x:Bind returnTime}"/>
+                        </Border>
+                         <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="4">
+                                <SymbolIcon Symbol="{x:Bind checkedout, Converter={StaticResource boolconv}}" Foreground="{x:Bind checkedout, Converter={StaticResource boolcool}}"/>
+                          </Border>
+                            <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="5">
+                                <SymbolIcon Symbol="{x:Bind returned, Converter={StaticResource boolconv}}" Foreground="{x:Bind returned, Converter={StaticResource boolcool}}"/>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+    </RelativePanel>
 </Page>

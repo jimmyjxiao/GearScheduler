@@ -78,7 +78,7 @@ CheckoutManager::AddCheckout::AddCheckout(dataspace::dataManager::CheckoutInfo *
 	}
 	devicepicker->ItemsSource = cxxstring;
 	devicepicker->SelectedItem = seldevice;
-
+	CloseButton->Visibility = Windows::UI::Xaml::Visibility::Visible;
 	isloaded = true;
 	edit = editing;
 	editmode = true;
@@ -192,16 +192,29 @@ void CheckoutManager::AddCheckout::AppBarButton_Click(Platform::Object^ sender, 
 				addinfo.actualreturntime = NULL;
 				if (editmode)
 				{
-					if (dataspace::dataManager::CheckoutInfo::isSameNotfulfilled(addinfo, *edit))
+					Platform::Collections::Vector<Platform::String^>^ allowedusers = ref new Platform::Collections::Vector<Platform::String^>({ Platform::StringReference((const wchar_t*)edit->Team.data()) });
+					auto signin = ref new AuthenticationDialog(allowedusers, this->dataInstance);
+					addinfo.checkoutID = edit->checkoutID;
+					addinfo.actualchktime = edit->actualchktime;
+					addinfo.actualreturntime = edit->actualreturntime;
+					addinfo.fullfilled = edit->fullfilled;
+					signin->Authenticated += ref new CheckoutManager::AuthSucesshandler([this, addinfo](Platform::String^ user, Windows::UI::Xaml::Controls::ContentDialogButtonClickDeferral^ def)
 					{
-						addinfo.checkoutID = edit->checkoutID;
-						addinfo.actualchktime = edit->actualchktime;
-						addinfo.actualreturntime = edit->actualreturntime;
-						addinfo.fullfilled = edit->fullfilled;
-						dataInstance->editCheckout(addinfo);
+						if (!dataspace::dataManager::CheckoutInfo::isSameNotfulfilled(addinfo, *edit))
+						{
+
+							dataInstance->editCheckout(addinfo);
+							updatefunc();
+						}
 						updatefunc();
-					}
+						def->Complete();
+
+
+
+
+					});
 					((Windows::UI::Xaml::Controls::ContentDialog^)Parent)->Hide();
+					signin->ShowAsync();
 				}
 				else
 					dataInstance->scheduleCheckout(addinfo);
@@ -274,10 +287,12 @@ void CheckoutManager::AddCheckout::AppBarButton_Click(Platform::Object^ sender, 
 
 				msg->DefaultCommandIndex = 1;
 				msg->CancelCommandIndex = 1;
+				if(editmode)
+					((Windows::UI::Xaml::Controls::ContentDialog^)Parent)->Hide();
 				msg->ShowAsync();
 			}
 		}
-		
+	
 
 }
 
@@ -311,4 +326,35 @@ void CheckoutManager::AddCheckout::OnBackRequested(Platform::Object ^sender, Win
 	Windows::Foundation::Collections::IKeyValuePair<bool, time_t>^ backinfo;
 	((Windows::UI::Xaml::Controls::Frame^)Parent)->Navigate(Calpage::typeid, backinfo);
 	((Windows::UI::Xaml::Controls::Frame^)Parent)->GoBack();
+}
+
+
+void CheckoutManager::AddCheckout::CloseButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	((Windows::UI::Xaml::Controls::ContentDialog^)Parent)->Hide();
+}
+
+
+void CheckoutManager::AddCheckout::deleteButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	if (editmode)
+	{
+		Platform::Collections::Vector<Platform::String^>^ allowedusers = ref new Platform::Collections::Vector<Platform::String^>({Platform::StringReference((const wchar_t*)edit->Team.data())});
+		auto signin = ref new AuthenticationDialog(allowedusers, this->dataInstance);
+
+		signin->Authenticated += ref new CheckoutManager::AuthSucesshandler([this](Platform::String^ user, Windows::UI::Xaml::Controls::ContentDialogButtonClickDeferral^ def)
+		{
+			database->deleteCheckout(edit->checkoutID);
+			def->Complete();
+			updatefunc();
+			
+		});
+		((Windows::UI::Xaml::Controls::ContentDialog^)Parent)->Hide();
+		signin->ShowAsync();
+
+
+
+	}
+	else
+		((Windows::UI::Xaml::Controls::Frame^)Parent)->GoBack();
 }

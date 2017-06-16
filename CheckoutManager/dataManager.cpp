@@ -60,7 +60,7 @@ namespace dataspace
 				"ON checkouts.teamID=Teams.teamID "
 				"INNER JOIN deviceType "
 				"ON checkouts.typeID=devicetype.typeID "
-				"WHERE (? BETWEEN checkouts.chktime AND checkouts.duetime) OR (? BETWEEN checkouts.chktime AND checkouts.duetime) OR (checkouts.chktime BETWEEN ? AND ?) AND (deviceType.deviceName = ?);");
+				"WHERE ((? BETWEEN checkouts.chktime AND checkouts.duetime) OR (? BETWEEN checkouts.chktime AND checkouts.duetime) OR (checkouts.chktime BETWEEN ? AND ?)) AND (deviceType.typeID = ?);");
 
 		}
 		catch (sqlite::sqlite_exception z)
@@ -108,6 +108,40 @@ namespace dataspace
 
 	}
 
+	void dataManager::returndevice(int ID)
+	{
+		int checkoutID = 0;
+		try
+		{
+			try
+			{
+				*inventory
+					<< u"SELECT checkoutID FROM devices "
+					"WHERE PublicID = ?"
+					<< ID
+					>> checkoutID;
+				*inventory
+					<< u"UPDATE checkouts "
+					"SET returned=1, actreturntime=(SELECT strftime('%s','now')) "
+					"WHERE checkoutID = ?;"
+					<< checkoutID;
+			}
+			catch (std::exception e)
+			{
+				__debugbreak();
+			}
+			*inventory
+				<< u"UPDATE devices "
+				"SET available=1, currentholder=NULL, checkoutID=NULL "
+				"WHERE PublicID = ?"
+				<< ID;
+		}
+		catch (std::exception e)
+		{
+
+		}
+	}
+
 	bool dataManager::scheduleCheckout(CheckoutInfo & adding)
 	{
 		try
@@ -128,7 +162,7 @@ namespace dataspace
 		return false;
 	}
 
-	void dataManager::editCheckout(CheckoutInfo & adding)
+	void dataManager::editCheckout(const CheckoutInfo & adding)
 	{
 		try
 		{
@@ -157,15 +191,17 @@ namespace dataspace
 		{
 			*inventory <<
 				u"UPDATE checkouts "
-				"SET checkedout=1, actchktime=(SELECT strftime('%s','now')),  returned=0 "
+				"SET checkedout=1, actchktime=(SELECT strftime('%s','now')),  returned=0, devicepubID = ? "
 				"WHERE checkoutID = ? "
+				<< deviceID
 				<< checkout.checkoutID;
 			*inventory <<
 				u"UPDATE devices "
-				"SET available=0, CurrentHolder = ? "
+				"SET available=0, CurrentHolder = ?, checkoutID = ?"
 				"WHERE publicID = ?"
 				<< checkout.Team
-				<< deviceID;
+				<< deviceID
+				<< checkout.checkoutID;
 		}
 		catch (std::exception e)
 		{
@@ -178,7 +214,7 @@ namespace dataspace
 	{
 		*inventory <<
 			"UPDATE devices "
-			"SET available=0, CurrentHolder=? "
+			"SET available=0, CurrentHolder=?, ForcedCheckout=1 "
 			"WHERE publicID=?"
 			<< team
 			<< deviceID;
@@ -193,7 +229,7 @@ namespace dataspace
 		try
 		{
 			*inventory <<
-				u"SELECT typeID FROM devices WHERE PublicID = ?"
+				u"SELECT typeID FROM devices WHERE PublicID = ? "
 				<< deviceID
 				>> [&](int z)
 			{
@@ -205,7 +241,7 @@ namespace dataspace
 				{
 					auto it = std::find_if(x.begin(), x.end(), [team, hash, deviceID, this](CheckoutInfo v)
 					{
-						return (team == v.Team);
+						return ((team == v.Team) && !v.fullfilled);
 					});
 					if (it == x.end())
 					{
@@ -214,10 +250,13 @@ namespace dataspace
 					}
 					else
 					{
+						returndevice(std::stoi((const wchar_t*)deviceID.data()));
 						fullfillCheckout(*it, hash, deviceID);
 						returning = *it;
 					}
 				}
+				else
+					throw'U';
 			};
 			if (!deviceFound)
 			{
@@ -324,6 +363,39 @@ namespace dataspace
 		{
 			__debugbreak();
 		}
+	}
+	std::vector<std::pair<dataManager::CheckoutInfo, int>> dataManager::getOverdueCheckouts()
+	{
+		std::vector<std::pair<CheckoutInfo, int>> returning = std::vector<std::pair<CheckoutInfo, int>>();
+		*inventory << u"SELECT Teams.TeamName, checkouts.chktime, deviceType.deviceName, checkouts.duetime, checkouts.actchktime, checkouts.actreturntime, checkouts.checkoutID, checkouts.checkedout, checkouts.devicepubID "
+			"FROM checkouts "
+			"INNER JOIN Teams "
+			"ON checkouts.teamID=Teams.teamID "
+			"INNER JOIN deviceType "
+			"ON checkouts.typeID=devicetype.typeID "
+			"WHERE checkouts.checkedout = 1 AND checkouts.returned = 0 AND (SELECT strftime('%s','now')) > checkouts.duetime;"
+			>>
+			[&](std::u16string TeamName, time_t date, std::u16string device, time_t due, time_t chkd, time_t retur, int checkoutID, int fullfilled, int deviceID)
+
+		{
+			//				__debugbreak();
+			CheckoutInfo adding =
+			{
+				TeamName,
+				device,
+				date,
+				due
+
+
+
+			};
+			adding.checkoutID = checkoutID;
+			adding.actualchktime = chkd;
+			adding.actualreturntime = retur;
+			adding.fullfilled = fullfilled;
+			returning.push_back(std::make_pair(adding, deviceID));
+		};
+		return returning;
 	}
 
 	bool dataManager::passwordCheck(std::u16string team, std::u16string hash)

@@ -8,9 +8,10 @@
     mc:Ignorable="d">
 
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <CommandBar>
+        <CommandBar OverflowButtonVisibility="Collapsed">
             <AppBarButton Icon="Save" Click="AppBarButton_Click" IsEnabled="False" x:Name="savebutton" Label="Save"/>
-            <AppBarButton Icon="Delete" Label="Delete"/>
+            <AppBarButton Icon="Delete" Label="Delete" Name="deleteButton" Click="deleteButton_Click"/>
+            <AppBarButton Icon="Cancel" Label="Close" x:Name="CloseButton" Visibility="Collapsed" Click="CloseButton_Click"/>
             <CommandBar.Content>
                 <TextBlock Text="Checkout details" Style="{ThemeResource HeaderTextBlockStyle}" FontSize="40" VerticalAlignment="Center" Margin="4,0,0,0" Padding="0"/>
             </CommandBar.Content>

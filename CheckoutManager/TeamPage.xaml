@@ -19,11 +19,13 @@
                 <TextBlock x:Name="addTypeWarning"/>
             </StackPanel>
         </StackPanel>
-        <ListView ItemsSource="{x:Bind bindTeams}" RelativePanel.Below="stack">
+        <ListView ItemsSource="{x:Bind bindTeams}" RelativePanel.Below="stack" ContextRequested="ListView_ContextRequested" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True" x:Name="teamslist">
 
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Team">
-                    <TextBlock Text="{x:Bind teamName}" Foreground="{x:Bind color}"/>
+                    
+                     <TextBlock Text="{x:Bind teamName}" Foreground="{x:Bind color}"/>
+
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

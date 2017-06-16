@@ -8,6 +8,7 @@
 #include "WeekEvent.g.h"
 #include "WeekViewControl.xaml.h"
 #include "dataManager.h"
+#include "converters.h"
 namespace CheckoutManager
 {
 	public delegate void manualHide(WeekEvent^ listing);
@@ -48,6 +49,25 @@ namespace CheckoutManager
 				return timetext;
 			}
 		}
+		property Platform::String^ actChecktime
+		{
+			Platform::String^ get()
+			{
+				return Platform::StringReference(converters::shortDatetime(chkact).data());
+			}
+		}
+		property Platform::String^ actReturntime
+		{
+			Platform::String^ get()
+			{
+					if (retact != NULL)
+						return Platform::StringReference(converters::shortDatetime(retact).data());
+					else
+						return L"N/A";
+				
+			}
+		}
+		property bool chk;
 		property Windows::UI::Xaml::Media::SolidColorBrush^ background
 		{
 			Windows::UI::Xaml::Media::SolidColorBrush^ get()
@@ -58,10 +78,12 @@ namespace CheckoutManager
 
 
 	internal:
-		WeekEvent(Windows::UI::Color color, Platform::String ^ devices, Platform::String^ teams, bool fullfilled, Platform::String^ timestr, int* maxzIndex, dataspace::dataManager::CheckoutInfo checkout, std::function<void()> editfunc);
+		WeekEvent(Windows::UI::Color color, Platform::String ^ devices, Platform::String^ teams, bool fullfilled, Platform::String^ timestr, int* maxzIndex, dataspace::dataManager::CheckoutInfo checkout, std::function<void()> editfunc, time_t actChk, time_t actRet, bool ful);
 		dataspace::dataManager::CheckoutInfo Checkout;
 		std::shared_ptr<std::vector<WeekEvent^>> intersectswith;
 	private:
+		time_t retact;
+		time_t chkact;
 		std::function<void()> updatefunc;
 		Platform::String^ team;
 		Platform::String^ device;

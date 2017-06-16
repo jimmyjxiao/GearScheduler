@@ -49,6 +49,8 @@ namespace CheckoutManager
         private: ::Windows::UI::Xaml::Controls::TimePicker^ startTime;
         private: ::Windows::UI::Xaml::Controls::ToggleSwitch^ sameDay;
         private: ::Windows::UI::Xaml::Controls::AppBarButton^ savebutton;
+        private: ::Windows::UI::Xaml::Controls::AppBarButton^ deleteButton;
+        private: ::Windows::UI::Xaml::Controls::AppBarButton^ CloseButton;
     };
 }
 

@@ -204,8 +204,9 @@ void CheckoutManager::WeekViewControl::updatecalendar(CalInfo^ calz)
 					it = cal->colorMap.find(z.Team);
 				else if (cal->ViewBy == ViewByDevice)
 					it = cal->colorMap.find(z.deviceType);
-				auto eventTimestr = ref new Platform::String(_wctime(&z.checkoutTime));
-				eventTimestr = Platform::String::Concat(eventTimestr, ref new Platform::String(_wctime(&z.duedate)));
+				Platform::String^ eventTimestr = Platform::StringReference(converters::shortDatetime(z.checkoutTime).data());
+				eventTimestr += L"\n";
+				eventTimestr = Platform::String::Concat(eventTimestr, Platform::StringReference(converters::shortDatetime(z.duedate).data()));
 
 				maxZindex[izp - 1] = 0;
 				//test
@@ -215,9 +216,12 @@ void CheckoutManager::WeekViewControl::updatecalendar(CalInfo^ calz)
 				auto d = z.fullfilled;
 				auto e = eventTimestr;
 				auto f = &maxZindex[izp - 1];
-				auto adding = ref new WeekEvent(it->second, ref new Platform::String((const wchar_t*)z.deviceType.data()), ref new Platform::String((const wchar_t*)z.Team.data()), z.fullfilled, eventTimestr, &maxZindex[izp - 1], z, updateFunc);
+
+				
+				auto adding = ref new WeekEvent(it->second, ref new Platform::String((const wchar_t*)z.deviceType.data()), ref new Platform::String((const wchar_t*)z.Team.data()), z.fullfilled, eventTimestr, &maxZindex[izp - 1], z, updateFunc, z.actualchktime, z.actualreturntime, z.fullfilled);
+				adding->chk = z.fullfilled;
 				double top = startprop*canvasHeight;
-		
+
 				adding->Width = columnwidth;
 				
 				if (z.duedate < endtime)
