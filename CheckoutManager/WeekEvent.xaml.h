@@ -53,7 +53,10 @@ namespace CheckoutManager
 		{
 			Platform::String^ get()
 			{
-				return Platform::StringReference(converters::shortDatetime(chkact).data());
+				if (chkact != NULL)
+					return Platform::StringReference(converters::shortDatetime(chkact).data());
+				else
+					return L"N/A";
 			}
 		}
 		property Platform::String^ actReturntime

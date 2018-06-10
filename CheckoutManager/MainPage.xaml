@@ -5,17 +5,15 @@
     xmlns:local="using:CheckoutManager"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:conv="using:converters"
+    xmlns:conv="using:CheckoutManager.converters"
+    xmlns:navi="using:CheckoutManager.nav"
     mc:Ignorable="d">
 
     <Page.Resources>
 
         <conv:BooleanToVisibilityConverter x:Key="boolvis"/>
-        <DataTemplate x:Key="NavMenuItemTemplate" x:DataType="local:NavItem">
-
-
+        <DataTemplate x:Key="NavMenuItemTemplate" x:DataType="navi:NavItem">
             <Grid>
-
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="48" />
                     <ColumnDefinition />

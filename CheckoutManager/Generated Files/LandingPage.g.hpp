@@ -31,7 +31,7 @@ void ::CheckoutManager::LandingPage::InitializeComponent()
 /// Auto generated class for compiled bindings.
 /// </summary>
 class CheckoutManager::LandingPage::LandingPage_obj1_Bindings 
-    : public ::XamlBindingInfo::ReferenceTypeXamlBindings<::CheckoutManager::LandingPage>
+    : public ::XamlBindingInfo::ReferenceTypeXamlBindings<::CheckoutManager::LandingPage, ::XamlBindingInfo::XamlBindingTrackingBase>
 {
 public:
     LandingPage_obj1_Bindings()
@@ -55,6 +55,7 @@ public:
     {
         throw ref new ::Platform::InvalidArgumentException("No unloadable elements to disconnect.");
     }
+
 private:
     // Fields for each control that has bindings.
     ::Windows::UI::Xaml::Controls::TextBlock^ obj2;
@@ -77,7 +78,7 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // LandingPage.xaml line 14
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj2, obj, nullptr);
+            Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj2, obj, nullptr);
         }
     }
     void Update_dtf(::Platform::String^ obj, int phase)
@@ -85,8 +86,16 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // LandingPage.xaml line 16
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj3, obj, nullptr);
+            Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj3, obj, nullptr);
         }
+    }
+    static void Set_Windows_UI_Xaml_Controls_TextBlock_Text(::Windows::UI::Xaml::Controls::TextBlock^ obj, ::Platform::String^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = targetNullValue;
+        }
+        obj->Text = value;
     }
 };
 

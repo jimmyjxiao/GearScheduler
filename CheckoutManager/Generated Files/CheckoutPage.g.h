@@ -53,8 +53,8 @@ namespace CheckoutManager
     private:
         bool _contentLoaded;
     
-        class CheckoutPage_obj4_Bindings;
-        class CheckoutPage_obj11_Bindings;
+        class CheckoutPage_obj6_Bindings;
+        class CheckoutPage_obj14_Bindings;
     
         ::XamlBindingInfo::XamlBindings^ Bindings;
         private: ::Windows::UI::Xaml::Controls::Grid^ CheckoutPanel;

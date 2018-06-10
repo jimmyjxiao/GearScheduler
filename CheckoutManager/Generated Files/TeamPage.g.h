@@ -13,7 +13,7 @@ namespace Windows {
         namespace Xaml {
             namespace Controls {
                 ref class StackPanel;
-                ref class ListView;
+                ref class GridView;
                 ref class TextBox;
                 ref class PasswordBox;
                 ref class Button;
@@ -47,7 +47,7 @@ namespace CheckoutManager
     
         ::XamlBindingInfo::XamlBindings^ Bindings;
         private: ::Windows::UI::Xaml::Controls::StackPanel^ stack;
-        private: ::Windows::UI::Xaml::Controls::ListView^ teamslist;
+        private: ::Windows::UI::Xaml::Controls::GridView^ teamslist;
         private: ::Windows::UI::Xaml::Controls::TextBox^ newTeambox;
         private: ::Windows::UI::Xaml::Controls::PasswordBox^ Password;
         private: ::Windows::UI::Xaml::Controls::PasswordBox^ confirmpass;

@@ -11,23 +11,27 @@
 #include "DeviceViewPage.xaml.h"
 #include "TeamPage.xaml.h"
 #include "CheckoutPage.xaml.h"
+#include "LandingPage.xaml.h"
 namespace CheckoutManager
 {
 	/// <summary>
 	/// An empty page that can be used on its own or navigated to within a Frame.
 	/// </summary>
-	public ref struct NavItem sealed
+	namespace nav
 	{
+		public ref struct NavItem sealed
+		{
 
-	public:
-		NavItem(Platform::Type^ page, Platform::String^ label, Windows::UI::Xaml::Controls::Symbol sym);
-		property bool selected;
-		property Platform::String^ Label;
-		property Windows::UI::Xaml::Controls::Symbol Symbol;
-		property Windows::UI::Xaml::Interop::TypeName destPage;
+		public:
 
-
-	};
+			property bool selected;
+			property Platform::String^ Label;
+			property Windows::UI::Xaml::Controls::Symbol Symbol;
+		internal:
+			NavItem(Platform::Type^ page, Platform::String^ label, Windows::UI::Xaml::Controls::Symbol sym);
+			property Windows::UI::Xaml::Interop::TypeName destPage;
+		};
+	}
 	public ref class MainPage sealed
 	{
 	public:
@@ -35,7 +39,6 @@ namespace CheckoutManager
 		property Windows::UI::Xaml::Controls::Frame^ AppFrame
 		{
 			Windows::UI::Xaml::Controls::Frame^ get();
-
 		}
 
 	private:

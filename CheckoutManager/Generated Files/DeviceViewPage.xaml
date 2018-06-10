@@ -1,0 +1,103 @@
+﻿<Page x:ConnectionId='1'
+    x:Class="CheckoutManager.DeviceViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CheckoutManager"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:CheckoutManager.converters"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <CollectionViewSource x:ConnectionId='2' x:Name="devicesGrouped" IsSourceGrouped="True" ItemsPath="devices"                              />
+        <x:String x:Key="convParam">True</x:String>
+        <converters:BooleanToVisibilityConverter x:Key="booltovis"/>
+        <converters:booltocolor x:Key="availconverter"/>
+        <local:grouptostr x:Key="groupnameconverter"/>
+        <DataTemplate                           x:Key="deviceTemplate">
+            <Grid x:ConnectionId='3' HorizontalAlignment="Stretch"                                                                                                         >
+                <Grid.ContextFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem x:ConnectionId='4' Icon="Delete" Text="Delete"                                                        />
+                    </MenuFlyout>
+                </Grid.ContextFlyout>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border BorderThickness="1" BorderBrush="Gray">
+                    <TextBlock x:ConnectionId='7'                            />
+                </Border>
+                <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="1">
+                    <TextBlock x:ConnectionId='6'                               />
+                </Border>
+                <Border BorderThickness="1" BorderBrush="Gray" Grid.Column="2">
+                    <TextBlock x:ConnectionId='5' Grid.Column="2"                         />
+                </Border>
+               
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel  Grid.Column="3">
+            <StackPanel>
+                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Add Items"/>
+                <ComboBox x:ConnectionId='15' x:Name="DeviceSelector" Header="Item Type" DisplayMemberPath="key"                                   />
+                <TextBox x:ConnectionId='16' Header="Description" x:Name="newdevdesc"/>
+                <Button x:ConnectionId='17' Content="Add Item" Padding="5" x:Name="addDevicebutton"                              />
+                <StackPanel x:ConnectionId='18' Orientation="Horizontal" x:Name="addDeviceError" Visibility="Collapsed">
+                    <SymbolIcon Symbol="Important" Foreground="Red"/>
+                    <TextBlock x:ConnectionId='19' x:Name="addDeviceWarning"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Padding="5">
+                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Add Item Type"/>
+                <TextBox x:ConnectionId='11' Header="Type Name" x:Name="typeTextbox"/>
+                <Button x:ConnectionId='12' Content="Add Item Category"                            />
+                <StackPanel x:ConnectionId='13' Orientation="Horizontal" x:Name="addDeviceTypeError" Visibility="Collapsed">
+                    <SymbolIcon Symbol="Important" Foreground="Red"/>
+                    <TextBlock x:ConnectionId='14' x:Name="addDeviceTypeWarning"/>
+                </StackPanel>
+            </StackPanel>
+
+        </StackPanel>
+        <TextBlock Text="Item:"  Style="{StaticResource TitleTextBlockStyle}"/>
+        <TextBlock Text="Currently Checked out By" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="WrapWholeWords" Grid.Column="1"/>
+        <TextBlock Text="Item ID:" Style="{StaticResource TitleTextBlockStyle}" Grid.Column="2"/>
+        <ListView x:ConnectionId='8'                                            ItemTemplate="{StaticResource deviceTemplate}" HorizontalContentAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,27,0,0">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.GroupStyle>
+                <GroupStyle HidesIfEmpty="False">
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate                                >
+
+                            <TextBlock x:ConnectionId='9'                                                >
+                                <TextBlock.ContextFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem x:ConnectionId='10' Text="Delete"                                                               />
+
+                                    </MenuFlyout>
+                                </TextBlock.ContextFlyout>
+                            </TextBlock>
+
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                
+                </GroupStyle>
+            </ListView.GroupStyle>
+
+        </ListView>
+    </Grid>
+</Page>
+

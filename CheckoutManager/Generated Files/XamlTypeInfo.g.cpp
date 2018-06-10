@@ -15,9 +15,11 @@
 #include "CheckoutPage.xaml.h"
 #include "DeviceViewPage.xaml.h"
 #include "LandingPage.xaml.h"
+#include "OOBEPage.xaml.h"
 #include "App.xaml.h"
 #include "MainPage.xaml.h"
 #include "TeamPage.xaml.h"
+#include "TrialExpired.xaml.h"
 #include "WeekEvent.xaml.h"
 #include "WeekViewControl.xaml.h"
 #include "XamlBindingInfo.g.hpp"
@@ -27,9 +29,11 @@
 #include "CheckoutPage.g.hpp"
 #include "DeviceViewPage.g.hpp"
 #include "LandingPage.g.hpp"
+#include "OOBEPage.g.hpp"
 #include "App.g.hpp"
 #include "MainPage.g.hpp"
 #include "TeamPage.g.hpp"
+#include "TrialExpired.g.hpp"
 #include "WeekEvent.g.hpp"
 #include "WeekViewControl.g.hpp"
 
@@ -249,6 +253,16 @@ void SetReferenceTypeMember_teamName(::Platform::Object^ instance, ::Platform::O
     safe_cast<TDeclaringType^>(instance)->teamName = safe_cast<TValue^>(value);
 }
 
+enum TypeInfo_Flags
+{
+    TypeInfo_Flags_None                 = 0x00,
+    TypeInfo_Flags_IsLocalType          = 0x01,
+    TypeInfo_Flags_IsSystemType         = 0x02,
+    TypeInfo_Flags_IsReturnTypeStub     = 0x04,
+    TypeInfo_Flags_IsBindable           = 0x08,
+    TypeInfo_Flags_IsMarkupExtension    = 0x10, 
+};
+
 struct TypeInfo
 {
     PCWSTR  typeName;
@@ -262,16 +276,7 @@ struct TypeInfo
     int     firstEnumValueIndex;
     int     createFromStringIndex;
     ::Windows::UI::Xaml::Interop::TypeKind kindofType;
-    bool    isLocalType;
-    bool    isSystemType;
-    bool    isReturnTypeStub;
-    bool    isBindable;
-};
-
-
-std::function<::Platform::Object^(::Platform::String^)> CreateFromStringMethods[] =
-{
-    nullptr //Last entry is for padding
+    unsigned int flags;
 };
 
 const TypeInfo TypeInfos[] = 
@@ -281,217 +286,229 @@ const TypeInfo TypeInfos[] =
     nullptr, nullptr, nullptr, nullptr,
     -1,
     0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
-    false, true,  false, false,
+    TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
     //   1
     L"String", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
     0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
-    false, true,  false, false,
+    TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
     //   2
     L"Boolean", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
     0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
-    false, true,  false, false,
+    TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
     //   3
     L"System.ValueType", L"",
     nullptr, nullptr, nullptr, nullptr,
     0, // Object
     0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
-    false, false, false, false,
+    TypeInfo_Flags_None,
     //   4
     L"CheckoutManager.Team", L"",
     &ActivateType<::CheckoutManager::Team>, nullptr, nullptr, nullptr,
     0, // Object
     0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
     //   5
-    L"converters.booltocolor", L"",
-    &ActivateType<::converters::booltocolor>, nullptr, nullptr, nullptr,
-    24, // Windows.UI.Xaml.DependencyObject
-    2, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
-    //   6
     L"CheckoutManager.device", L"",
     nullptr, nullptr, nullptr, nullptr,
     3, // System.ValueType
     2, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
-    //   7
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
+    //   6
     L"CheckoutManager.CalInfo", L"",
     nullptr, nullptr, nullptr, nullptr,
     0, // Object
     2, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, true,  false,
-    //   8
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_IsReturnTypeStub | TypeInfo_Flags_None,
+    //   7
     L"CheckoutManager.Calpage", L"",
     &ActivateType<::CheckoutManager::Calpage>, nullptr, nullptr, nullptr,
     18, // Windows.UI.Xaml.Controls.Page
     2, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
-    //   9
-    L"converters.booltosymbol", L"",
-    &ActivateType<::converters::booltosymbol>, nullptr, nullptr, nullptr,
-    0, // Object
-    3, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
-    //  10
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
+    //   8
     L"CheckoutManager.MainPage", L"",
     &ActivateType<::CheckoutManager::MainPage>, nullptr, nullptr, nullptr,
     18, // Windows.UI.Xaml.Controls.Page
     3, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
-    //  11
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
+    //   9
+    L"CheckoutManager.OOBEPage", L"",
+    &ActivateType<::CheckoutManager::OOBEPage>, nullptr, nullptr, nullptr,
+    18, // Windows.UI.Xaml.Controls.Page
+    4, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
+    //  10
     L"CheckoutManager.TeamPage", L"",
     &ActivateType<::CheckoutManager::TeamPage>, nullptr, nullptr, nullptr,
     18, // Windows.UI.Xaml.Controls.Page
     4, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
-    //  12
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
+    //  11
     L"CheckoutManager.WeekEvent", L"",
     nullptr, nullptr, nullptr, nullptr,
     25, // Windows.UI.Xaml.Controls.UserControl
     5, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
-    //  13
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
+    //  12
     L"CheckoutManager.grouptostr", L"",
     &ActivateType<::CheckoutManager::grouptostr>, nullptr, nullptr, nullptr,
     0, // Object
     13, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
-    //  14
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
+    //  13
     L"CheckoutManager.AddCheckout", L"",
     &ActivateType<::CheckoutManager::AddCheckout>, nullptr, nullptr, nullptr,
     18, // Windows.UI.Xaml.Controls.Page
     13, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
-    //  15
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
+    //  14
     L"CheckoutManager.LandingPage", L"",
     &ActivateType<::CheckoutManager::LandingPage>, nullptr, nullptr, nullptr,
     18, // Windows.UI.Xaml.Controls.Page
     13, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
-    //  16
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
+    //  15
     L"CheckoutManager.CheckoutPage", L"",
     &ActivateType<::CheckoutManager::CheckoutPage>, nullptr, nullptr, nullptr,
     18, // Windows.UI.Xaml.Controls.Page
     16, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
-    //  17
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
+    //  16
     L"CheckoutManager.devicesGroup", L"",
     &ActivateType<::CheckoutManager::devicesGroup>, nullptr, nullptr, nullptr,
     0, // Object
     16, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, true, 
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_IsBindable | TypeInfo_Flags_None,
+    //  17
+    L"CheckoutManager.TrialExpired", L"",
+    &ActivateType<::CheckoutManager::TrialExpired>, nullptr, nullptr, nullptr,
+    18, // Windows.UI.Xaml.Controls.Page
+    20, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
     //  18
     L"Windows.UI.Xaml.Controls.Page", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
     20, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
-    false, true,  false, false,
+    TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
     //  19
     L"CheckoutManager.DeviceViewPage", L"",
     &ActivateType<::CheckoutManager::DeviceViewPage>, nullptr, nullptr, nullptr,
     18, // Windows.UI.Xaml.Controls.Page
     20, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
     //  20
     L"Windows.UI.Xaml.Input.ICommand", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
     21, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
-    false, true,  false, false,
+    TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
     //  21
     L"Windows.UI.Xaml.Controls.Frame", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
     21, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
-    false, true,  false, false,
+    TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
     //  22
     L"CheckoutManager.WeekViewControl", L"",
     &ActivateType<::CheckoutManager::WeekViewControl>, nullptr, nullptr, nullptr,
     25, // Windows.UI.Xaml.Controls.UserControl
     21, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
     //  23
     L"CheckoutManager.MonthViewControl", L"",
     &ActivateType<::CheckoutManager::MonthViewControl>, nullptr, nullptr, nullptr,
     27, // Windows.UI.Xaml.Controls.CalendarView
     24, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
     //  24
     L"Windows.UI.Xaml.DependencyObject", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
     25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
-    false, true,  false, false,
+    TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
     //  25
     L"Windows.UI.Xaml.Controls.UserControl", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
     25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
-    false, true,  false, false,
+    TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
     //  26
     L"CheckoutManager.AuthenticationDialog", L"",
     nullptr, nullptr, nullptr, nullptr,
     29, // Windows.UI.Xaml.Controls.ContentDialog
     25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
     //  27
     L"Windows.UI.Xaml.Controls.CalendarView", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
     25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
-    false, true,  false, false,
+    TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
     //  28
     L"Windows.UI.Xaml.Media.SolidColorBrush", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
     25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
-    false, true,  false, false,
+    TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
     //  29
     L"Windows.UI.Xaml.Controls.ContentDialog", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
     25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
-    false, true,  false, false,
+    TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
     //  30
+    L"CheckoutManager.converters.booltocolor", L"",
+    &ActivateType<::CheckoutManager::converters::booltocolor>, nullptr, nullptr, nullptr,
+    24, // Windows.UI.Xaml.DependencyObject
+    25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
+    //  31
     L"Windows.UI.Xaml.Controls.ContentControl", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
     25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
-    false, true,  false, false,
-    //  31
-    L"converters.BooleanToVisibilityConverter", L"",
-    &ActivateType<::converters::BooleanToVisibilityConverter>, nullptr, nullptr, nullptr,
+    TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
+    //  32
+    L"CheckoutManager.converters.booltosymbol", L"",
+    &ActivateType<::CheckoutManager::converters::booltosymbol>, nullptr, nullptr, nullptr,
     0, // Object
     25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    true,  false, false, false,
-    //  32
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
+    //  33
+    L"CheckoutManager.converters.BooleanToVisibilityConverter", L"",
+    &ActivateType<::CheckoutManager::converters::BooleanToVisibilityConverter>, nullptr, nullptr, nullptr,
+    0, // Object
+    25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
+    //  34
     L"Windows.Foundation.Collections.IVector`1<CheckoutManager.Team>", L"",
     nullptr, &CollectionAdd<::Windows::Foundation::Collections::IVector<::CheckoutManager::Team^>, ::CheckoutManager::Team^>, nullptr, nullptr,
     -1,
     25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
-    false, false, true,  false,
-    //  33
+    TypeInfo_Flags_IsReturnTypeStub | TypeInfo_Flags_None,
+    //  35
     L"Windows.Foundation.Collections.IVector`1<CheckoutManager.device>", L"",
     nullptr, &CollectionAdd<::Windows::Foundation::Collections::IVector<::CheckoutManager::device>, ::CheckoutManager::device>, nullptr, nullptr,
     -1,
     25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
-    false, false, true,  false,
-    //  34
+    TypeInfo_Flags_IsReturnTypeStub | TypeInfo_Flags_None,
+    //  36
     L"Windows.Foundation.Collections.IVector`1<CheckoutManager.devicesGroup>", L"",
     nullptr, &CollectionAdd<::Windows::Foundation::Collections::IVector<::CheckoutManager::devicesGroup^>, ::CheckoutManager::devicesGroup^>, nullptr, nullptr,
     -1,
     25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
-    false, false, true,  false,
+    TypeInfo_Flags_IsReturnTypeStub | TypeInfo_Flags_None,
     //  Last type here is for padding
     L"", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1, 
     25, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    false, false, false, false,
+    TypeInfo_Flags_None,
 };
 
 const UINT TypeInfoLookup[] = { 
@@ -518,12 +535,12 @@ const UINT TypeInfoLookup[] = {
       4,   //  20
       5,   //  21
       5,   //  22
-      7,   //  23
-     10,   //  24
-     12,   //  25
-     13,   //  26
-     14,   //  27
-     16,   //  28
+      6,   //  23
+      8,   //  24
+     11,   //  25
+     12,   //  26
+     13,   //  27
+     15,   //  28
      18,   //  29
      19,   //  30
      22,   //  31
@@ -534,39 +551,39 @@ const UINT TypeInfoLookup[] = {
      25,   //  36
      27,   //  37
      29,   //  38
-     30,   //  39
-     32,   //  40
-     32,   //  41
-     32,   //  42
-     32,   //  43
-     32,   //  44
-     32,   //  45
-     32,   //  46
-     32,   //  47
-     32,   //  48
-     32,   //  49
-     32,   //  50
-     32,   //  51
-     32,   //  52
-     32,   //  53
-     32,   //  54
-     32,   //  55
-     32,   //  56
-     32,   //  57
-     32,   //  58
-     32,   //  59
-     32,   //  60
-     32,   //  61
-     32,   //  62
-     33,   //  63
-     33,   //  64
-     34,   //  65
-     34,   //  66
-     34,   //  67
-     34,   //  68
-     34,   //  69
-     34,   //  70
-     35,   //  71
+     31,   //  39
+     33,   //  40
+     33,   //  41
+     33,   //  42
+     33,   //  43
+     33,   //  44
+     33,   //  45
+     33,   //  46
+     33,   //  47
+     33,   //  48
+     33,   //  49
+     33,   //  50
+     33,   //  51
+     33,   //  52
+     33,   //  53
+     33,   //  54
+     33,   //  55
+     34,   //  56
+     34,   //  57
+     34,   //  58
+     34,   //  59
+     34,   //  60
+     34,   //  61
+     34,   //  62
+     35,   //  63
+     35,   //  64
+     36,   //  65
+     36,   //  66
+     36,   //  67
+     36,   //  68
+     36,   //  69
+     36,   //  70
+     37,   //  71
 };
 
 struct MemberInfo 
@@ -601,7 +618,7 @@ const MemberInfo MemberInfos[] =
     L"CurrentCalendar",
     &GetReferenceTypeMember_CurrentCalendar<::CheckoutManager::Calpage>,
     nullptr,
-    7, // CheckoutManager.CalInfo
+    6, // CheckoutManager.CalInfo
     -1,
     true,  false, false,
     //   3 - CheckoutManager.MainPage.AppFrame
@@ -615,7 +632,7 @@ const MemberInfo MemberInfos[] =
     L"bindTeams",
     &GetReferenceTypeMember_bindTeams<::CheckoutManager::TeamPage>,
     nullptr,
-    32, // Windows.Foundation.Collections.IVector`1<CheckoutManager.Team>
+    34, // Windows.Foundation.Collections.IVector`1<CheckoutManager.Team>
     -1,
     true,  false, false,
     //   5 - CheckoutManager.WeekEvent.background
@@ -699,7 +716,7 @@ const MemberInfo MemberInfos[] =
     L"devices",
     &GetReferenceTypeMember_devices<::CheckoutManager::devicesGroup>,
     &SetReferenceTypeMember_devices<::CheckoutManager::devicesGroup, ::Windows::Foundation::Collections::IVector<::CheckoutManager::device>>,
-    33, // Windows.Foundation.Collections.IVector`1<CheckoutManager.device>
+    35, // Windows.Foundation.Collections.IVector`1<CheckoutManager.device>
     -1,
     false, false, false,
     //  17 - CheckoutManager.devicesGroup.deleteGroup
@@ -727,14 +744,14 @@ const MemberInfo MemberInfos[] =
     L"bindDevices",
     &GetReferenceTypeMember_bindDevices<::CheckoutManager::DeviceViewPage>,
     nullptr,
-    34, // Windows.Foundation.Collections.IVector`1<CheckoutManager.devicesGroup>
+    36, // Windows.Foundation.Collections.IVector`1<CheckoutManager.devicesGroup>
     -1,
     true,  false, false,
     //  21 - CheckoutManager.WeekViewControl.cal
     L"cal",
     &GetReferenceTypeMember_cal<::CheckoutManager::WeekViewControl>,
     &SetReferenceTypeMember_cal<::CheckoutManager::WeekViewControl, ::CheckoutManager::CalInfo>,
-    7, // CheckoutManager.CalInfo
+    6, // CheckoutManager.CalInfo
     -1,
     false, false, false,
     //  22 - CheckoutManager.WeekViewControl.dateRange
@@ -755,7 +772,7 @@ const MemberInfo MemberInfos[] =
     L"cal",
     &GetReferenceTypeMember_cal<::CheckoutManager::MonthViewControl>,
     &SetReferenceTypeMember_cal<::CheckoutManager::MonthViewControl, ::CheckoutManager::CalInfo>,
-    7, // CheckoutManager.CalInfo
+    6, // CheckoutManager.CalInfo
     -1,
     false, false, false,
 };
@@ -768,7 +785,7 @@ PCWSTR GetShortName(PCWSTR longName)
 
 const TypeInfo* GetTypeInfo(::Platform::String^ typeName)
 {
-    int typeNameLength = typeName->Length();
+    auto typeNameLength = typeName->Length();
     if (typeNameLength < _countof(TypeInfoLookup) - 1)
     {
         for (UINT i = TypeInfoLookup[typeNameLength]; i < TypeInfoLookup[typeNameLength+1]; i++)
@@ -784,7 +801,8 @@ const TypeInfo* GetTypeInfo(::Platform::String^ typeName)
 
 const MemberInfo* GetMemberInfo(::Platform::String^ longMemberName)
 {
-    for (int lastDotIndex = longMemberName->Length(); lastDotIndex >= 0; lastDotIndex--)
+    auto lastDotIndex = longMemberName->Length();
+    while (true)
     {
         if (longMemberName->Data()[lastDotIndex] == '.')
         {
@@ -803,6 +821,11 @@ const MemberInfo* GetMemberInfo(::Platform::String^ longMemberName)
             }
             break;
         }
+        if (lastDotIndex == 0)
+        {
+            break;
+        }
+        lastDotIndex--;
     }
     return nullptr;
 }
@@ -825,7 +848,7 @@ const MemberInfo* GetMemberInfo(::Platform::String^ longMemberName)
     {
         return nullptr;
     }
-    else if (pTypeInfo->isSystemType)
+    else if (pTypeInfo->flags & TypeInfo_Flags_IsSystemType)
     {
         return ref new ::XamlTypeInfo::InfoProvider::XamlSystemBaseType(typeName);
     }
@@ -841,14 +864,11 @@ const MemberInfo* GetMemberInfo(::Platform::String^ longMemberName)
         userType->DictionaryAdd = pTypeInfo->dictionaryAdd;
         userType->FromStringConverter = pTypeInfo->fromStringConverter;
         userType->ContentPropertyName = ::Platform::StringReference(pTypeInfo->contentPropertyName);
-        userType->IsLocalType = pTypeInfo->isLocalType;
-        userType->IsReturnTypeStub = pTypeInfo->isReturnTypeStub;
-        userType->IsBindable = pTypeInfo->isBindable;
+        userType->IsLocalType = pTypeInfo->flags & TypeInfo_Flags_IsLocalType;
+        userType->IsReturnTypeStub = pTypeInfo->flags & TypeInfo_Flags_IsReturnTypeStub;
+        userType->IsBindable = pTypeInfo->flags & TypeInfo_Flags_IsBindable;
+        userType->IsMarkupExtension = pTypeInfo->flags & TypeInfo_Flags_IsMarkupExtension;
         userType->CreateFromStringMethod = nullptr;
-        if (pTypeInfo->createFromStringIndex != -1)
-        {
-            userType->CreateFromStringMethod = &(CreateFromStringMethods[pTypeInfo->createFromStringIndex]);
-        }
         int nextMemberIndex = pTypeInfo->firstMemberIndex;
         for (int i=pTypeInfo->firstMemberIndex; i < pNextTypeInfo->firstMemberIndex; i++)
         {

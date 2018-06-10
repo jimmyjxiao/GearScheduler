@@ -39,7 +39,7 @@ namespace CheckoutManager
     private:
         bool _contentLoaded;
     
-        class MainPage_obj1_Bindings;
+        class MainPage_obj2_Bindings;
     
         ::XamlBindingInfo::XamlBindings^ Bindings;
         private: ::Windows::UI::Xaml::Controls::SplitView^ navMenu;

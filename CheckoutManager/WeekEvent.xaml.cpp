@@ -138,7 +138,13 @@ void CheckoutManager::WeekEvent::Password_PasswordChanged(Platform::Object^ send
 
 void CheckoutManager::WeekEvent::MenuFlyoutItem_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	deleted(this);
+	AuthenticationDialog^ auth = ref new AuthenticationDialog(ref new Platform::Collections::Vector<Platform::String^>({ team }), database);
+	auth->Authenticated += ref new CheckoutManager::AuthSucesshandler([this](Platform::String^ user, Windows::UI::Xaml::Controls::ContentDialogButtonClickDeferral^ def) {
+		deleted(this);
+		def->Complete();
+	});
+	auth->ShowAsync();
+
 }
 
 

@@ -30,11 +30,11 @@ void ::CheckoutManager::MainPage::InitializeComponent()
 /// <summary>
 /// Auto generated class for compiled bindings.
 /// </summary>
-class CheckoutManager::MainPage::MainPage_obj1_Bindings 
-    : public ::XamlBindingInfo::ReferenceTypeXamlBindings<::CheckoutManager::NavItem>
+class CheckoutManager::MainPage::MainPage_obj2_Bindings 
+    : public ::XamlBindingInfo::ReferenceTypeXamlBindings<::CheckoutManager::nav::NavItem, ::XamlBindingInfo::XamlBindingTrackingBase>
 {
 public:
-    MainPage_obj1_Bindings()
+    MainPage_obj2_Bindings()
     {
     }
 
@@ -42,11 +42,14 @@ public:
     {
         switch(__connectionId)
         {
-            case 2: // MainPage.xaml line 25
-                this->obj2 = safe_cast<::Windows::UI::Xaml::Controls::SymbolIcon^>(__target);
+            case 2: // MainPage.xaml line 16
+                this->obj2 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
                 break;
-            case 3: // MainPage.xaml line 26
-                this->obj3 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            case 3: // MainPage.xaml line 23
+                this->obj3 = safe_cast<::Windows::UI::Xaml::Controls::SymbolIcon^>(__target);
+                break;
+            case 4: // MainPage.xaml line 24
+                this->obj4 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 break;
         }
     }
@@ -56,36 +59,39 @@ public:
         throw ref new ::Platform::InvalidArgumentException("No unloadable elements to disconnect.");
     }
 
-    void ResetTemplate()
+    void Recycle()
     {
     }
 
-    int ProcessBindings(::Windows::UI::Xaml::Controls::ContainerContentChangingEventArgs^ args)
+    void ProcessBindings(::Platform::Object^ item, int itemIndex, int phase, int* nextPhase)
     {
-        int nextPhase = -1;
-        switch(args->Phase)
+        switch (phase)
         {
             case 0:
-                nextPhase = -1;
-                this->SetDataRoot(static_cast<::CheckoutManager::NavItem^>(args->Item));
+                *nextPhase = -1;
+                this->SetDataRoot(static_cast<::CheckoutManager::nav::NavItem^>(item));
                 if (this->_dataContextChangedToken.Value != 0)
                 {
-                    safe_cast<::Windows::UI::Xaml::FrameworkElement^>(args->ItemContainer->ContentTemplateRoot)->DataContextChanged -= this->_dataContextChangedToken;
+                    this->obj2.Resolve<::Windows::UI::Xaml::Controls::Grid>()->DataContextChanged -= this->_dataContextChangedToken;
                     this->_dataContextChangedToken.Value = 0;
                 }
                 this->_isInitialized = true;
                 break;
+            default:
+                *nextPhase = -1;
+                break;
         }
-        this->Update_((::CheckoutManager::NavItem^) args->Item, (1 << args->Phase));
-        return nextPhase;
+        this->Update_((::CheckoutManager::nav::NavItem^) item, 1 << phase);
     }
+
 private:
     // Fields for each control that has bindings.
-    ::Windows::UI::Xaml::Controls::SymbolIcon^ obj2;
-    ::Windows::UI::Xaml::Controls::TextBlock^ obj3;
+    ::Platform::WeakReference obj2;
+    ::Windows::UI::Xaml::Controls::SymbolIcon^ obj3;
+    ::Windows::UI::Xaml::Controls::TextBlock^ obj4;
 
     // Update methods for each path node used in binding steps.
-    void Update_(::CheckoutManager::NavItem^ obj, int phase)
+    void Update_(::CheckoutManager::nav::NavItem^ obj, int phase)
     {
         if (obj != nullptr)
         {
@@ -100,17 +106,29 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            // MainPage.xaml line 25
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_SymbolIcon_Symbol(this->obj2, obj);
+            // MainPage.xaml line 23
+            Set_Windows_UI_Xaml_Controls_SymbolIcon_Symbol(this->obj3, obj);
         }
     }
     void Update_Label(::Platform::String^ obj, int phase)
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            // MainPage.xaml line 26
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj3, obj, nullptr);
+            // MainPage.xaml line 24
+            Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj4, obj, nullptr);
         }
+    }
+    static void Set_Windows_UI_Xaml_Controls_SymbolIcon_Symbol(::Windows::UI::Xaml::Controls::SymbolIcon^ obj, ::Windows::UI::Xaml::Controls::Symbol value)
+    {
+        obj->Symbol = value;
+    }
+    static void Set_Windows_UI_Xaml_Controls_TextBlock_Text(::Windows::UI::Xaml::Controls::TextBlock^ obj, ::Platform::String^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = targetNullValue;
+        }
+        obj->Text = value;
     }
 };
 
@@ -118,26 +136,26 @@ void ::CheckoutManager::MainPage::Connect(int __connectionId, ::Platform::Object
 {
     switch (__connectionId)
     {
-    case 4:
+    case 5:
         {
             this->navMenu = safe_cast<::Windows::UI::Xaml::Controls::SplitView^>(__target);
         }
         break;
-    case 5:
+    case 6:
         {
-            ::Windows::UI::Xaml::Controls::Button^ element5 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-            (safe_cast<::Windows::UI::Xaml::Controls::Button^>(element5))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::MainPage::*)
+            ::Windows::UI::Xaml::Controls::Button^ element6 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::Button^>(element6))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::MainPage::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::Button_Click);
         }
         break;
-    case 6:
+    case 7:
         {
             this->navigator = safe_cast<::Windows::UI::Xaml::Controls::ListView^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::ListView^>(this->navigator))->SelectionChanged += ref new ::Windows::UI::Xaml::Controls::SelectionChangedEventHandler(this, (void (::CheckoutManager::MainPage::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::Controls::SelectionChangedEventArgs^))&MainPage::ListView_SelectionChanged);
         }
         break;
-    case 7:
+    case 8:
         {
             this->zFrame = safe_cast<::Windows::UI::Xaml::Controls::Frame^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::Frame^>(this->zFrame))->Navigated += ref new ::Windows::UI::Xaml::Navigation::NavigatedEventHandler(this, (void (::CheckoutManager::MainPage::*)
@@ -155,14 +173,15 @@ void ::CheckoutManager::MainPage::Connect(int __connectionId, ::Platform::Object
     ::XamlBindingInfo::XamlBindings^ bindings = nullptr;
     switch (__connectionId)
     {
-        case 1: // MainPage.xaml line 17
+        case 2: // MainPage.xaml line 16
             {
-                ::Windows::UI::Xaml::Controls::Grid^ element1 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
-                MainPage_obj1_Bindings* objBindings = new MainPage_obj1_Bindings();
-                objBindings->SetDataRoot(element1->DataContext);
+                ::Windows::UI::Xaml::Controls::Grid^ element2 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
+                MainPage_obj2_Bindings* objBindings = new MainPage_obj2_Bindings();
+                objBindings->SetDataRoot(element2->DataContext);
                 bindings = ref new ::XamlBindingInfo::XamlBindings(objBindings);
-                bindings->SubscribeForDataContextChanged(element1);
-                ::Windows::UI::Xaml::DataTemplate::SetExtensionInstance(element1, bindings);
+                bindings->SubscribeForDataContextChanged(element2);
+                ::Windows::UI::Xaml::DataTemplate::SetExtensionInstance(element2, bindings);
+                ::Windows::UI::Xaml::Markup::XamlBindingHelper::SetDataTemplateComponent(element2, bindings);
             }
             break;
     }

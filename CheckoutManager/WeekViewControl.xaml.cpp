@@ -226,7 +226,7 @@ void CheckoutManager::WeekViewControl::updatecalendar(CalInfo^ calz)
 				
 				if (z.duedate < endtime)
 				{
-					//__debugbreak();
+					////__debugbreak();
 					float endprop;
 					endprop = (z.duedate - z.checkoutTime) / 86400.0;
 					adding->Height = (endprop*canvasHeight);
@@ -236,7 +236,7 @@ void CheckoutManager::WeekViewControl::updatecalendar(CalInfo^ calz)
 					adding->Height = canvasHeight - top;
 				}
 				auto addingheight = adding->Height;
-				//__debugbreak();
+				////__debugbreak();
 
 				dayCanvas[izp - 1]->Children->Append(adding);
 				dayCanvas[izp - 1]->SetTop(adding, top);

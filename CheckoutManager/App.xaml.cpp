@@ -5,7 +5,8 @@
 
 #include "pch.h"
 #include "MainPage.xaml.h"
-
+#include "OOBEPage.xaml.h"
+#include "TrialExpired.xaml.h"
 using namespace CheckoutManager;
 
 using namespace Platform;
@@ -39,30 +40,51 @@ App::App()
 /// <param name="e">Details about the launch request and process.</param>
 void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEventArgs^ e)
 {
-
-    // Show graphics profiling information while debugging.
-	auto shell = dynamic_cast<MainPage^>(Window::Current->Content);
-	// Do not repeat app initialization when the Window already has content,
-	// just ensure that the window is active
-	if (shell == nullptr)
+	bool isintroed = false;
+	auto settings = Windows::Storage::ApplicationData::Current->LocalSettings;
+	if (settings->Values->HasKey("firstTimefinished"))
 	{
-		// Create a Frame to act as the navigation context and associate it with
-		// a SuspensionManager key
-		shell = ref new MainPage();
-
-		shell->AppFrame->NavigationFailed += ref new Windows::UI::Xaml::Navigation::NavigationFailedEventHandler(this, &App::OnNavigationFailed);
-
-		if (e->PreviousExecutionState == ApplicationExecutionState::Terminated)
-		{
-			// TODO: Restore the saved session state only when appropriate, scheduling the
-			// final launch steps after the restore is complete
-
-		}
-
-
+		if(static_cast<bool>(settings->Values->Lookup("firstTimefinished")))
+			isintroed = true;
 	}
-	Window::Current->Content = shell;
+	if (Windows::ApplicationModel::Store::CurrentApp::LicenseInformation->IsActive)
+	{
+		if (!isintroed)
+		{
+			if (Window::Current->Content == nullptr)
+				Window::Current->Content = ref new OOBEPage();
+		}
+		else
+		{
+			// Show graphics profiling information while debugging.
+			auto shell = dynamic_cast<MainPage^>(Window::Current->Content);
+			// Do not repeat app initialization when the Window already has content,
+			// just ensure that the window is active
+			if (shell == nullptr)
+			{
+				// Create a Frame to act as the navigation context and associate it with
+				// a SuspensionManager key
+				shell = ref new MainPage();
+
+				shell->AppFrame->NavigationFailed += ref new Windows::UI::Xaml::Navigation::NavigationFailedEventHandler(this, &App::OnNavigationFailed);
+
+				if (e->PreviousExecutionState == ApplicationExecutionState::Terminated)
+				{
+					// TODO: Restore the saved session state only when appropriate, scheduling the
+					// final launch steps after the restore is complete
+
+				}
+
+
+			}
+			Window::Current->Content = shell;
+		}
+	}
+	else {
+		Window::Current->Content = ref new TrialExpired();
+	}
 	Window::Current->Activate();
+
 }
 
 /// <summary>

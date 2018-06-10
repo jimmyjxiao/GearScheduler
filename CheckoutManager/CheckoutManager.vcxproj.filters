@@ -53,6 +53,8 @@
     <ClCompile Include="DelegateCommand.cpp">
       <Filter>CommandDelegate</Filter>
     </ClCompile>
+    <ClCompile Include="OOBEPage.xaml.cpp" />
+    <ClCompile Include="TrialExpired.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -80,6 +82,8 @@
     <ClInclude Include="DelegateCommand.h">
       <Filter>CommandDelegate</Filter>
     </ClInclude>
+    <ClInclude Include="OOBEPage.xaml.h" />
+    <ClInclude Include="TrialExpired.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png">
@@ -103,12 +107,218 @@
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
       <Filter>Assets</Filter>
     </Image>
+    <Image Include="Assets\1.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\2.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\3.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\4.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\5.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\6.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\7.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\50-logo.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\BadgeLogo.scale-100.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\BadgeLogo.scale-125.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\BadgeLogo.scale-150.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\BadgeLogo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\BadgeLogo.scale-400.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\CalPage-gif.gif">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\CalPage-gif-notrans.gif">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\CheckoutPage.PNG">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\DevicePage.PNG">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\GearScheduler-logo.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\GearScheduler-pieonly-logo.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\ID-raster.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\ID-raster-noshadow.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\LargeTile.scale-100.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\LargeTile.scale-125.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\LargeTile.scale-150.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\LargeTile.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\LargeTile.scale-400.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\logo-1920.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\MonthViewPage.PNG">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SmallTile.scale-100.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SmallTile.scale-125.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SmallTile.scale-150.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SmallTile.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SmallTile.scale-400.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.scale-100.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.scale-125.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.scale-150.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.scale-400.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.altform-unplated_targetsize-48.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.scale-100.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.scale-125.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.scale-150.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.scale-400.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-16.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-24.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-32.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-48.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-256.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square150x150Logo.scale-100.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square150x150Logo.scale-125.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square150x150Logo.scale-150.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square150x150Logo.scale-400.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.scale-100.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.scale-125.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.scale-150.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.scale-400.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Userpage.PNG">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\WeekViewPage.PNG">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Wide310x150Logo.scale-100.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Wide310x150Logo.scale-125.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Wide310x150Logo.scale-150.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Wide310x150Logo.scale-400.png">
+      <Filter>Assets</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CheckoutManager_TemporaryKey.pfx" />
+    <None Include="Assets\GearScheduler-logo.svg">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\ID.svg">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\sample.svg">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Package.StoreAssociation.xml" />
+    <None Include="CheckoutManager_StoreKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainPage.xaml" />
@@ -127,5 +337,7 @@
     <Page Include="DeviceViewPage.xaml" />
     <Page Include="TeamPage.xaml" />
     <Page Include="CheckoutPage.xaml" />
+    <Page Include="OOBEPage.xaml" />
+    <Page Include="TrialExpired.xaml" />
   </ItemGroup>
 </Project>

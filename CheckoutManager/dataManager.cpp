@@ -2,15 +2,18 @@
 #include "pch.h"
 #include "dataManager.h"
 #include <sstream>
+#include <random>
 namespace dataspace
 {
+	std::mt19937 dataManager::ran;
 	int32 dataManager::GetNewColor()
 	{
+		static std::uniform_int_distribution<int> uchannel(0, 255);
 		const uint8 A = 255;
 		uint8 R, G, B;
-		R = rand() % 255;
-		G = rand() % 255;
-		B = rand() % 255;
+		R = uchannel(ran);
+		G = uchannel(ran);
+		B = uchannel(ran);
 		uint32_t color = 0;
 		color |= A << 24;
 		color |= R << 16;
@@ -25,7 +28,7 @@ namespace dataspace
 		color |= z.R << 16;
 		color |= z.G << 8;
 		color |= z.B;
-		__debugbreak();
+		////__debugbreak();
 		return color;
 	}
 	Windows::UI::Color dataManager::inttocolor(int32 number)
@@ -35,17 +38,19 @@ namespace dataspace
 	dataManager::dataManager()
 	{
 		auto path = Windows::Storage::ApplicationData::Current->LocalFolder->Path + L"\\inventory.db";
-
+		std::random_device rd;
+		ran = std::mt19937(rd());
 		try
 		{
 			inventory = new sqlite::database((const char16_t*)path->Data());
-			*inventory << "CREATE TABLE IF NOT EXISTS 'checkouts' (`checkoutID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `teamID` tinyint, `checkedout` bit, `chktime` INTEGER NOT NULL, `typeID` tinyint, `duetime` INTEGER NOT NULL, `actchktime` INTEGER, `actreturntime` INTEGER, `returned` INTEGER); ";
+
+			*inventory << "CREATE TABLE IF NOT EXISTS 'checkouts' ( `checkoutID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `teamID` tinyint, `checkedout` bit, `chktime` INTEGER NOT NULL, `typeID` tinyint, `duetime` INTEGER NOT NULL, `actchktime` INTEGER, `actreturntime` INTEGER, `returned` INTEGER, `devicepubID` INTEGER ); ";
 			*inventory <<
-				"CREATE TABLE IF NOT EXISTS 'Teams' (`teamID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `TeamName` TEXT NOT NULL, `password` BLOB NOT NULL, `color` BLOB UNIQUE); ";
+				"CREATE TABLE IF NOT EXISTS 'Teams' (`teamID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `TeamName` TEXT NOT NULL UNIQUE, `password` BLOB NOT NULL, `color` BLOB UNIQUE)";
 			*inventory <<
-				"CREATE TABLE IF NOT EXISTS 'deviceType' (`deviceName` text NOT NULL, `typeID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `color` INTEGER); ";
+				"CREATE TABLE IF NOT EXISTS 'deviceType' ( `deviceName` text NOT NULL UNIQUE, `typeID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `color` INTEGER )";
 				*inventory <<
-				"CREATE TABLE IF NOT EXISTS 'devices' (`deviceID` INTEGER NOT NULL, `typeID` tinyint NOT NULL, `available` bit, `Currentholder` TEXT, `desc` TEXT, `PublicID` TEXT, `ForcedCheckout` INTEGER, PRIMARY KEY(`deviceID`)); ";
+				"CREATE TABLE IF NOT EXISTS 'devices' ( `deviceID` INTEGER NOT NULL, `typeID` tinyint NOT NULL, `available` bit, `Currentholder` TEXT, `desc` TEXT, `PublicID` TEXT UNIQUE, `ForcedCheckout` INTEGER, `checkoutID` INTEGER, PRIMARY KEY(`deviceID`) )";
 			getcheckoutprepnd = std::make_unique<sqlite::database_binder>(*inventory << u"SELECT Teams.TeamName, checkouts.chktime, deviceType.deviceName, checkouts.duetime, checkouts.actchktime, checkouts.actreturntime, checkouts.checkoutID, checkouts.checkedout "
 				"FROM checkouts "
 				"INNER JOIN Teams "
@@ -68,7 +73,7 @@ namespace dataspace
 			
 			auto x = z.what();
 
-			__debugbreak();
+			////__debugbreak();
 		}
 
 
@@ -88,7 +93,7 @@ namespace dataspace
 				"INNER JOIN deviceType "
 				"ON checkouts.typeID=devicetype.typeID "
 				"WHERE (? BETWEEN checkouts.chktime AND checkouts.duetime) OR (? BETWEEN checkouts.chktime AND checkouts.duetime) OR (checkouts.chktime BETWEEN ? AND ?);");
-			__debugbreak();
+			////__debugbreak();
 			/*
 			getcheckoutprepyd = &(*inventory << u"SELECT Teams.TeamName, checkouts.chktime, deviceType.deviceName, checkouts.duetime, checkouts.actchktime, checkouts.actreturntime "
 			"FROM checkouts "
@@ -103,7 +108,7 @@ namespace dataspace
 		{
 			auto x = z.what();
 
-			__debugbreak();
+			////__debugbreak();
 		}
 
 	}
@@ -128,7 +133,7 @@ namespace dataspace
 			}
 			catch (std::exception e)
 			{
-				__debugbreak();
+				////__debugbreak();
 			}
 			*inventory
 				<< u"UPDATE devices "
@@ -157,7 +162,7 @@ namespace dataspace
 		}
 		catch (std::exception e)
 		{
-			__debugbreak();
+			////__debugbreak();
 		}
 		return false;
 	}
@@ -179,7 +184,7 @@ namespace dataspace
 		}
 		catch (std::exception e)
 		{
-			__debugbreak();
+			////__debugbreak();
 		}
 	}
 
@@ -198,14 +203,14 @@ namespace dataspace
 			*inventory <<
 				u"UPDATE devices "
 				"SET available=0, CurrentHolder = ?, checkoutID = ?"
-				"WHERE publicID = ?"
+				"WHERE PublicID = ?"
 				<< checkout.Team
-				<< deviceID
-				<< checkout.checkoutID;
+				<< checkout.checkoutID
+				<< deviceID;
 		}
 		catch (std::exception e)
 		{
-			__debugbreak();
+			////__debugbreak();
 		}
 		return true;
 	}
@@ -265,7 +270,7 @@ namespace dataspace
 		}
 		catch (std::exception e)
 		{
-			__debugbreak();
+			////__debugbreak();
 		}
 		return returning;
 	}
@@ -284,7 +289,7 @@ namespace dataspace
 				>> [&](std::u16string TeamName, time_t date, std::u16string device, time_t due, time_t chkd, time_t retur, int checkoutID, int fullfilled)
 
 			{
-				//				__debugbreak();
+				//				//__debugbreak();
 				CheckoutInfo adding =
 				{
 					TeamName,
@@ -306,7 +311,7 @@ namespace dataspace
 		}
 		catch (std::exception e)
 		{
-			__debugbreak();
+			////__debugbreak();
 		}
 		getcheckoutprepnd->reset();
 
@@ -361,7 +366,7 @@ namespace dataspace
 		}
 		catch (std::exception e)
 		{
-			__debugbreak();
+			////__debugbreak();
 		}
 	}
 	std::vector<std::pair<dataManager::CheckoutInfo, int>> dataManager::getOverdueCheckouts()
@@ -378,7 +383,7 @@ namespace dataspace
 			[&](std::u16string TeamName, time_t date, std::u16string device, time_t due, time_t chkd, time_t retur, int checkoutID, int fullfilled, int deviceID)
 
 		{
-			//				__debugbreak();
+			//				//__debugbreak();
 			CheckoutInfo adding =
 			{
 				TeamName,
@@ -393,7 +398,7 @@ namespace dataspace
 			adding.actualchktime = chkd;
 			adding.actualreturntime = retur;
 			adding.fullfilled = fullfilled;
-			returning.push_back(std::make_pair(adding, deviceID));
+			returning.emplace_back(adding, deviceID);
 		};
 		return returning;
 	}
@@ -451,7 +456,7 @@ namespace dataspace
 		}
 		catch (std::exception e)
 		{
-			__debugbreak();
+			////__debugbreak();
 		}
 	}
 
@@ -491,7 +496,13 @@ namespace dataspace
 			}
 			catch (std::exception e)
 			{
-				__debugbreak();
+				int y = 0;
+				*inventory << "SELECT count(*) FROM Teams WHERE TeamName = ?;"
+					<< name
+					>> y;
+				if (y > 0)
+					throw e;
+				//__debugbreak();
 
 			}
 			
@@ -531,24 +542,27 @@ namespace dataspace
 					>> y;
 				if (y > 0)
 					throw z;
-				//__debugbreak();
+				////__debugbreak();
 			}
 		}
 
 	}
 
-	void dataManager::addDevice(std::u16string desc, std::u16string type)
+	int dataManager::addDevice(std::u16string desc, std::u16string type)
 	{
+		static std::uniform_int_distribution<int> pubIDgen(0, 999);
 		while (1)
 		{
 			try
 			{
-				*inventory <<
-					u"INSERT INTO devices (typeID, desc, PublicID, available) "
-					"VALUES ((SELECT typeID FROM deviceType WHERE deviceName = ?), ?, (SELECT abs(random()) % 999), 1)"
-					<< type
-					<< desc;
-				break;
+			int ID = pubIDgen(ran);
+			*inventory <<
+				u"INSERT INTO devices (typeID, desc, PublicID, available) "
+				"VALUES ((SELECT typeID FROM deviceType WHERE deviceName = ?), ?, ?, 1)"
+				<< type
+				<< desc
+				<< ID;
+			return ID;
 			}
 			catch (...) {};
 		}
@@ -557,7 +571,7 @@ namespace dataspace
 	bool dataManager::deleteTeam(std::u16string name)
 	{
 		*inventory <<
-			"DELETE FROM Teams"
+			"DELETE FROM Teams "
 			"WHERE TeamName = ?;"
 			<< name;
 		return false;
@@ -573,10 +587,17 @@ namespace dataspace
 
 	void dataManager::deleteDevice(int ID)
 	{
-		*inventory <<
-			"DELETE FROM devices"
-			"WHERE PublicID = ?;"
-			<< ID;
+		try
+		{
+			*inventory <<
+				"DELETE FROM devices "
+				"WHERE PublicID = ?;"
+				<< ID;
+		}
+		catch (std::exception e)
+		{
+
+		}
 	}
 
 	bool dataManager::deleteTeam(int TeamID)
@@ -602,7 +623,7 @@ namespace dataspace
 		}
 		catch (std::exception e)
 		{
-			__debugbreak();
+			////__debugbreak();
 		}
 		return count;
 	}
@@ -622,7 +643,7 @@ namespace dataspace
 		}
 		catch (std::exception e)
 		{
-			__debugbreak();
+			////__debugbreak();
 		}
 		return std::make_pair(count, deviceName);
 	}

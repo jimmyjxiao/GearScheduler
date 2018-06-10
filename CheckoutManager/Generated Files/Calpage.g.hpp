@@ -32,7 +32,7 @@ void ::CheckoutManager::Calpage::InitializeComponent()
 /// Auto generated class for compiled bindings.
 /// </summary>
 class CheckoutManager::Calpage::Calpage_obj1_Bindings 
-    : public ::XamlBindingInfo::ReferenceTypeXamlBindings<::CheckoutManager::Calpage>
+    : public ::XamlBindingInfo::ReferenceTypeXamlBindings<::CheckoutManager::Calpage, ::XamlBindingInfo::XamlBindingTrackingBase>
     , public ::XamlBindingInfo::IXamlBindingTracking
 {
 public:
@@ -69,6 +69,7 @@ public:
     {
         throw ref new ::Platform::InvalidArgumentException("No unloadable elements to disconnect.");
     }
+
 private:
     // Fields for each control that has bindings.
     ::Windows::UI::Xaml::Controls::TextBlock^ obj10;
@@ -110,7 +111,7 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED | DATA_CHANGED)) != 0)
         {
             // Calpage.xaml line 43
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj10, obj, nullptr);
+            Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj10, obj, nullptr);
         }
     }
     void Update_CurrentCalendar(::CheckoutManager::CalInfo^ obj, int phase)
@@ -118,9 +119,9 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // Calpage.xaml line 60
-            ::XamlBindingInfo::XamlBindingSetters::Set_CheckoutManager_WeekViewControl_cal(this->obj14, obj, nullptr);
+            Set_CheckoutManager_WeekViewControl_cal(this->obj14, obj, nullptr);
             // Calpage.xaml line 57
-            ::XamlBindingInfo::XamlBindingSetters::Set_CheckoutManager_MonthViewControl_cal(this->obj15, obj, nullptr);
+            Set_CheckoutManager_MonthViewControl_cal(this->obj15, obj, nullptr);
         }
     }
 
@@ -169,6 +170,30 @@ private:
         if (sender != nullptr)
         {
         }
+    }
+    static void Set_Windows_UI_Xaml_Controls_TextBlock_Text(::Windows::UI::Xaml::Controls::TextBlock^ obj, ::Platform::String^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = targetNullValue;
+        }
+        obj->Text = value;
+    }
+    static void Set_CheckoutManager_WeekViewControl_cal(::CheckoutManager::WeekViewControl^ obj, ::CheckoutManager::CalInfo^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = (::CheckoutManager::CalInfo^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::CheckoutManager::CalInfo::typeid, targetNullValue);
+        }
+        obj->cal = value;
+    }
+    static void Set_CheckoutManager_MonthViewControl_cal(::CheckoutManager::MonthViewControl^ obj, ::CheckoutManager::CalInfo^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = (::CheckoutManager::CalInfo^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::CheckoutManager::CalInfo::typeid, targetNullValue);
+        }
+        obj->cal = value;
     }
 };
 

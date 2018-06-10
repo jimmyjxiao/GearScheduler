@@ -3,12 +3,14 @@
 #include "sqlite_modern_cpp\hdr\sqlite_modern_cpp.h"
 #define ViewByTeam 1
 #define ViewByDevice 0
-
+#include <random>
 namespace dataspace
 {
 	class dataManager
 	{
 	private:
+		static std::mt19937 ran;
+
 		std::function<Windows::UI::Color(bool)> getnewcolor;
 		static int32 GetNewColor();
 
@@ -54,7 +56,7 @@ namespace dataspace
 		int addTeam(std::u16string name, std::u16string hash);
 		bool addDevicetype(std::u16string name, Windows::UI::Color color);
 		int addDevicetype(std::u16string name);
-		void addDevice(std::u16string desc, std::u16string type);
+		int addDevice(std::u16string desc, std::u16string type);
 		bool deleteTeam(std::u16string name);
 		void deleteDeviceType(std::u16string name);
 		void deleteDevice(int ID);

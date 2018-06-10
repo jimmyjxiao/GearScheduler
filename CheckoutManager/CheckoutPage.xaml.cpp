@@ -128,7 +128,7 @@ void CheckoutManager::CheckoutPage::Button_Click(Platform::Object^ sender, Windo
 				}
 				catch (std::exception e)
 				{
-					__debugbreak();
+					//__debugbreak();
 				}
 				msgstr = String::Concat(msgstr, ref new String(tmformat));
 				//tmformat = nullptr;

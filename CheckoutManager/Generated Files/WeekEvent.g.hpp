@@ -31,7 +31,7 @@ void ::CheckoutManager::WeekEvent::InitializeComponent()
 /// Auto generated class for compiled bindings.
 /// </summary>
 class CheckoutManager::WeekEvent::WeekEvent_obj1_Bindings 
-    : public ::XamlBindingInfo::ReferenceTypeXamlBindings<::CheckoutManager::WeekEvent>
+    : public ::XamlBindingInfo::ReferenceTypeXamlBindings<::CheckoutManager::WeekEvent, ::XamlBindingInfo::XamlBindingTrackingBase>
 {
 public:
     WeekEvent_obj1_Bindings()
@@ -42,124 +42,64 @@ public:
     {
         switch(__connectionId)
         {
-            case 8: // WeekEvent.xaml line 31
-                this->obj8 = safe_cast<::Windows::UI::Xaml::Controls::RelativePanel^>(__target);
+            case 2: // WeekEvent.xaml line 15
+                this->obj2 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
                 break;
-            case 9: // WeekEvent.xaml line 32
-                this->obj9 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            case 3: // WeekEvent.xaml line 18
+                this->obj3 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
                 break;
-            case 12: // WeekEvent.xaml line 41
-                this->obj12 = safe_cast<::Windows::UI::Xaml::Controls::Border^>(__target);
+            case 4: // WeekEvent.xaml line 21
+                this->obj4 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
                 break;
-            case 13: // WeekEvent.xaml line 49
-                this->obj13 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
-                // WeekEvent.xaml line 49
-                if (this->obj13 != nullptr)
-                {
-                    ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj13, this->obj13TextDeferredValue, nullptr);
-                }
+            case 5: // WeekEvent.xaml line 24
+                this->obj5 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
                 break;
-            case 14: // WeekEvent.xaml line 45
-                this->obj14 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
-                // WeekEvent.xaml line 45
-                if (this->obj14 != nullptr)
-                {
-                    ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj14, this->obj14TextDeferredValue, nullptr);
-                }
+            case 6: // WeekEvent.xaml line 27
+                this->obj6 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
                 break;
-            case 15: // WeekEvent.xaml line 39
-                this->obj15 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
+            case 13: // WeekEvent.xaml line 50
+                this->obj13 = safe_cast<::Windows::UI::Xaml::Controls::RelativePanel^>(__target);
                 break;
-            case 16: // WeekEvent.xaml line 35
-                this->obj16 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
+            case 14: // WeekEvent.xaml line 51
+                this->obj14 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                break;
+            case 17: // WeekEvent.xaml line 60
+                this->obj17 = safe_cast<::Windows::UI::Xaml::Controls::Border^>(__target);
+                break;
+            case 18: // WeekEvent.xaml line 68
+                this->obj18 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
+                break;
+            case 19: // WeekEvent.xaml line 64
+                this->obj19 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
+                break;
+            case 20: // WeekEvent.xaml line 58
+                this->obj20 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
+                break;
+            case 21: // WeekEvent.xaml line 54
+                this->obj21 = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
                 break;
         }
     }
 
     void DisconnectUnloadedObject(int connectionId)
     {
-        switch (connectionId)
-        {
-            case 12: // WeekEvent.xaml line 41
-            {
-                if (this->obj12 != nullptr)
-                {
-                    this->obj12 = nullptr;
-                }
-                this->DisconnectUnloadedObject(13);
-                this->DisconnectUnloadedObject(14);
-                break;
-            }
-            case 13: // WeekEvent.xaml line 49
-            {
-                if (this->obj13 != nullptr)
-                {
-                    this->obj13TextDeferredValue = this->obj13->Text;
-                    this->obj13 = nullptr;
-                }
-                break;
-            }
-            case 14: // WeekEvent.xaml line 45
-            {
-                if (this->obj14 != nullptr)
-                {
-                    this->obj14TextDeferredValue = this->obj14->Text;
-                    this->obj14 = nullptr;
-                }
-                break;
-            }
-            default:
-            {
-                throw ref new ::Platform::InvalidArgumentException("Invalid connectionId.");
-            }
-        }
+        throw ref new ::Platform::InvalidArgumentException("No unloadable elements to disconnect.");
     }
 
-    void UpdateUnloadedElement(int connectionId)
-    {
-        switch (connectionId)
-        {
-            case 12: // WeekEvent.xaml line 41
-            {
-                // WeekEvent.xaml line 41
-                if (this->obj12LoadDeferredValue)
-                {
-                    this->GetDataRoot()->FindName("fulfilledblock");
-                }
-                else
-                {
-                    this->GetDataRoot()->UnloadObject(this->obj12);
-                }
-                break;
-            }
-            default:
-            {
-                throw ref new ::Platform::InvalidArgumentException("Invalid connectionId.");
-            }
-        }
-    }
 private:
     // Fields for each control that has bindings.
-    ::Windows::UI::Xaml::Controls::RelativePanel^ obj8;
-    ::Windows::UI::Xaml::Controls::TextBlock^ obj9;
-    ::Windows::UI::Xaml::Controls::Border^ obj12;
-    ::Platform::Boolean obj12LoadDeferredValue;
-    ::Windows::UI::Xaml::Documents::Run^ obj13;
-    ::Platform::String^ obj13TextDeferredValue;
-    ::Windows::UI::Xaml::Documents::Run^ obj14;
-    ::Platform::String^ obj14TextDeferredValue;
-    ::Windows::UI::Xaml::Documents::Run^ obj15;
-    ::Windows::UI::Xaml::Documents::Run^ obj16;
-    std::list<int> UnloadedElementsToUpdate;
-
-    void CompleteUpdate(int phase)
-    {
-        while (!this->UnloadedElementsToUpdate.empty())
-        {
-            this->UpdateUnloadedElement(this->UnloadedElementsToUpdate.front());
-            this->UnloadedElementsToUpdate.pop_front();
-        }
-    }
+    ::Windows::UI::Xaml::Documents::Run^ obj2;
+    ::Windows::UI::Xaml::Documents::Run^ obj3;
+    ::Windows::UI::Xaml::Documents::Run^ obj4;
+    ::Windows::UI::Xaml::Documents::Run^ obj5;
+    ::Windows::UI::Xaml::Documents::Run^ obj6;
+    ::Windows::UI::Xaml::Controls::RelativePanel^ obj13;
+    ::Windows::UI::Xaml::Controls::TextBlock^ obj14;
+    ::Windows::UI::Xaml::Controls::Border^ obj17;
+    ::Windows::UI::Xaml::Documents::Run^ obj18;
+    ::Windows::UI::Xaml::Documents::Run^ obj19;
+    ::Windows::UI::Xaml::Documents::Run^ obj20;
+    ::Windows::UI::Xaml::Documents::Run^ obj21;
 
     // Update methods for each path node used in binding steps.
     void Update_(::CheckoutManager::WeekEvent^ obj, int phase)
@@ -168,95 +108,116 @@ private:
         {
             if ((phase & (NOT_PHASED | (1 << 0))) != 0)
             {
-                this->Update_background(obj->background, phase);
                 this->Update_timeStr(obj->timeStr, phase);
-                this->Update_chk(obj->chk, phase);
-                this->Update_actReturntime(obj->actReturntime, phase);
-                this->Update_actChecktime(obj->actChecktime, phase);
-                this->Update_teamStr(obj->teamStr, phase);
                 this->Update_deviceStr(obj->deviceStr, phase);
+                this->Update_teamStr(obj->teamStr, phase);
+                this->Update_actChecktime(obj->actChecktime, phase);
+                this->Update_actReturntime(obj->actReturntime, phase);
+                this->Update_background(obj->background, phase);
+                this->Update_chk(obj->chk, phase);
             }
-        }
-        this->CompleteUpdate(phase);
-    }
-    void Update_background(::Windows::UI::Xaml::Media::SolidColorBrush^ obj, int phase)
-    {
-        if((phase & ((1 << 0) | NOT_PHASED )) != 0)
-        {
-            // WeekEvent.xaml line 31
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_Panel_Background(this->obj8, obj, nullptr);
         }
     }
     void Update_timeStr(::Platform::String^ obj, int phase)
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            // WeekEvent.xaml line 32
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj9, obj, nullptr);
-        }
-    }
-    void Update_chk(::Platform::Boolean obj, int phase)
-    {
-        if((phase & ((1 << 0) | NOT_PHASED )) != 0)
-        {
-            // WeekEvent.xaml line 41
-            this->obj12LoadDeferredValue = obj;
-    
-            if (obj)
-            {
-                this->GetDataRoot()->FindName("fulfilledblock");
-            }
-            else
-            {
-                this->GetDataRoot()->UnloadObject(this->obj12);
-            }
-        }
-    }
-    void Update_actReturntime(::Platform::String^ obj, int phase)
-    {
-        if((phase & ((1 << 0) | NOT_PHASED )) != 0)
-        {
-            // WeekEvent.xaml line 49
-            if (this->obj13 != nullptr)
-            {
-                ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj13, obj, nullptr);
-            }
-            else
-            {
-                this->obj13TextDeferredValue = obj;
-            }
-        }
-    }
-    void Update_actChecktime(::Platform::String^ obj, int phase)
-    {
-        if((phase & ((1 << 0) | NOT_PHASED )) != 0)
-        {
-            // WeekEvent.xaml line 45
-            if (this->obj14 != nullptr)
-            {
-                ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj14, obj, nullptr);
-            }
-            else
-            {
-                this->obj14TextDeferredValue = obj;
-            }
-        }
-    }
-    void Update_teamStr(::Platform::String^ obj, int phase)
-    {
-        if((phase & ((1 << 0) | NOT_PHASED )) != 0)
-        {
-            // WeekEvent.xaml line 39
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj15, obj, nullptr);
+            // WeekEvent.xaml line 15
+            Set_Windows_UI_Xaml_Documents_Run_Text(this->obj2, obj, nullptr);
+            // WeekEvent.xaml line 51
+            Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj14, obj, nullptr);
         }
     }
     void Update_deviceStr(::Platform::String^ obj, int phase)
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            // WeekEvent.xaml line 35
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Documents_Run_Text(this->obj16, obj, nullptr);
+            // WeekEvent.xaml line 18
+            Set_Windows_UI_Xaml_Documents_Run_Text(this->obj3, obj, nullptr);
+            // WeekEvent.xaml line 54
+            Set_Windows_UI_Xaml_Documents_Run_Text(this->obj21, obj, nullptr);
         }
+    }
+    void Update_teamStr(::Platform::String^ obj, int phase)
+    {
+        if((phase & ((1 << 0) | NOT_PHASED )) != 0)
+        {
+            // WeekEvent.xaml line 21
+            Set_Windows_UI_Xaml_Documents_Run_Text(this->obj4, obj, nullptr);
+            // WeekEvent.xaml line 58
+            Set_Windows_UI_Xaml_Documents_Run_Text(this->obj20, obj, nullptr);
+        }
+    }
+    void Update_actChecktime(::Platform::String^ obj, int phase)
+    {
+        if((phase & ((1 << 0) | NOT_PHASED )) != 0)
+        {
+            // WeekEvent.xaml line 24
+            Set_Windows_UI_Xaml_Documents_Run_Text(this->obj5, obj, nullptr);
+            // WeekEvent.xaml line 64
+            Set_Windows_UI_Xaml_Documents_Run_Text(this->obj19, obj, nullptr);
+        }
+    }
+    void Update_actReturntime(::Platform::String^ obj, int phase)
+    {
+        if((phase & ((1 << 0) | NOT_PHASED )) != 0)
+        {
+            // WeekEvent.xaml line 27
+            Set_Windows_UI_Xaml_Documents_Run_Text(this->obj6, obj, nullptr);
+            // WeekEvent.xaml line 68
+            Set_Windows_UI_Xaml_Documents_Run_Text(this->obj18, obj, nullptr);
+        }
+    }
+    void Update_background(::Windows::UI::Xaml::Media::SolidColorBrush^ obj, int phase)
+    {
+        if((phase & ((1 << 0) | NOT_PHASED )) != 0)
+        {
+            // WeekEvent.xaml line 50
+            Set_Windows_UI_Xaml_Controls_Panel_Background(this->obj13, obj, nullptr);
+        }
+    }
+    void Update_chk(::Platform::Boolean obj, int phase)
+    {
+            if ((phase & (NOT_PHASED | (1 << 0))) != 0)
+            {
+                this->Update_chk_Cast_chk_To_Visibility(obj ? ::Windows::UI::Xaml::Visibility::Visible : ::Windows::UI::Xaml::Visibility::Collapsed, phase);
+            }
+    }
+    void Update_chk_Cast_chk_To_Visibility(::Windows::UI::Xaml::Visibility obj, int phase)
+    {
+        if((phase & ((1 << 0) | NOT_PHASED )) != 0)
+        {
+            // WeekEvent.xaml line 60
+            Set_Windows_UI_Xaml_UIElement_Visibility(this->obj17, obj);
+        }
+    }
+    static void Set_Windows_UI_Xaml_Documents_Run_Text(::Windows::UI::Xaml::Documents::Run^ obj, ::Platform::String^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = targetNullValue;
+        }
+        obj->Text = value;
+    }
+    static void Set_Windows_UI_Xaml_Controls_Panel_Background(::Windows::UI::Xaml::Controls::Panel^ obj, ::Windows::UI::Xaml::Media::Brush^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = (::Windows::UI::Xaml::Media::Brush^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Windows::UI::Xaml::Media::Brush::typeid, targetNullValue);
+        }
+        obj->Background = value;
+    }
+    static void Set_Windows_UI_Xaml_Controls_TextBlock_Text(::Windows::UI::Xaml::Controls::TextBlock^ obj, ::Platform::String^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = targetNullValue;
+        }
+        obj->Text = value;
+    }
+    static void Set_Windows_UI_Xaml_UIElement_Visibility(::Windows::UI::Xaml::UIElement^ obj, ::Windows::UI::Xaml::Visibility value)
+    {
+        obj->Visibility = value;
     }
 };
 
@@ -271,107 +232,75 @@ void ::CheckoutManager::WeekEvent::Connect(int __connectionId, ::Platform::Objec
                 (::Platform::Object^, ::Windows::UI::Xaml::Input::TappedRoutedEventArgs^))&WeekEvent::UserControl_Tapped);
         }
         break;
-    case 2:
+    case 7:
         {
-            ::Windows::UI::Xaml::Controls::MenuFlyoutItem^ element2 = safe_cast<::Windows::UI::Xaml::Controls::MenuFlyoutItem^>(__target);
-            (safe_cast<::Windows::UI::Xaml::Controls::MenuFlyoutItem^>(element2))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::WeekEvent::*)
+            ::Windows::UI::Xaml::Controls::MenuFlyoutItem^ element7 = safe_cast<::Windows::UI::Xaml::Controls::MenuFlyoutItem^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::MenuFlyoutItem^>(element7))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::WeekEvent::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WeekEvent::MenuFlyoutItem_Click);
         }
         break;
-    case 3:
+    case 8:
         {
             this->edit = safe_cast<::Windows::UI::Xaml::Controls::MenuFlyoutItem^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::MenuFlyoutItem^>(this->edit))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::WeekEvent::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WeekEvent::edit_Click);
         }
         break;
-    case 4:
+    case 9:
         {
-            ::Windows::UI::Xaml::Controls::MenuFlyoutItem^ element4 = safe_cast<::Windows::UI::Xaml::Controls::MenuFlyoutItem^>(__target);
-            (safe_cast<::Windows::UI::Xaml::Controls::MenuFlyoutItem^>(element4))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::WeekEvent::*)
+            ::Windows::UI::Xaml::Controls::MenuFlyoutItem^ element9 = safe_cast<::Windows::UI::Xaml::Controls::MenuFlyoutItem^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::MenuFlyoutItem^>(element9))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::WeekEvent::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WeekEvent::MenuFlyoutItem_Click_1);
         }
         break;
-    case 5:
+    case 10:
         {
             this->DeviceID = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(this->DeviceID))->TextChanging += ref new ::Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::Controls::TextBox^, ::Windows::UI::Xaml::Controls::TextBoxTextChangingEventArgs^>(this, (void (::CheckoutManager::WeekEvent::*)
                 (::Windows::UI::Xaml::Controls::TextBox^, ::Windows::UI::Xaml::Controls::TextBoxTextChangingEventArgs^))&WeekEvent::DeviceID_TextChanging);
         }
         break;
-    case 6:
+    case 11:
         {
             this->Password = safe_cast<::Windows::UI::Xaml::Controls::PasswordBox^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::PasswordBox^>(this->Password))->PasswordChanged += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::WeekEvent::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WeekEvent::Password_PasswordChanged);
         }
         break;
-    case 7:
+    case 12:
         {
-            ::Windows::UI::Xaml::Controls::Button^ element7 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-            (safe_cast<::Windows::UI::Xaml::Controls::Button^>(element7))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::WeekEvent::*)
+            ::Windows::UI::Xaml::Controls::Button^ element12 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::Button^>(element12))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::WeekEvent::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WeekEvent::Button_Click);
         }
         break;
-    case 8:
+    case 13:
         {
             this->mainGrid = safe_cast<::Windows::UI::Xaml::Controls::RelativePanel^>(__target);
         }
         break;
-    case 9:
+    case 14:
         {
             this->timeblock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
         }
         break;
-    case 10:
+    case 15:
         {
             this->itemblock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
         }
         break;
-    case 11:
+    case 16:
         {
             this->Userblock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
         }
         break;
-    case 12:
+    case 17:
         {
             this->fulfilledblock = safe_cast<::Windows::UI::Xaml::Controls::Border^>(__target);
         }
         break;
     }
     _contentLoaded = true;
-}
-
-void ::CheckoutManager::WeekEvent::UnloadObject(::Windows::UI::Xaml::DependencyObject^ unloadableObject)
-{
-    if (unloadableObject != nullptr)
-    {
-        // WeekEvent.xaml line 41
-        if (unloadableObject == this->fulfilledblock)
-        {
-            this->DisconnectUnloadedObject(12);
-        }
-        ::Windows::UI::Xaml::Markup::XamlMarkupHelper::UnloadObject(unloadableObject);        
-    }
-}
-
-void ::CheckoutManager::WeekEvent::DisconnectUnloadedObject(int connectionId)
-{
-    switch(connectionId)
-    {
-        case 12: // WeekEvent.xaml line 41
-        {
-            this->Bindings->DisconnectUnloadedObject(13);
-            this->Bindings->DisconnectUnloadedObject(14);
-            this->Bindings->DisconnectUnloadedObject(12);
-            this->fulfilledblock = nullptr;
-            break;
-        }
-        default:
-        {
-            throw ref new ::Platform::InvalidArgumentException("Invalid connectionId.");
-        }
-    }
 }
 
 ::Windows::UI::Xaml::Markup::IComponentConnector^ ::CheckoutManager::WeekEvent::GetBindingConnector(int __connectionId, ::Platform::Object^ __target)

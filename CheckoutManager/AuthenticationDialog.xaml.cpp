@@ -46,7 +46,7 @@ void CheckoutManager::AuthenticationDialog::ContentDialog_PrimaryButtonClick(Win
 
 void CheckoutManager::AuthenticationDialog::ContentDialog_SecondaryButtonClick(Windows::UI::Xaml::Controls::ContentDialog^ sender, Windows::UI::Xaml::Controls::ContentDialogButtonClickEventArgs^ args)
 {
-
+	Hide();
 }
 
 
@@ -102,7 +102,7 @@ void CheckoutManager::AuthenticationDialog::Button_Click(Platform::Object^ sende
 		
 	catch (Exception^ e)
 	{
-		__debugbreak();
+		////__debugbreak();
 	}
 }
 

@@ -5,7 +5,7 @@
     xmlns:local="using:CheckoutManager"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:converters="using:converters"
+    xmlns:converters="using:CheckoutManager.converters"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -15,7 +15,7 @@
         <converters:booltocolor x:Key="availconverter"/>
         <local:grouptostr x:Key="groupnameconverter"/>
         <DataTemplate x:DataType="local:device" x:Key="deviceTemplate">
-            <Grid HorizontalAlignment="Stretch" ContextRequested="Grid_ContextRequested"  Background="{x:Bind Converter={StaticResource availconverter}, Path=checkedOut, ConverterParameter=str}">
+            <Grid HorizontalAlignment="Stretch" Background="{x:Bind Converter={StaticResource availconverter}, Path=checkedOut, ConverterParameter=str}">
                 <Grid.ContextFlyout>
                     <MenuFlyout>
                         <MenuFlyoutItem Icon="Delete" Text="Delete" Click="MenuFlyoutItem_Click_1" Tag="{x:Bind deviceID}" />
@@ -60,7 +60,7 @@
             <StackPanel Padding="5">
                 <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Add Item Type"/>
                 <TextBox Header="Type Name" x:Name="typeTextbox"/>
-                <Button Content="Add Device Category" Click="AddDeviceType_Click"/>
+                <Button Content="Add Item Category" Click="AddDeviceType_Click"/>
                 <StackPanel Orientation="Horizontal" x:Name="addDeviceTypeError" Visibility="Collapsed">
                     <SymbolIcon Symbol="Important" Foreground="Red"/>
                     <TextBlock x:Name="addDeviceTypeWarning"/>

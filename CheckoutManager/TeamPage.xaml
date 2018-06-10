@@ -9,26 +9,41 @@
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch">
         <StackPanel Padding="5" Name="stack" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
-            <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Add New Person/Team:"/>
+            <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Add New User:"/>
             <TextBox Header="Name" x:Name="newTeambox"/>
             <PasswordBox x:Name="Password" PasswordChanged="Password_PasswordChanged" Header="Password:" />
             <PasswordBox x:Name="confirmpass" PasswordChanged="confirmpass_PasswordChanged" IsEnabled="False" Header="Confirm Password:"/>
-            <Button Content="Add Person/Team" Click="Button_Click" x:Name="addbutton" IsEnabled="False"/>
+            <Button Content="Add User" Click="Button_Click" x:Name="addbutton" IsEnabled="False"/>
             <StackPanel Orientation="Horizontal" x:Name="addError" Visibility="Collapsed">
                 <SymbolIcon Symbol="Important" Foreground="Red"/>
                 <TextBlock x:Name="addTypeWarning"/>
             </StackPanel>
         </StackPanel>
-        <ListView ItemsSource="{x:Bind bindTeams}" RelativePanel.Below="stack" ContextRequested="ListView_ContextRequested" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True" x:Name="teamslist">
-
-            <ListView.ItemTemplate>
+        
+        <GridView ItemsSource="{x:Bind bindTeams}" RelativePanel.Below="stack" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" x:Name="teamslist">
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapGrid Orientation="Vertical"  />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </GridView.ItemContainerStyle>
+            <GridView.ItemTemplate>
                 <DataTemplate x:DataType="local:Team">
-                    
-                     <TextBlock Text="{x:Bind teamName}" Foreground="{x:Bind color}"/>
-
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="48"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{x:Bind teamName}" Foreground="{x:Bind color}" HorizontalAlignment="Stretch"  TextWrapping="NoWrap" Width="200" VerticalAlignment="Center"/>
+                        <AppBarButton Icon="Delete" Width="48" Height="48" Grid.Column="1" Tag="{x:Bind teamName}" Click="AppBarButton_Click"/>
+                    </Grid>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </GridView.ItemTemplate>
+        </GridView>
 
     </RelativePanel>
 </Page>

@@ -31,7 +31,7 @@
 
                 <Button Content="Schedule Checkout" Click="Button_Click" VerticalAlignment="Stretch" />
                 <AppBarSeparator VerticalAlignment="Center"/>
-                <RadioButton GroupName="devteamview" Content="View By Device" Tag="dev" Checked="RadioButton_Checked" VerticalAlignment="Center" x:Name="devradio"/>
+                <RadioButton GroupName="devteamview" Content="View By Item" Tag="dev" Checked="RadioButton_Checked" VerticalAlignment="Center" x:Name="devradio"/>
                 <RadioButton GroupName="devteamview" Content="View By User" Margin="3,0,0,0" Tag="team" Checked="RadioButton_Checked" VerticalAlignment="Center"/>
                  <StackPanel Visibility="Collapsed" x:Name="weekTools" Orientation="Horizontal" VerticalAlignment="Center">
                         <AppBarSeparator VerticalAlignment="Center"/>

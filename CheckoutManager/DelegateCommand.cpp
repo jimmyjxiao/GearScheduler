@@ -15,7 +15,7 @@
 \***************************************************************************/
 #include "pch.h"
 #include "DelegateCommand.h"
-using namespace CommandDelegate;
+using namespace CheckoutManager::CommandDelegate;
 
 DelegateCommand::DelegateCommand(ExecuteDelegate^ execute, CanExecuteDelegate^ canExecute)
 	: executeDelegate(execute), canExecuteDelegate(canExecute)

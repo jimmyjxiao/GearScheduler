@@ -9,6 +9,7 @@
 #include "WeekViewControl.xaml.h"
 #include "MonthViewControl.h"
 #include "AddCheckout.xaml.h"
+using namespace Windows::UI::Xaml::Media::Imaging;
 namespace CheckoutManager
 {
 	/// <summary>
@@ -19,7 +20,8 @@ namespace CheckoutManager
 	public ref class Calpage sealed
 	{
 	public:
-		
+
+
 		Calpage();
 		property CalInfo^ CurrentCalendar
 		{

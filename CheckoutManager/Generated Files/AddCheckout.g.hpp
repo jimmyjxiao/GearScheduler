@@ -30,62 +30,62 @@ void ::CheckoutManager::AddCheckout::Connect(int __connectionId, ::Platform::Obj
 {
     switch (__connectionId)
     {
-    case 1:
+    case 2:
         {
             this->teamSelector = safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(this->teamSelector))->SelectionChanged += ref new ::Windows::UI::Xaml::Controls::SelectionChangedEventHandler(this, (void (::CheckoutManager::AddCheckout::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::Controls::SelectionChangedEventArgs^))&AddCheckout::teamSelector_SelectionChanged);
         }
         break;
-    case 2:
+    case 3:
         {
             this->devicepicker = safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(this->devicepicker))->SelectionChanged += ref new ::Windows::UI::Xaml::Controls::SelectionChangedEventHandler(this, (void (::CheckoutManager::AddCheckout::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::Controls::SelectionChangedEventArgs^))&AddCheckout::teamSelector_SelectionChanged);
         }
         break;
-    case 3:
+    case 4:
         {
             this->returnDate = safe_cast<::Windows::UI::Xaml::Controls::CalendarDatePicker^>(__target);
         }
         break;
-    case 4:
+    case 5:
         {
             this->returnTime = safe_cast<::Windows::UI::Xaml::Controls::TimePicker^>(__target);
         }
         break;
-    case 5:
+    case 6:
         {
             this->startDate = safe_cast<::Windows::UI::Xaml::Controls::CalendarDatePicker^>(__target);
         }
         break;
-    case 6:
+    case 7:
         {
             this->startTime = safe_cast<::Windows::UI::Xaml::Controls::TimePicker^>(__target);
         }
         break;
-    case 7:
+    case 8:
         {
             this->sameDay = safe_cast<::Windows::UI::Xaml::Controls::ToggleSwitch^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::ToggleSwitch^>(this->sameDay))->Toggled += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::AddCheckout::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&AddCheckout::sameDay_Toggled);
         }
         break;
-    case 8:
+    case 9:
         {
             this->savebutton = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(this->savebutton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::AddCheckout::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&AddCheckout::AppBarButton_Click);
         }
         break;
-    case 9:
+    case 10:
         {
             this->deleteButton = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(this->deleteButton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::AddCheckout::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&AddCheckout::deleteButton_Click);
         }
         break;
-    case 10:
+    case 11:
         {
             this->CloseButton = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(this->CloseButton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::AddCheckout::*)

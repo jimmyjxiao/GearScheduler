@@ -3,7 +3,8 @@
 #include "pch.h"
 #include "converters.h"
 #include <cwctype>
-using namespace converters;
+
+using namespace CheckoutManager::converters;
 
 using namespace Platform;
 using namespace Windows::Foundation;
@@ -31,12 +32,12 @@ Object^ BooleanToVisibilityConverter::ConvertBack(Object^ value, TypeName target
 	return (visibility != nullptr && visibility->Value == Visibility::Visible);
 }
 
-time_t converters::FoundationtoStdtime(const Windows::Foundation::DateTime* in)
+time_t CheckoutManager::converters::FoundationtoStdtime(const Windows::Foundation::DateTime* in)
 {
 	return (const time_t)((in->UniversalTime - 116444736000000000ULL) / 10000000);
 }
 
-void converters::textchangedNumberfilter(Windows::UI::Xaml::Controls::TextBox ^ sender, Windows::UI::Xaml::Controls::TextBoxTextChangingEventArgs ^ args)
+void CheckoutManager::converters::textchangedNumberfilter(Windows::UI::Xaml::Controls::TextBox ^ sender, Windows::UI::Xaml::Controls::TextBoxTextChangingEventArgs ^ args)
 {
 
 	
@@ -46,7 +47,7 @@ void converters::textchangedNumberfilter(Windows::UI::Xaml::Controls::TextBox ^ 
 
 }
 
-std::wstring converters::shortDatetime(time_t time)
+std::wstring CheckoutManager::converters::shortDatetime(time_t time)
 {
 	wchar_t buf[80]; //inefficient, but who cares;
 	wcsftime(buf, 80, L"%D %I:%M%p", localtime(&time));

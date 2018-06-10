@@ -9,26 +9,41 @@
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch">
         <StackPanel x:ConnectionId='2' Padding="5" Name="stack" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
-            <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Add New Person/Team:"/>
-            <TextBox x:ConnectionId='5' Header="Name" x:Name="newTeambox"/>
-            <PasswordBox x:ConnectionId='6' x:Name="Password"                                            Header="Password:" />
-            <PasswordBox x:ConnectionId='7' x:Name="confirmpass"                                               IsEnabled="False" Header="Confirm Password:"/>
-            <Button x:ConnectionId='8' Content="Add Person/Team"                      x:Name="addbutton" IsEnabled="False"/>
-            <StackPanel x:ConnectionId='9' Orientation="Horizontal" x:Name="addError" Visibility="Collapsed">
+            <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Add New User:"/>
+            <TextBox x:ConnectionId='7' Header="Name" x:Name="newTeambox"/>
+            <PasswordBox x:ConnectionId='8' x:Name="Password"                                            Header="Password:" />
+            <PasswordBox x:ConnectionId='9' x:Name="confirmpass"                                               IsEnabled="False" Header="Confirm Password:"/>
+            <Button x:ConnectionId='10' Content="Add User"                      x:Name="addbutton" IsEnabled="False"/>
+            <StackPanel x:ConnectionId='11' Orientation="Horizontal" x:Name="addError" Visibility="Collapsed">
                 <SymbolIcon Symbol="Important" Foreground="Red"/>
-                <TextBlock x:ConnectionId='10' x:Name="addTypeWarning"/>
+                <TextBlock x:ConnectionId='12' x:Name="addTypeWarning"/>
             </StackPanel>
         </StackPanel>
-        <ListView x:ConnectionId='3'                                  RelativePanel.Below="stack"                                              RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True" x:Name="teamslist">
-
-            <ListView.ItemTemplate>
+        
+        <GridView x:ConnectionId='3'                                  RelativePanel.Below="stack" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" x:Name="teamslist">
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapGrid Orientation="Vertical"  />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </GridView.ItemContainerStyle>
+            <GridView.ItemTemplate>
                 <DataTemplate                        >
-                    
-                     <TextBlock x:ConnectionId='4'                                                     />
-
+                    <Grid x:ConnectionId='4'>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="48"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:ConnectionId='5'                                                      HorizontalAlignment="Stretch"  TextWrapping="NoWrap" Width="200" VerticalAlignment="Center"/>
+                        <AppBarButton x:ConnectionId='6' Icon="Delete" Width="48" Height="48" Grid.Column="1"                                                   />
+                    </Grid>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </GridView.ItemTemplate>
+        </GridView>
 
     </RelativePanel>
 </Page>

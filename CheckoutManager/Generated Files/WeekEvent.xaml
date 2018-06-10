@@ -1,0 +1,75 @@
+﻿<UserControl x:ConnectionId='1'
+    x:Class="CheckoutManager.WeekEvent"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CheckoutManager"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+                               >
+    <ToolTipService.ToolTip>
+        <ToolTip>
+            <TextBlock>
+                <Run x:ConnectionId='2'                        />
+                <LineBreak/>
+                <Run Text="Item: "/>
+                <Run x:ConnectionId='3'                          />
+                <LineBreak/>
+                <Run Text="User: "/>
+                <Run x:ConnectionId='4'                        />
+                <LineBreak/>
+                <Run Text="Checked Out:"/>
+                <Run x:ConnectionId='5'                             />
+                <LineBreak/>
+                <Run Text="Returned: "/>
+                <Run x:ConnectionId='6'                              />
+            </TextBlock>
+        </ToolTip>
+    </ToolTipService.ToolTip>
+    <UserControl.ContextFlyout>
+        <MenuFlyout>
+            <MenuFlyoutItem x:ConnectionId='7' Text="Hide"                              />
+            <MenuFlyoutSeparator/>
+            <MenuFlyoutItem x:ConnectionId='8' Text="Edit" Name="edit"                   />
+            <MenuFlyoutItem x:ConnectionId='9' Text="Delete"                               />
+        </MenuFlyout>
+    </UserControl.ContextFlyout>
+    <FlyoutBase.AttachedFlyout>
+        <Flyout>
+            <StackPanel>
+                <TextBox x:ConnectionId='10' Header="ItemID:" InputScope="Digits" x:Name="DeviceID"                                     />
+                <PasswordBox x:ConnectionId='11' x:Name="Password" Header="Password:"                                           />
+                <Button x:ConnectionId='12' Content="Checkout"                     />
+
+            </StackPanel>
+        </Flyout>
+    </FlyoutBase.AttachedFlyout>
+    
+    <RelativePanel x:ConnectionId='13'                                  x:Name="mainGrid"  BorderBrush="Black" BorderThickness="4">
+        <TextBlock x:ConnectionId='14' Name="timeblock"                         FontWeight="Bold" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+        <TextBlock x:ConnectionId='15' Name="itemblock" RelativePanel.Below="timeblock">
+            <Run Text="Item: "/>
+            <Run x:ConnectionId='21'                          />
+        </TextBlock>
+        <TextBlock x:ConnectionId='16' RelativePanel.Below="itemblock" Name="Userblock">
+            <Run Text="User: "/>
+            <Run x:ConnectionId='20'                        />
+        </TextBlock>
+        <Border x:ConnectionId='17' RelativePanel.Below="Userblock"                           x:Name="fulfilledblock" BorderBrush="Black" BorderThickness="0,2,0,0" RelativePanel.AlignLeftWithPanel="True"  RelativePanel.AlignRightWithPanel="True">
+            <StackPanel>
+                <TextBlock>
+                    <Run Text="Checked Out:"/>
+                    <Run x:ConnectionId='19'                             />
+                </TextBlock>
+                <TextBlock>
+                    <Run Text="Returned:"/>
+                    <Run x:ConnectionId='18'                              />
+                </TextBlock>
+            </StackPanel>
+        </Border>
+    </RelativePanel>
+ 
+</UserControl>
+

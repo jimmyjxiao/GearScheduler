@@ -248,7 +248,7 @@ void CheckoutManager::AddCheckout::AppBarButton_Click(Platform::Object^ sender, 
 					}
 					catch (std::exception e)
 					{
-						__debugbreak();
+						//__debugbreak();
 					}
 					msgstr = String::Concat(msgstr, StringReference(tmformat));
 					//tmformat = nullptr;

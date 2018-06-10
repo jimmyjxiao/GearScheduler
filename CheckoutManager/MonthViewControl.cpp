@@ -74,14 +74,14 @@ void CheckoutManager::MonthViewControl::CalendarView_CalendarViewDayItemChanging
 				}
 				catch (Platform::Exception^ e)
 				{
-					__debugbreak();
+					//__debugbreak();
 				}
 			}
 		});
 	}
 	catch (Platform::Exception^ e)
 	{
-		__debugbreak();
+		//__debugbreak();
 	}
 
 }

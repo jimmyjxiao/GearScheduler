@@ -5,7 +5,7 @@
 
 #include "pch.h"
 #include "TeamPage.xaml.h"
-
+#include "AuthenticationDialog.xaml.h"
 using namespace CheckoutManager;
 
 using namespace Platform;
@@ -32,8 +32,16 @@ void CheckoutManager::TeamPage::Button_Click(Platform::Object^ sender, Windows::
 {
 	auto newteam = ref new Team();
 	newteam->teamName = newTeambox->Text;
-	newteam->color = ref new Windows::UI::Xaml::Media::SolidColorBrush(dataspace::dataManager::inttocolor(data->addTeam((const char16_t*)newTeambox->Text->Data(), (const char16_t*)confirmpass->Password->Data()))); //implement password hashing function later. Not really necessary right now; who's gonna bother to hack this?
-	teamvec->Append(newteam);
+	try
+	{
+		newteam->color = ref new Windows::UI::Xaml::Media::SolidColorBrush(dataspace::dataManager::inttocolor(data->addTeam((const char16_t*)newTeambox->Text->Data(), (const char16_t*)confirmpass->Password->Data()))); //implement password hashing function later. Not really necessary right now; who's gonna bother to hack this?
+		teamvec->Append(newteam);
+	}
+	catch (sqlite::exceptions::constraint)
+	{
+		Windows::UI::Popups::MessageDialog("Username Already in Use.").ShowAsync();
+	}
+
 }
 Windows::Foundation::Collections::IVector<Team^>^ CheckoutManager::TeamPage::bindTeams::get()
 {
@@ -77,4 +85,26 @@ void CheckoutManager::TeamPage::ListView_ContextRequested(Windows::UI::Xaml::UIE
 	//Platform::String^ dighe = teamslist->Items->GetAt(1)->GetType()->FullName;
 	//__debugbreak();
 
+}
+
+
+
+
+void CheckoutManager::TeamPage::AppBarButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	Platform::String^ teamName = (Platform::String^)(((Windows::UI::Xaml::Controls::AppBarButton^)sender)->Tag);
+	AuthenticationDialog^ auth = ref new AuthenticationDialog(ref new Platform::Collections::Vector<Platform::String^>({ teamName }), data);
+	auth->Authenticated += ref new CheckoutManager::AuthSucesshandler([teamName,this](Platform::String^ user, Windows::UI::Xaml::Controls::ContentDialogButtonClickDeferral^ def) {
+		database->deleteTeam((const char16_t*)teamName->Data());
+		auto it = std::remove_if(Windows::Foundation::Collections::begin(bindTeams), Windows::Foundation::Collections::end(bindTeams), [teamName](Team^ z) {
+			return z->teamName->Equals(teamName);
+		});
+		if (it != Windows::Foundation::Collections::end(bindTeams))
+		{
+			bindTeams->RemoveAtEnd();
+		}
+		
+		def->Complete();
+	});
+	auth->ShowAsync();
 }

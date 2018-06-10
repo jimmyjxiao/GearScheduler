@@ -5,9 +5,8 @@
 // If you are reading this code right now I am so sorry. I know it's a huge steaming pile of shit.
 #include "pch.h"
 #include "MainPage.xaml.h"
-
 using namespace CheckoutManager;
-
+using namespace CheckoutManager::nav;
 using namespace Platform;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
@@ -43,7 +42,9 @@ MainPage::MainPage()
 	//navigator->SelectedIndex = 0;
 	//auto container = (Windows::UI::Xaml::Controls::ListViewItem^)navigator->ContainerFromIndex(0);
 	//container->IsSelected = false;
-
+	//zFrame->Navigate(OOBE::typeid);
+	//OOBEDialog^ zeig = ref new OOBEDialog();
+	//zeig->ShowAsync();
 }
 
 Windows::UI::Xaml::Controls::Frame^ CheckoutManager::MainPage::AppFrame::get()
@@ -77,7 +78,7 @@ void CheckoutManager::MainPage::Button_Click(Platform::Object^ sender, Windows::
 	auto formatter = ref new Windows::Globalization::DateTimeFormatting::DateTimeFormatter(L"longdate shorttime");
 	auto str = formatter->Template;
 	auto formated = formatter->Format(reftm->GetDateTime());
-	__debugbreak();
+	//__debugbreak();
 	*/
 
 }
@@ -95,7 +96,7 @@ void CheckoutManager::MainPage::ListView_SelectionChanged(Platform::Object^ send
 	zFrame->Navigate(topage->destPage);
 }
 
-CheckoutManager::NavItem::NavItem(Platform::Type ^ page, Platform::String ^ label, Windows::UI::Xaml::Controls::Symbol sym)
+CheckoutManager::nav::NavItem::NavItem(Platform::Type ^ page, Platform::String ^ label, Windows::UI::Xaml::Controls::Symbol sym)
 {
 	destPage = page;
 	Label = label;
@@ -115,6 +116,6 @@ void CheckoutManager::MainPage::zFrame_Navigated(Platform::Object^ sender, Windo
 	/*auto newpage = (Platform::Type^)(dynamic_cast<Windows::UI::Xaml::Controls::Frame^>(sender)->SourcePageType);
 	auto tn = AddCheckout::typeid;
 	if (newpage == tn)
-		__debugbreak();*/
+		//__debugbreak();*/
 	
 }

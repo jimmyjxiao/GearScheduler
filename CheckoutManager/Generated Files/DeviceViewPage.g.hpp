@@ -31,7 +31,7 @@ void ::CheckoutManager::DeviceViewPage::InitializeComponent()
 /// Auto generated class for compiled bindings.
 /// </summary>
 class CheckoutManager::DeviceViewPage::DeviceViewPage_obj3_Bindings 
-    : public ::XamlBindingInfo::ValueTypeXamlBindings<::CheckoutManager::device>
+    : public ::XamlBindingInfo::ValueTypeXamlBindings<::CheckoutManager::device, ::XamlBindingInfo::XamlBindingTrackingBase>
 {
             ::Windows::UI::Xaml::ResourceDictionary^ localResources;
             ::Platform::WeakReference converterLookupRoot;
@@ -67,28 +67,29 @@ public:
         throw ref new ::Platform::InvalidArgumentException("No unloadable elements to disconnect.");
     }
 
-    void ResetTemplate()
+    void Recycle()
     {
     }
 
-    int ProcessBindings(::Windows::UI::Xaml::Controls::ContainerContentChangingEventArgs^ args)
+    void ProcessBindings(::Platform::Object^ item, int itemIndex, int phase, int* nextPhase)
     {
-        int nextPhase = -1;
-        switch(args->Phase)
+        switch (phase)
         {
             case 0:
-                nextPhase = -1;
-                this->SetDataRoot(static_cast<::CheckoutManager::device>(args->Item));
+                *nextPhase = -1;
+                this->SetDataRoot(static_cast<::CheckoutManager::device>(item));
                 if (this->_dataContextChangedToken.Value != 0)
                 {
-                    safe_cast<::Windows::UI::Xaml::FrameworkElement^>(args->ItemContainer->ContentTemplateRoot)->DataContextChanged -= this->_dataContextChangedToken;
+                    this->obj3.Resolve<::Windows::UI::Xaml::Controls::Grid>()->DataContextChanged -= this->_dataContextChangedToken;
                     this->_dataContextChangedToken.Value = 0;
                 }
                 this->_isInitialized = true;
                 break;
+            default:
+                *nextPhase = -1;
+                break;
         }
-        this->Update_((::CheckoutManager::device) args->Item, (1 << args->Phase));
-        return nextPhase;
+        this->Update_((::CheckoutManager::device) item, 1 << phase);
     }
 
     void SetConverterLookupRoot(::Windows::UI::Xaml::FrameworkElement^ rootElement)
@@ -132,7 +133,7 @@ private:
             // DeviceViewPage.xaml line 18
             if (this->obj3 != nullptr)
             {
-                ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_Panel_Background(this->obj3.Resolve<::Windows::UI::Xaml::Controls::Grid>(), safe_cast<::Windows::UI::Xaml::Media::Brush^>(this->LookupConverter("availconverter")->Convert(obj, ::Windows::UI::Xaml::Media::Brush::typeid, "str", nullptr)), nullptr);
+                Set_Windows_UI_Xaml_Controls_Panel_Background(this->obj3.Resolve<::Windows::UI::Xaml::Controls::Grid>(), safe_cast<::Windows::UI::Xaml::Media::Brush^>(this->LookupConverter("availconverter")->Convert(obj, ::Windows::UI::Xaml::Media::Brush::typeid, "str", nullptr)), nullptr);
             }
         }
     }
@@ -141,9 +142,9 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // DeviceViewPage.xaml line 21
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_FrameworkElement_Tag(this->obj4, obj, nullptr);
+            Set_Windows_UI_Xaml_FrameworkElement_Tag(this->obj4, obj, nullptr);
             // DeviceViewPage.xaml line 36
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj5, obj.ToString(), nullptr);
+            Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj5, obj.ToString(), nullptr);
         }
     }
     void Update_currentRentee(::Platform::String^ obj, int phase)
@@ -151,7 +152,7 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // DeviceViewPage.xaml line 33
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj6, obj, nullptr);
+            Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj6, obj, nullptr);
         }
     }
     void Update_description(::Platform::String^ obj, int phase)
@@ -159,8 +160,32 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // DeviceViewPage.xaml line 30
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj7, obj, nullptr);
+            Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj7, obj, nullptr);
         }
+    }
+    static void Set_Windows_UI_Xaml_Controls_Panel_Background(::Windows::UI::Xaml::Controls::Panel^ obj, ::Windows::UI::Xaml::Media::Brush^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = (::Windows::UI::Xaml::Media::Brush^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Windows::UI::Xaml::Media::Brush::typeid, targetNullValue);
+        }
+        obj->Background = value;
+    }
+    static void Set_Windows_UI_Xaml_FrameworkElement_Tag(::Windows::UI::Xaml::FrameworkElement^ obj, ::Platform::Object^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = (::Platform::Object^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Platform::Object::typeid, targetNullValue);
+        }
+        obj->Tag = value;
+    }
+    static void Set_Windows_UI_Xaml_Controls_TextBlock_Text(::Windows::UI::Xaml::Controls::TextBlock^ obj, ::Platform::String^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = targetNullValue;
+        }
+        obj->Text = value;
     }
 };
 
@@ -168,7 +193,7 @@ private:
 /// Auto generated class for compiled bindings.
 /// </summary>
 class CheckoutManager::DeviceViewPage::DeviceViewPage_obj9_Bindings 
-    : public ::XamlBindingInfo::ReferenceTypeXamlBindings<::CheckoutManager::devicesGroup>
+    : public ::XamlBindingInfo::ReferenceTypeXamlBindings<::CheckoutManager::devicesGroup, ::XamlBindingInfo::XamlBindingTrackingBase>
 {
 public:
     DeviceViewPage_obj9_Bindings()
@@ -193,29 +218,31 @@ public:
         throw ref new ::Platform::InvalidArgumentException("No unloadable elements to disconnect.");
     }
 
-    void ResetTemplate()
+    void Recycle()
     {
     }
 
-    int ProcessBindings(::Windows::UI::Xaml::Controls::ContainerContentChangingEventArgs^ args)
+    void ProcessBindings(::Platform::Object^ item, int itemIndex, int phase, int* nextPhase)
     {
-        int nextPhase = -1;
-        switch(args->Phase)
+        switch (phase)
         {
             case 0:
-                nextPhase = -1;
-                this->SetDataRoot(static_cast<::CheckoutManager::devicesGroup^>(args->Item));
+                *nextPhase = -1;
+                this->SetDataRoot(static_cast<::CheckoutManager::devicesGroup^>(item));
                 if (this->_dataContextChangedToken.Value != 0)
                 {
-                    safe_cast<::Windows::UI::Xaml::FrameworkElement^>(args->ItemContainer->ContentTemplateRoot)->DataContextChanged -= this->_dataContextChangedToken;
+                    this->obj9.Resolve<::Windows::UI::Xaml::Controls::TextBlock>()->DataContextChanged -= this->_dataContextChangedToken;
                     this->_dataContextChangedToken.Value = 0;
                 }
                 this->_isInitialized = true;
                 break;
+            default:
+                *nextPhase = -1;
+                break;
         }
-        this->Update_((::CheckoutManager::devicesGroup^) args->Item, (1 << args->Phase));
-        return nextPhase;
+        this->Update_((::CheckoutManager::devicesGroup^) item, 1 << phase);
     }
+
 private:
     // Fields for each control that has bindings.
     ::Platform::WeakReference obj9;
@@ -241,7 +268,7 @@ private:
             // DeviceViewPage.xaml line 85
             if (this->obj9 != nullptr)
             {
-                ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj9.Resolve<::Windows::UI::Xaml::Controls::TextBlock>(), obj, nullptr);
+                Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj9.Resolve<::Windows::UI::Xaml::Controls::TextBlock>(), obj, nullptr);
             }
         }
     }
@@ -252,7 +279,7 @@ private:
             // DeviceViewPage.xaml line 85
             if (this->obj9 != nullptr)
             {
-                ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Foreground(this->obj9.Resolve<::Windows::UI::Xaml::Controls::TextBlock>(), obj, nullptr);
+                Set_Windows_UI_Xaml_Controls_TextBlock_Foreground(this->obj9.Resolve<::Windows::UI::Xaml::Controls::TextBlock>(), obj, nullptr);
             }
         }
     }
@@ -261,8 +288,32 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // DeviceViewPage.xaml line 88
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_MenuFlyoutItem_Command(this->obj10, obj, nullptr);
+            Set_Windows_UI_Xaml_Controls_MenuFlyoutItem_Command(this->obj10, obj, nullptr);
         }
+    }
+    static void Set_Windows_UI_Xaml_Controls_TextBlock_Text(::Windows::UI::Xaml::Controls::TextBlock^ obj, ::Platform::String^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = targetNullValue;
+        }
+        obj->Text = value;
+    }
+    static void Set_Windows_UI_Xaml_Controls_TextBlock_Foreground(::Windows::UI::Xaml::Controls::TextBlock^ obj, ::Windows::UI::Xaml::Media::Brush^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = (::Windows::UI::Xaml::Media::Brush^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Windows::UI::Xaml::Media::Brush::typeid, targetNullValue);
+        }
+        obj->Foreground = value;
+    }
+    static void Set_Windows_UI_Xaml_Controls_MenuFlyoutItem_Command(::Windows::UI::Xaml::Controls::MenuFlyoutItem^ obj, ::Windows::UI::Xaml::Input::ICommand^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = (::Windows::UI::Xaml::Input::ICommand^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Windows::UI::Xaml::Input::ICommand::typeid, targetNullValue);
+        }
+        obj->Command = value;
     }
 };
 
@@ -270,7 +321,7 @@ private:
 /// Auto generated class for compiled bindings.
 /// </summary>
 class CheckoutManager::DeviceViewPage::DeviceViewPage_obj1_Bindings 
-    : public ::XamlBindingInfo::ReferenceTypeXamlBindings<::CheckoutManager::DeviceViewPage>
+    : public ::XamlBindingInfo::ReferenceTypeXamlBindings<::CheckoutManager::DeviceViewPage, ::XamlBindingInfo::XamlBindingTrackingBase>
 {
 public:
     DeviceViewPage_obj1_Bindings()
@@ -297,6 +348,7 @@ public:
     {
         throw ref new ::Platform::InvalidArgumentException("No unloadable elements to disconnect.");
     }
+
 private:
     // Fields for each control that has bindings.
     ::Windows::UI::Xaml::Data::CollectionViewSource^ obj2;
@@ -320,9 +372,9 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // DeviceViewPage.xaml line 12
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Data_CollectionViewSource_Source(this->obj2, obj, nullptr);
+            Set_Windows_UI_Xaml_Data_CollectionViewSource_Source(this->obj2, obj, nullptr);
             // DeviceViewPage.xaml line 52
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_ItemsControl_ItemsSource(this->obj15, obj, nullptr);
+            Set_Windows_UI_Xaml_Controls_ItemsControl_ItemsSource(this->obj15, obj, nullptr);
         }
     }
     void Update_devicesGrouped(::Windows::UI::Xaml::Data::CollectionViewSource^ obj, int phase)
@@ -340,8 +392,24 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // DeviceViewPage.xaml line 74
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_ItemsControl_ItemsSource(this->obj8, obj, nullptr);
+            Set_Windows_UI_Xaml_Controls_ItemsControl_ItemsSource(this->obj8, obj, nullptr);
         }
+    }
+    static void Set_Windows_UI_Xaml_Data_CollectionViewSource_Source(::Windows::UI::Xaml::Data::CollectionViewSource^ obj, ::Platform::Object^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = (::Platform::Object^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Platform::Object::typeid, targetNullValue);
+        }
+        obj->Source = value;
+    }
+    static void Set_Windows_UI_Xaml_Controls_ItemsControl_ItemsSource(::Windows::UI::Xaml::Controls::ItemsControl^ obj, ::Platform::Object^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = (::Platform::Object^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Platform::Object::typeid, targetNullValue);
+        }
+        obj->ItemsSource = value;
     }
 };
 
@@ -352,13 +420,6 @@ void ::CheckoutManager::DeviceViewPage::Connect(int __connectionId, ::Platform::
     case 2:
         {
             this->devicesGrouped = safe_cast<::Windows::UI::Xaml::Data::CollectionViewSource^>(__target);
-        }
-        break;
-    case 3:
-        {
-            ::Windows::UI::Xaml::Controls::Grid^ element3 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
-            (safe_cast<::Windows::UI::Xaml::Controls::Grid^>(element3))->ContextRequested += ref new ::Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::UIElement^, ::Windows::UI::Xaml::Input::ContextRequestedEventArgs^>(this, (void (::CheckoutManager::DeviceViewPage::*)
-                (::Windows::UI::Xaml::UIElement^, ::Windows::UI::Xaml::Input::ContextRequestedEventArgs^))&DeviceViewPage::Grid_ContextRequested);
         }
         break;
     case 4:
@@ -452,6 +513,7 @@ void ::CheckoutManager::DeviceViewPage::Connect(int __connectionId, ::Platform::
                 bindings = ref new ::XamlBindingInfo::XamlBindings(objBindings);
                 bindings->SubscribeForDataContextChanged(element3);
                 ::Windows::UI::Xaml::DataTemplate::SetExtensionInstance(element3, bindings);
+                ::Windows::UI::Xaml::Markup::XamlBindingHelper::SetDataTemplateComponent(element3, bindings);
             }
             break;
         case 9: // DeviceViewPage.xaml line 85
@@ -462,6 +524,7 @@ void ::CheckoutManager::DeviceViewPage::Connect(int __connectionId, ::Platform::
                 bindings = ref new ::XamlBindingInfo::XamlBindings(objBindings);
                 bindings->SubscribeForDataContextChanged(element9);
                 ::Windows::UI::Xaml::DataTemplate::SetExtensionInstance(element9, bindings);
+                ::Windows::UI::Xaml::Markup::XamlBindingHelper::SetDataTemplateComponent(element9, bindings);
             }
             break;
     }

@@ -83,7 +83,7 @@ Windows::Foundation::Collections::IVector<devicesGroup^>^ CheckoutManager::Devic
 				devtype->key = ref new Platform::String((const wchar_t*)z.first.c_str());
 				devtype->color = ref new Windows::UI::Xaml::Media::SolidColorBrush(z.second);
 				auto treetype = devtype->ToString();
-				//__debugbreak();
+				////__debugbreak();
 				//devtype->color = ref new Windows::UI::Xaml::Media::SolidColorBrush(Windows::UI::Colors::Red);
 				devtype->devices = ref new Platform::Collections::Vector<device, deviceEqual>();
 				auto range = v.equal_range(z.first);
@@ -111,7 +111,7 @@ Windows::Foundation::Collections::IVector<devicesGroup^>^ CheckoutManager::Devic
 		}
 		catch (std::exception e)
 		{
-			__debugbreak();
+			//__debugbreak();
 		}
 	}
 	return currentBinded;
@@ -128,26 +128,26 @@ void CheckoutManager::DeviceViewPage::addDevicebutton_Click(Platform::Object^ se
 	{
 		try
 		{
-			data->addDevice((char16_t*)newdevdesc->Text->Data(), (char16_t*)selectedType->key->Data());
+			int newpubid = data->addDevice((char16_t*)newdevdesc->Text->Data(), (char16_t*)selectedType->key->Data());
 			device newdevice;
-			newdevice.checkedOut = false, newdevice.currentRentee = "", newdevice.description = newdevdesc->Text, newdevice.deviceID = 99;
+			newdevice.checkedOut = false, newdevice.currentRentee = "", newdevice.description = newdevdesc->Text, newdevice.deviceID = newpubid;
 			if (selectedType->devices == nullptr)
 				selectedType->devices = ref new Platform::Collections::Vector<device, deviceEqual>();
 			selectedType->devices->Append(newdevice);
 		}
 		catch (std::exception e)
 		{
-			__debugbreak();
+			//__debugbreak();
 		}
 
 	}
-	//__debugbreak();
+	////__debugbreak();
 }
 
 
 void CheckoutManager::DeviceViewPage::Grid_ContextRequested(Windows::UI::Xaml::UIElement^ sender, Windows::UI::Xaml::Input::ContextRequestedEventArgs^ args)
 {
-
+	__debugbreak();
 }
 
 
@@ -155,7 +155,7 @@ void CheckoutManager::DeviceViewPage::MenuFlyoutItem_Click(Platform::Object^ sen
 {
 	auto s = e->ToString();
 	auto a = e->OriginalSource;
-	__debugbreak();
+	//__debugbreak();
 }
 
 
@@ -168,7 +168,7 @@ void CheckoutManager::DeviceViewPage::MenuFlyoutItem_Loaded(Platform::Object^ se
 
 void CheckoutManager::DeviceViewPage::MenuFlyoutItem_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	int s = (int)((Windows::UI::Xaml::Controls::MenuFlyoutItem^)sender)->Tag;
+	int s = static_cast<int>(((Windows::UI::Xaml::Controls::MenuFlyoutItem^)sender)->Tag);
 	data->deleteDevice(s);
 	device a = (device)(((Windows::UI::Xaml::Controls::MenuFlyoutItem^)sender)->DataContext);
 	concurrency::create_task([this, a,s]() {
@@ -185,5 +185,5 @@ void CheckoutManager::DeviceViewPage::MenuFlyoutItem_Click_1(Platform::Object^ s
 			}
 		}
 	});
-	//__debugbreak();
+	////__debugbreak();
 }

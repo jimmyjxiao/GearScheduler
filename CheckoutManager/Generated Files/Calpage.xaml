@@ -31,7 +31,7 @@
 
                 <Button x:ConnectionId='5' Content="Schedule Checkout"                      VerticalAlignment="Stretch" />
                 <AppBarSeparator VerticalAlignment="Center"/>
-                <RadioButton x:ConnectionId='6' GroupName="devteamview" Content="View By Device" Tag="dev"                               VerticalAlignment="Center" x:Name="devradio"/>
+                <RadioButton x:ConnectionId='6' GroupName="devteamview" Content="View By Item" Tag="dev"                               VerticalAlignment="Center" x:Name="devradio"/>
                 <RadioButton x:ConnectionId='7' GroupName="devteamview" Content="View By User" Margin="3,0,0,0" Tag="team"                               VerticalAlignment="Center"/>
                  <StackPanel x:ConnectionId='8' Visibility="Collapsed" x:Name="weekTools" Orientation="Horizontal" VerticalAlignment="Center">
                         <AppBarSeparator VerticalAlignment="Center"/>

@@ -30,13 +30,13 @@ void ::CheckoutManager::CheckoutPage::InitializeComponent()
 /// <summary>
 /// Auto generated class for compiled bindings.
 /// </summary>
-class CheckoutManager::CheckoutPage::CheckoutPage_obj4_Bindings 
-    : public ::XamlBindingInfo::ValueTypeXamlBindings<::CheckoutManager::refCheckout>
+class CheckoutManager::CheckoutPage::CheckoutPage_obj6_Bindings 
+    : public ::XamlBindingInfo::ValueTypeXamlBindings<::CheckoutManager::refCheckout, ::XamlBindingInfo::XamlBindingTrackingBase>
 {
             ::Windows::UI::Xaml::ResourceDictionary^ localResources;
             ::Platform::WeakReference converterLookupRoot;
 public:
-    CheckoutPage_obj4_Bindings()
+    CheckoutPage_obj6_Bindings()
     {
     }
 
@@ -44,23 +44,26 @@ public:
     {
         switch(__connectionId)
         {
-            case 5: // CheckoutPage.xaml line 206
-                this->obj5 = safe_cast<::Windows::UI::Xaml::Controls::SymbolIcon^>(__target);
+            case 6: // CheckoutPage.xaml line 181
+                this->obj6 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
                 break;
-            case 6: // CheckoutPage.xaml line 203
-                this->obj6 = safe_cast<::Windows::UI::Xaml::Controls::SymbolIcon^>(__target);
+            case 7: // CheckoutPage.xaml line 206
+                this->obj7 = safe_cast<::Windows::UI::Xaml::Controls::SymbolIcon^>(__target);
                 break;
-            case 7: // CheckoutPage.xaml line 200
-                this->obj7 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            case 8: // CheckoutPage.xaml line 203
+                this->obj8 = safe_cast<::Windows::UI::Xaml::Controls::SymbolIcon^>(__target);
                 break;
-            case 8: // CheckoutPage.xaml line 197
-                this->obj8 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
-                break;
-            case 9: // CheckoutPage.xaml line 194
+            case 9: // CheckoutPage.xaml line 200
                 this->obj9 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 break;
-            case 10: // CheckoutPage.xaml line 191
+            case 10: // CheckoutPage.xaml line 197
                 this->obj10 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                break;
+            case 11: // CheckoutPage.xaml line 194
+                this->obj11 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                break;
+            case 12: // CheckoutPage.xaml line 191
+                this->obj12 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 break;
         }
     }
@@ -70,28 +73,29 @@ public:
         throw ref new ::Platform::InvalidArgumentException("No unloadable elements to disconnect.");
     }
 
-    void ResetTemplate()
+    void Recycle()
     {
     }
 
-    int ProcessBindings(::Windows::UI::Xaml::Controls::ContainerContentChangingEventArgs^ args)
+    void ProcessBindings(::Platform::Object^ item, int itemIndex, int phase, int* nextPhase)
     {
-        int nextPhase = -1;
-        switch(args->Phase)
+        switch (phase)
         {
             case 0:
-                nextPhase = -1;
-                this->SetDataRoot(static_cast<::CheckoutManager::refCheckout>(args->Item));
+                *nextPhase = -1;
+                this->SetDataRoot(static_cast<::CheckoutManager::refCheckout>(item));
                 if (this->_dataContextChangedToken.Value != 0)
                 {
-                    safe_cast<::Windows::UI::Xaml::FrameworkElement^>(args->ItemContainer->ContentTemplateRoot)->DataContextChanged -= this->_dataContextChangedToken;
+                    this->obj6.Resolve<::Windows::UI::Xaml::Controls::Grid>()->DataContextChanged -= this->_dataContextChangedToken;
                     this->_dataContextChangedToken.Value = 0;
                 }
                 this->_isInitialized = true;
                 break;
+            default:
+                *nextPhase = -1;
+                break;
         }
-        this->Update_((::CheckoutManager::refCheckout) args->Item, (1 << args->Phase));
-        return nextPhase;
+        this->Update_((::CheckoutManager::refCheckout) item, 1 << phase);
     }
 
     void SetConverterLookupRoot(::Windows::UI::Xaml::FrameworkElement^ rootElement)
@@ -111,12 +115,13 @@ public:
 
 private:
     // Fields for each control that has bindings.
-    ::Windows::UI::Xaml::Controls::SymbolIcon^ obj5;
-    ::Windows::UI::Xaml::Controls::SymbolIcon^ obj6;
-    ::Windows::UI::Xaml::Controls::TextBlock^ obj7;
-    ::Windows::UI::Xaml::Controls::TextBlock^ obj8;
+    ::Platform::WeakReference obj6;
+    ::Windows::UI::Xaml::Controls::SymbolIcon^ obj7;
+    ::Windows::UI::Xaml::Controls::SymbolIcon^ obj8;
     ::Windows::UI::Xaml::Controls::TextBlock^ obj9;
     ::Windows::UI::Xaml::Controls::TextBlock^ obj10;
+    ::Windows::UI::Xaml::Controls::TextBlock^ obj11;
+    ::Windows::UI::Xaml::Controls::TextBlock^ obj12;
 
     // Update methods for each path node used in binding steps.
     void Update_(::CheckoutManager::refCheckout obj, int phase)
@@ -136,9 +141,9 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // CheckoutPage.xaml line 206
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_SymbolIcon_Symbol(this->obj5, safe_cast<::Windows::UI::Xaml::Controls::Symbol>(this->LookupConverter("boolconv")->Convert(obj, ::Windows::UI::Xaml::Controls::Symbol::typeid, nullptr, nullptr)));
+            Set_Windows_UI_Xaml_Controls_SymbolIcon_Symbol(this->obj7, safe_cast<::Windows::UI::Xaml::Controls::Symbol>(this->LookupConverter("boolconv")->Convert(obj, ::Windows::UI::Xaml::Controls::Symbol::typeid, nullptr, nullptr)));
             // CheckoutPage.xaml line 206
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_IconElement_Foreground(this->obj5, safe_cast<::Windows::UI::Xaml::Media::Brush^>(this->LookupConverter("boolcool")->Convert(obj, ::Windows::UI::Xaml::Media::Brush::typeid, nullptr, nullptr)), nullptr);
+            Set_Windows_UI_Xaml_Controls_IconElement_Foreground(this->obj7, safe_cast<::Windows::UI::Xaml::Media::Brush^>(this->LookupConverter("boolcool")->Convert(obj, ::Windows::UI::Xaml::Media::Brush::typeid, nullptr, nullptr)), nullptr);
         }
     }
     void Update_checkedout(::Platform::Boolean obj, int phase)
@@ -146,9 +151,9 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // CheckoutPage.xaml line 203
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_SymbolIcon_Symbol(this->obj6, safe_cast<::Windows::UI::Xaml::Controls::Symbol>(this->LookupConverter("boolconv")->Convert(obj, ::Windows::UI::Xaml::Controls::Symbol::typeid, nullptr, nullptr)));
+            Set_Windows_UI_Xaml_Controls_SymbolIcon_Symbol(this->obj8, safe_cast<::Windows::UI::Xaml::Controls::Symbol>(this->LookupConverter("boolconv")->Convert(obj, ::Windows::UI::Xaml::Controls::Symbol::typeid, nullptr, nullptr)));
             // CheckoutPage.xaml line 203
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_IconElement_Foreground(this->obj6, safe_cast<::Windows::UI::Xaml::Media::Brush^>(this->LookupConverter("boolcool")->Convert(obj, ::Windows::UI::Xaml::Media::Brush::typeid, nullptr, nullptr)), nullptr);
+            Set_Windows_UI_Xaml_Controls_IconElement_Foreground(this->obj8, safe_cast<::Windows::UI::Xaml::Media::Brush^>(this->LookupConverter("boolcool")->Convert(obj, ::Windows::UI::Xaml::Media::Brush::typeid, nullptr, nullptr)), nullptr);
         }
     }
     void Update_returnTime(::Platform::String^ obj, int phase)
@@ -156,7 +161,7 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // CheckoutPage.xaml line 200
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj7, obj, nullptr);
+            Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj9, obj, nullptr);
         }
     }
     void Update_CheckoutTime(::Platform::String^ obj, int phase)
@@ -164,7 +169,7 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // CheckoutPage.xaml line 197
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj8, obj, nullptr);
+            Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj10, obj, nullptr);
         }
     }
     void Update_team(::Platform::String^ obj, int phase)
@@ -172,7 +177,7 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // CheckoutPage.xaml line 194
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj9, obj, nullptr);
+            Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj11, obj, nullptr);
         }
     }
     void Update_deviceType(::Platform::String^ obj, int phase)
@@ -180,19 +185,39 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // CheckoutPage.xaml line 191
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj10, obj, nullptr);
+            Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj12, obj, nullptr);
         }
+    }
+    static void Set_Windows_UI_Xaml_Controls_SymbolIcon_Symbol(::Windows::UI::Xaml::Controls::SymbolIcon^ obj, ::Windows::UI::Xaml::Controls::Symbol value)
+    {
+        obj->Symbol = value;
+    }
+    static void Set_Windows_UI_Xaml_Controls_IconElement_Foreground(::Windows::UI::Xaml::Controls::IconElement^ obj, ::Windows::UI::Xaml::Media::Brush^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = (::Windows::UI::Xaml::Media::Brush^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Windows::UI::Xaml::Media::Brush::typeid, targetNullValue);
+        }
+        obj->Foreground = value;
+    }
+    static void Set_Windows_UI_Xaml_Controls_TextBlock_Text(::Windows::UI::Xaml::Controls::TextBlock^ obj, ::Platform::String^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = targetNullValue;
+        }
+        obj->Text = value;
     }
 };
 
 /// <summary>
 /// Auto generated class for compiled bindings.
 /// </summary>
-class CheckoutManager::CheckoutPage::CheckoutPage_obj11_Bindings 
-    : public ::XamlBindingInfo::ValueTypeXamlBindings<::CheckoutManager::overDueinfo>
+class CheckoutManager::CheckoutPage::CheckoutPage_obj14_Bindings 
+    : public ::XamlBindingInfo::ValueTypeXamlBindings<::CheckoutManager::overDueinfo, ::XamlBindingInfo::XamlBindingTrackingBase>
 {
 public:
-    CheckoutPage_obj11_Bindings()
+    CheckoutPage_obj14_Bindings()
     {
     }
 
@@ -200,20 +225,23 @@ public:
     {
         switch(__connectionId)
         {
-            case 12: // CheckoutPage.xaml line 119
-                this->obj12 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            case 14: // CheckoutPage.xaml line 98
+                this->obj14 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
                 break;
-            case 13: // CheckoutPage.xaml line 116
-                this->obj13 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
-                break;
-            case 14: // CheckoutPage.xaml line 113
-                this->obj14 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
-                break;
-            case 15: // CheckoutPage.xaml line 110
+            case 15: // CheckoutPage.xaml line 119
                 this->obj15 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 break;
-            case 16: // CheckoutPage.xaml line 107
+            case 16: // CheckoutPage.xaml line 116
                 this->obj16 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                break;
+            case 17: // CheckoutPage.xaml line 113
+                this->obj17 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                break;
+            case 18: // CheckoutPage.xaml line 110
+                this->obj18 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                break;
+            case 19: // CheckoutPage.xaml line 107
+                this->obj19 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 break;
         }
     }
@@ -223,36 +251,39 @@ public:
         throw ref new ::Platform::InvalidArgumentException("No unloadable elements to disconnect.");
     }
 
-    void ResetTemplate()
+    void Recycle()
     {
     }
 
-    int ProcessBindings(::Windows::UI::Xaml::Controls::ContainerContentChangingEventArgs^ args)
+    void ProcessBindings(::Platform::Object^ item, int itemIndex, int phase, int* nextPhase)
     {
-        int nextPhase = -1;
-        switch(args->Phase)
+        switch (phase)
         {
             case 0:
-                nextPhase = -1;
-                this->SetDataRoot(static_cast<::CheckoutManager::overDueinfo>(args->Item));
+                *nextPhase = -1;
+                this->SetDataRoot(static_cast<::CheckoutManager::overDueinfo>(item));
                 if (this->_dataContextChangedToken.Value != 0)
                 {
-                    safe_cast<::Windows::UI::Xaml::FrameworkElement^>(args->ItemContainer->ContentTemplateRoot)->DataContextChanged -= this->_dataContextChangedToken;
+                    this->obj14.Resolve<::Windows::UI::Xaml::Controls::Grid>()->DataContextChanged -= this->_dataContextChangedToken;
                     this->_dataContextChangedToken.Value = 0;
                 }
                 this->_isInitialized = true;
                 break;
+            default:
+                *nextPhase = -1;
+                break;
         }
-        this->Update_((::CheckoutManager::overDueinfo) args->Item, (1 << args->Phase));
-        return nextPhase;
+        this->Update_((::CheckoutManager::overDueinfo) item, 1 << phase);
     }
+
 private:
     // Fields for each control that has bindings.
-    ::Windows::UI::Xaml::Controls::TextBlock^ obj12;
-    ::Windows::UI::Xaml::Controls::TextBlock^ obj13;
-    ::Windows::UI::Xaml::Controls::TextBlock^ obj14;
+    ::Platform::WeakReference obj14;
     ::Windows::UI::Xaml::Controls::TextBlock^ obj15;
     ::Windows::UI::Xaml::Controls::TextBlock^ obj16;
+    ::Windows::UI::Xaml::Controls::TextBlock^ obj17;
+    ::Windows::UI::Xaml::Controls::TextBlock^ obj18;
+    ::Windows::UI::Xaml::Controls::TextBlock^ obj19;
 
     // Update methods for each path node used in binding steps.
     void Update_(::CheckoutManager::overDueinfo obj, int phase)
@@ -271,7 +302,7 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // CheckoutPage.xaml line 119
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj12, obj, nullptr);
+            Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj15, obj, nullptr);
         }
     }
     void Update_dueTime(::Platform::String^ obj, int phase)
@@ -279,7 +310,7 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // CheckoutPage.xaml line 116
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj13, obj, nullptr);
+            Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj16, obj, nullptr);
         }
     }
     void Update_checkedOutTime(::Platform::String^ obj, int phase)
@@ -287,7 +318,7 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // CheckoutPage.xaml line 113
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj14, obj, nullptr);
+            Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj17, obj, nullptr);
         }
     }
     void Update_itemID(::default::int32 obj, int phase)
@@ -295,7 +326,7 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // CheckoutPage.xaml line 110
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj15, obj.ToString(), nullptr);
+            Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj18, obj.ToString(), nullptr);
         }
     }
     void Update_itemType(::Platform::String^ obj, int phase)
@@ -303,8 +334,16 @@ private:
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
             // CheckoutPage.xaml line 107
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj16, obj, nullptr);
+            Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj19, obj, nullptr);
         }
+    }
+    static void Set_Windows_UI_Xaml_Controls_TextBlock_Text(::Windows::UI::Xaml::Controls::TextBlock^ obj, ::Platform::String^ value, ::Platform::String^ targetNullValue)
+    {
+        if (value == nullptr && targetNullValue != nullptr)
+        {
+            value = targetNullValue;
+        }
+        obj->Text = value;
     }
 };
 
@@ -312,94 +351,94 @@ void ::CheckoutManager::CheckoutPage::Connect(int __connectionId, ::Platform::Ob
 {
     switch (__connectionId)
     {
-    case 1:
+    case 2:
         {
             this->CheckoutPanel = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
         }
         break;
-    case 2:
+    case 3:
         {
             this->overdueview = safe_cast<::Windows::UI::Xaml::Controls::ListView^>(__target);
         }
         break;
-    case 3:
+    case 4:
         {
             this->currentListview = safe_cast<::Windows::UI::Xaml::Controls::ListView^>(__target);
         }
         break;
-    case 17:
+    case 20:
         {
             this->returnBox = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(this->returnBox))->TextChanging += ref new ::Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::Controls::TextBox^, ::Windows::UI::Xaml::Controls::TextBoxTextChangingEventArgs^>(this, (void (::CheckoutManager::CheckoutPage::*)
                 (::Windows::UI::Xaml::Controls::TextBox^, ::Windows::UI::Xaml::Controls::TextBoxTextChangingEventArgs^))&CheckoutPage::returnBox_TextChanging);
         }
         break;
-    case 18:
+    case 21:
         {
             this->Returnbutton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->Returnbutton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::CheckoutPage::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&CheckoutPage::Returnbutton_Click);
         }
         break;
-    case 19:
+    case 22:
         {
             this->returnBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
         }
         break;
-    case 20:
+    case 23:
         {
             this->IDbox = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(this->IDbox))->TextChanging += ref new ::Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::Controls::TextBox^, ::Windows::UI::Xaml::Controls::TextBoxTextChangingEventArgs^>(this, (void (::CheckoutManager::CheckoutPage::*)
                 (::Windows::UI::Xaml::Controls::TextBox^, ::Windows::UI::Xaml::Controls::TextBoxTextChangingEventArgs^))&CheckoutPage::returnBox_TextChanging);
         }
         break;
-    case 21:
+    case 24:
         {
             this->teamSelector = safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(this->teamSelector))->SelectionChanged += ref new ::Windows::UI::Xaml::Controls::SelectionChangedEventHandler(this, (void (::CheckoutManager::CheckoutPage::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::Controls::SelectionChangedEventArgs^))&CheckoutPage::teamSelector_SelectionChanged);
         }
         break;
-    case 22:
+    case 25:
         {
             this->password = safe_cast<::Windows::UI::Xaml::Controls::PasswordBox^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::PasswordBox^>(this->password))->PasswordChanged += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::CheckoutPage::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&CheckoutPage::PasswordBox_PasswordChanged);
         }
         break;
-    case 23:
+    case 26:
         {
             this->checkoutbutton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->checkoutbutton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CheckoutManager::CheckoutPage::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&CheckoutPage::Button_Click);
         }
         break;
-    case 24:
+    case 27:
         {
             this->warning = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
         }
         break;
-    case 25:
+    case 28:
         {
             this->statusBlock = safe_cast<::Windows::UI::Xaml::Controls::RichTextBlock^>(__target);
         }
         break;
-    case 26:
+    case 29:
         {
             this->devTypeblock = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
         }
         break;
-    case 27:
+    case 30:
         {
             this->IDblock = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
         }
         break;
-    case 28:
+    case 31:
         {
             this->userblock = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
         }
         break;
-    case 29:
+    case 32:
         {
             this->dueblock = safe_cast<::Windows::UI::Xaml::Documents::Run^>(__target);
         }
@@ -413,25 +452,27 @@ void ::CheckoutManager::CheckoutPage::Connect(int __connectionId, ::Platform::Ob
     ::XamlBindingInfo::XamlBindings^ bindings = nullptr;
     switch (__connectionId)
     {
-        case 4: // CheckoutPage.xaml line 181
+        case 6: // CheckoutPage.xaml line 181
             {
-                ::Windows::UI::Xaml::Controls::Grid^ element4 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
-                CheckoutPage_obj4_Bindings* objBindings = new CheckoutPage_obj4_Bindings();
-                objBindings->SetDataRoot(element4->DataContext);
+                ::Windows::UI::Xaml::Controls::Grid^ element6 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
+                CheckoutPage_obj6_Bindings* objBindings = new CheckoutPage_obj6_Bindings();
+                objBindings->SetDataRoot(element6->DataContext);
                 objBindings->SetConverterLookupRoot(this);
                 bindings = ref new ::XamlBindingInfo::XamlBindings(objBindings);
-                bindings->SubscribeForDataContextChanged(element4);
-                ::Windows::UI::Xaml::DataTemplate::SetExtensionInstance(element4, bindings);
+                bindings->SubscribeForDataContextChanged(element6);
+                ::Windows::UI::Xaml::DataTemplate::SetExtensionInstance(element6, bindings);
+                ::Windows::UI::Xaml::Markup::XamlBindingHelper::SetDataTemplateComponent(element6, bindings);
             }
             break;
-        case 11: // CheckoutPage.xaml line 98
+        case 14: // CheckoutPage.xaml line 98
             {
-                ::Windows::UI::Xaml::Controls::Grid^ element11 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
-                CheckoutPage_obj11_Bindings* objBindings = new CheckoutPage_obj11_Bindings();
-                objBindings->SetDataRoot(element11->DataContext);
+                ::Windows::UI::Xaml::Controls::Grid^ element14 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
+                CheckoutPage_obj14_Bindings* objBindings = new CheckoutPage_obj14_Bindings();
+                objBindings->SetDataRoot(element14->DataContext);
                 bindings = ref new ::XamlBindingInfo::XamlBindings(objBindings);
-                bindings->SubscribeForDataContextChanged(element11);
-                ::Windows::UI::Xaml::DataTemplate::SetExtensionInstance(element11, bindings);
+                bindings->SubscribeForDataContextChanged(element14);
+                ::Windows::UI::Xaml::DataTemplate::SetExtensionInstance(element14, bindings);
+                ::Windows::UI::Xaml::Markup::XamlBindingHelper::SetDataTemplateComponent(element14, bindings);
             }
             break;
     }
